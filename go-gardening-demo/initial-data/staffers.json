@@ -1,0 +1,171 @@
+[
+  {
+    "id": "staff-01",
+    "details": {
+      "name": "Morgan Ellery",
+      "address": "12 Birch Rd, Columbus, OH 43215",
+      "phone": "555-201-1001"
+    },
+    "roles": [
+      "admin"
+    ]
+  },
+  {
+    "id": "staff-02",
+    "details": {
+      "name": "Priya Anand",
+      "address": "44 Cedar Ln, Denver, CO 80203",
+      "phone": "555-201-1002"
+    },
+    "roles": [
+      "human_resource_manager"
+    ]
+  },
+  {
+    "id": "staff-03",
+    "details": {
+      "name": "Jordan Lee",
+      "address": "8 Maple St, Austin, TX 73301",
+      "phone": "555-201-1003"
+    },
+    "roles": [
+      "business-manager"
+    ]
+  },
+  {
+    "id": "staff-04",
+    "details": {
+      "name": "Sam Whitfield",
+      "address": "271 Oak Ave, Portland, OR 97201",
+      "phone": "555-201-1004"
+    },
+    "roles": [
+      "business-manager",
+      "customer-support-manager"
+    ]
+  },
+  {
+    "id": "staff-05",
+    "details": {
+      "name": "Taylor Brooks",
+      "address": "19 Willow Dr, Raleigh, NC 27601",
+      "phone": "555-201-1005"
+    },
+    "roles": [
+      "customer-management",
+      "customer-support"
+    ]
+  },
+  {
+    "id": "staff-06",
+    "details": {
+      "name": "Devon Ortiz",
+      "address": "530 Pine Way, Madison, WI 53703",
+      "phone": "555-201-1006"
+    },
+    "roles": [
+      "customer-management",
+      "customer-support"
+    ]
+  },
+  {
+    "id": "staff-07",
+    "details": {
+      "name": "Casey Nguyen",
+      "address": "77 Aspen Blvd, Boise, ID 83702",
+      "phone": "555-201-1007"
+    },
+    "roles": [
+      "human_resource_staffer"
+    ]
+  },
+  {
+    "id": "staff-08",
+    "details": {
+      "name": "Riley Foster",
+      "address": "6 Magnolia Ter, Nashville, TN 37201",
+      "phone": "555-201-1008"
+    },
+    "roles": [
+      "human_resource_staffer"
+    ]
+  },
+  {
+    "id": "staff-09",
+    "details": {
+      "name": "Elena Marsh",
+      "address": "142 Cypress Ct, Tampa, FL 33602",
+      "phone": "555-201-1009"
+    },
+    "roles": [
+      "customer-support"
+    ]
+  },
+  {
+    "id": "staff-10",
+    "details": {
+      "name": "Marcus Webb",
+      "address": "58 Redwood Ave, Sacramento, CA 95814",
+      "phone": "555-201-1010"
+    },
+    "roles": [
+      "customer-support"
+    ]
+  },
+  {
+    "id": "staff-11",
+    "details": {
+      "name": "Nina Patel",
+      "address": "9 Larkspur Ln, Tucson, AZ 85701",
+      "phone": "555-201-1011"
+    },
+    "roles": [
+      "inventory-clerk",
+      "business-staff"
+    ]
+  },
+  {
+    "id": "staff-12",
+    "details": {
+      "name": "Owen Kaczmarek",
+      "address": "233 Hawthorne St, Louisville, KY 40202",
+      "phone": "555-201-1012"
+    },
+    "roles": [
+      "business-staff"
+    ]
+  },
+  {
+    "id": "staff-13",
+    "details": {
+      "name": "Bianca Solis",
+      "address": "77 Driftwood Dr, Albuquerque, NM 87102",
+      "phone": "555-201-1013"
+    },
+    "roles": [
+      "business-staff"
+    ]
+  },
+  {
+    "id": "staff-14",
+    "details": {
+      "name": "Trevor Lindqvist",
+      "address": "14 Meadowbrook Rd, Omaha, NE 68102",
+      "phone": "555-201-1014"
+    },
+    "roles": [
+      "business-staff"
+    ]
+  },
+  {
+    "id": "staff-15",
+    "details": {
+      "name": "Harper Douglas",
+      "address": "21 Fairview Ct, Spokane, WA 99201",
+      "phone": "555-201-1015"
+    },
+    "roles": [
+      "analyst"
+    ]
+  }
+]

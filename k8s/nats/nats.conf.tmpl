@@ -1,0 +1,70 @@
+# NATS server config (scripts/deploy.sh renders it into the nats-server-config
+# Secret, replacing each @@password:<user>@@ with that component's password
+# from its nats-client-<user> Secret). See docs/architecture/events.md.
+#
+# Every client must authenticate, over TLS, as one of these users, and may
+# publish and subscribe only to the subjects its component needs: only
+# go-proxy publishes events, only event-aggregator reads them, and every
+# other component only hears the config-change pings for its own sections
+# (configsync's "_system.config.<section>"). Adding a NATS client means
+# adding a user here.
+
+port: 4222
+max_payload: 1MB
+
+# HTTP monitoring, for the pod's readiness/liveness probes (/healthz). It
+# has no authentication and also serves connection details (users, client
+# IPs, subscriptions - never passwords or messages), so it's kept off the
+# Service and the NetworkPolicy admits no pod to it; only the node
+# (kubelet) reaches it.
+http_port: 8222
+
+tls {
+  cert_file: "/etc/nats/tls/tls.crt"
+  key_file: "/etc/nats/tls/tls.key"
+}
+
+authorization {
+  users: [
+    {
+      user: "go-proxy"
+      password: "@@password:go-proxy@@"
+      permissions: {
+        publish: { allow: ["events.>", "_system.config.>"] }
+        subscribe: { allow: ["_system.config.>"] }
+      }
+    }
+    {
+      user: "event-aggregator"
+      password: "@@password:event-aggregator@@"
+      permissions: {
+        publish: { deny: [">"] }
+        subscribe: { allow: ["events.>", "_system.config.event-aggregation", "_system.config.event-dictionary", "_system.config.log-level"] }
+      }
+    }
+    {
+      user: "declarative-guardrail"
+      password: "@@password:declarative-guardrail@@"
+      permissions: {
+        publish: { deny: [">"] }
+        subscribe: { allow: ["_system.config.declarative-guardrails", "_system.config.log-level"] }
+      }
+    }
+    {
+      user: "rate-limiter"
+      password: "@@password:rate-limiter@@"
+      permissions: {
+        publish: { deny: [">"] }
+        subscribe: { allow: ["_system.config.rate-limiting", "_system.config.log-level"] }
+      }
+    }
+    {
+      user: "ai-powered-tools"
+      password: "@@password:ai-powered-tools@@"
+      permissions: {
+        publish: { deny: [">"] }
+        subscribe: { allow: ["_system.config.log-level"] }
+      }
+    }
+  ]
+}

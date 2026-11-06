@@ -1,0 +1,13 @@
+# Strategic-merge patch applied over k8s/go-proxy-service.yaml on the
+# enterprise exposure path only (scripts/deploy.sh --ingress-host): the
+# Ingress in this directory is the sole entry point there, so the Service
+# must not also provision a LoadBalancer (on a cloud cluster that would
+# create a second, public, plain-HTTP load balancer bypassing nginx/TLS).
+# port 80 -> targetPort 8081 is unchanged, so selfUrl's in-cluster address
+# (http://go-proxy.mcp-proxy.svc.cluster.local/mcp) keeps working as-is.
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-proxy
+spec:
+  type: ClusterIP

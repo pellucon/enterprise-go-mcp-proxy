@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  # Same shape/rationale as k8s/networkpolicy-default-deny.yaml (the
+  # mcp-proxy namespace's own copy). Defense-in-depth consistency with the
+  # other two managed namespaces (mcp-proxy, gardening-demo) — this
+  # namespace only ever holds the one demo-authorization-server pod, which
+  # already brings its own self-contained allow-ingress policy (see
+  # networkpolicy.yaml in this same directory), so this has no practical
+  # effect today beyond matching the pattern.
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress: []

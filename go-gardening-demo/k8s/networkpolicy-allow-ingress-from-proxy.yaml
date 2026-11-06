@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-from-proxy
+spec:
+  # Cross-namespace equivalent of
+  # k8s/networkpolicy-allow-proxy-to-backends.yaml (the mcp-proxy
+  # namespace's own copy, which only reaches pods it shares a namespace
+  # with). go-proxy itself now lives in a different namespace (mcp-proxy)
+  # from these go-gardening-demo/servers/* backends (gardening-demo), so
+  # "only go-proxy's own pods" can no longer be expressed as a bare
+  # podSelector — a from-entry's podSelector alone only ever matches pods
+  # in the NetworkPolicy's own namespace. Combining namespaceSelector and
+  # podSelector in the same "from" list entry is AND semantics (matches
+  # only pods that satisfy both), which is what's needed here: pods
+  # labeled app: go-proxy, specifically in the namespace labeled
+  # kubernetes.io/metadata.name: mcp-proxy (the label every namespace gets
+  # automatically since k8s 1.21 — no manual labeling of the mcp-proxy
+  # namespace is needed for this to work).
+  podSelector:
+    matchLabels:
+      mcp.io/role: backend-mcp-server
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: mcp-proxy
+          podSelector:
+            matchLabels:
+              app: go-proxy
+      ports:
+        - protocol: TCP
+          port: 8080

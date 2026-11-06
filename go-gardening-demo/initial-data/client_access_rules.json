@@ -1,0 +1,155 @@
+[
+  {
+    "role": "admin",
+    "allowed_tools": [
+      "*"
+    ],
+    "allowed_prompts": [
+      "*"
+    ],
+    "allowed_resources": [
+      "*"
+    ],
+    "allowed_resource_templates": [
+      "*"
+    ]
+  },
+  {
+    "role": "business-manager",
+    "allowed_tools": [
+      "garden-customer-admin.*",
+      "garden-business-ops.*",
+      "garden-online-store.load_customer_orders",
+      "garden-online-store.purchase_fulfilled",
+      "garden-online-store.load_product_supply",
+      "garden-online-store.load_supply_orders",
+      "garden-online-store.load_historical_purchases",
+      "garden-online-store.add_product_supply",
+      "garden-online-store.add_supply_order",
+      "garden-online-store.mark_supply_order_fulfilled",
+      "garden-online-store.get_inventory",
+      "garden-online-store.get_catalogue",
+      "event-aggregator.list_events"
+    ],
+    "allowed_prompts": [
+      "garden-business-ops.unauthorized_requests_report",
+      "garden-business-ops.unavailable_and_unpopular_products"
+    ]
+  },
+  {
+    "role": "human_resource_manager",
+    "allowed_tools": [
+      "garden-staff-admin.*",
+      "garden-customer-service.get_customer_service_calls"
+    ]
+  },
+  {
+    "role": "customer-support-manager",
+    "allowed_tools": [
+      "garden-customer-service.*"
+    ]
+  },
+  {
+    "role": "customer-management",
+    "allowed_tools": [
+      "garden-customer-admin.*"
+    ]
+  },
+  {
+    "role": "customer-support",
+    "allowed_tools": [
+      "garden-customer-service.add_customer_service_call",
+      "garden-customer-service.resolve_customer_service_call"
+    ]
+  },
+  {
+    "role": "human_resource_staffer",
+    "allowed_tools": [
+      "garden-staff-admin.load_staffers",
+      "garden-staff-admin.add_or_update_staffer",
+      "garden-staff-admin.get_staffers"
+    ]
+  },
+  {
+    "role": "inventory-clerk",
+    "allowed_tools": [
+      "garden-online-store.load_product_supply",
+      "garden-online-store.load_supply_orders",
+      "garden-online-store.add_supply_order",
+      "garden-online-store.mark_supply_order_fulfilled",
+      "garden-online-store.get_inventory",
+      "garden-online-store.get_catalogue",
+      "garden-business-ops.get_deals",
+      "garden-business-ops.get_active_deals",
+      "garden-online-store.get_supply_orders",
+      "garden-online-store.get_customer_orders",
+      "garden-online-store.get_product_supply"
+    ],
+    "allowed_prompts": [
+      "garden-business-ops.unavailable_and_unpopular_products"
+    ]
+  },
+  {
+    "role": "business-staff",
+    "allowed_tools": [
+      "garden-business-ops.update_customer_type",
+      "garden-online-store.load_customer_orders",
+      "garden-online-store.purchase_fulfilled",
+      "garden-online-store.load_product_supply",
+      "garden-online-store.load_supply_orders",
+      "garden-online-store.load_historical_purchases",
+      "garden-online-store.add_product_supply",
+      "garden-online-store.add_supply_order",
+      "garden-online-store.mark_supply_order_fulfilled",
+      "garden-online-store.get_inventory",
+      "garden-online-store.get_catalogue",
+      "garden-business-ops.get_deals",
+      "garden-business-ops.get_active_deals"
+    ]
+  },
+  {
+    "role": "customer",
+    "allowed_tools": [
+      "garden-online-store.purchase_products",
+      "garden-online-store.get_catalogue",
+      "garden-business-ops.get_active_deals",
+      "garden-customer-admin.get_customer_type"
+    ],
+    "allowed_prompts": [
+      "garden-online-store.product_on_sale_for_me"
+    ]
+  },
+  {
+    "role": "customer-*",
+    "allowed_tools": [
+      "garden-customer-service.get_customer_service_calls"
+    ],
+    "allowed_prompts": [
+      "garden-customer-service.my_service_calls"
+    ]
+  },
+  {
+    "role": "business*",
+    "allowed_tools": [
+      "garden-online-store.get_supply_orders",
+      "garden-online-store.get_customer_orders",
+      "garden-online-store.get_product_supply"
+    ]
+  },
+  {
+    "role": "analyst",
+    "allowed_tools": [
+      "event-aggregator.list_events",
+      "garden-online-store.get_catalogue",
+      "garden-business-ops.get_deals",
+      "garden-business-ops.get_active_deals",
+      "garden-customer-admin.get_customers_status",
+      "garden-online-store.get_customer_orders"
+    ],
+    "allowed_prompts": [
+      "garden-business-ops.vip_spend_comparison",
+      "garden-business-ops.unhappy_spend_comparison",
+      "garden-business-ops.purchase_failure_patterns"
+    ]
+  }
+]

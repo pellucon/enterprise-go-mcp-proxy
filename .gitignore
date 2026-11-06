@@ -1,0 +1,95 @@
+# The external client-facing JWT verification key used only by the
+# proxyserver package's own tests (testdata/integration_test.cfg,
+# testdata/orchestration_test.cfg, and several *_test.go files' inline
+# config, all referencing it as ./public.pem relative to proxyserver/, the
+# tests' working directory). mcp_client_test.go's init() generates a fresh
+# RSA keypair every test run and writes only this public half here - the
+# matching private key never touches disk at all. Not needed in
+# production, which uses jwksUrl instead (see proxy-server.cfg).
+/proxyserver/public.pem
+
+# The LLM API key passed to ./scripts/deploy.sh --ai-api-key-file for
+# ai-powered-tools (see docs/architecture/utility-and-ai-tools.md). Real, sensitive secret material —
+# never committed.
+/ai-api-key.txt
+
+# A GitHub PAT for ./scripts/build.sh --release / ./scripts/deploy.sh
+# --release's --github-token-file (see docs/architecture/build-deploy.md). Real, sensitive secret material — never committed.
+/github-token.txt
+
+# Secret material under common names, anywhere in the tree - so a key saved
+# under a name of its own (e.g. an --ai-api-key-file ./openai-key.txt, a
+# TLS key, an .env file) is never committed by a broad "git add".
+*-key.txt
+*token*.txt
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+
+# Incremental-build stamp files for the root Makefile's per-target
+# staleness tracking (go list -deps-derived transitive dependencies — see
+# Makefile, scripts/build.sh) — regenerated on every build, never committed.
+/.build/
+
+# CLI binaries built by ./scripts/build.sh (see scripts/cli.sh,
+# go-gardening-demo/cli.sh) — local build artifacts, not committed.
+/bin/
+/go-gardening-demo/bin/
+
+# Personal Claude Code settings/instructions — per-contributor, never committed.
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Compiled binaries for every "package main" directory in this module.
+# `go build ./...` run from the repo root drops one binary per main package
+# here at the root (named after its directory); `go build .` run inside a
+# package directory drops a same-named binary there. Both forms are listed.
+# Root-level patterns are anchored with a leading "/" so they never match a
+# same-named directory elsewhere. /claude-bridge, /cli and
+# /demo-authorization-server are deliberately NOT listed: each collides
+# with a real source directory at the root, and a pattern without a
+# trailing slash would ignore that whole directory. `go build ./...` can't
+# write a file over an existing directory anyway, so nothing is lost.
+/go-proxy
+/ai-powered-tools
+/client
+/gendata
+/patchcfg
+/garden-business-ops
+/garden-customer-admin
+/garden-customer-service
+/garden-online-store
+/garden-staff-admin
+/declarative-guardrail
+/event-aggregator
+/rate-limiter
+/driver
+/generator
+/ai-mcp-servers/ai-powered-tools/ai-powered-tools
+/claude-bridge/claude-bridge
+/cmd/go-proxy/go-proxy
+/cli/cli
+/demo-authorization-server/demo-authorization-server
+/demo-authorization-server/client/client
+/go-gardening-demo/cli/cli
+/go-gardening-demo/gendata/gendata
+/go-gardening-demo/patchcfg/patchcfg
+/go-gardening-demo/servers/garden-business-ops/garden-business-ops
+/go-gardening-demo/servers/garden-customer-admin/garden-customer-admin
+/go-gardening-demo/servers/garden-customer-service/garden-customer-service
+/go-gardening-demo/servers/garden-online-store/garden-online-store
+/go-gardening-demo/servers/garden-staff-admin/garden-staff-admin
+/platform-mcp-servers/declarative-guardrail/declarative-guardrail
+/platform-mcp-servers/event-aggregator/event-aggregator
+/platform-mcp-servers/rate-limiter/rate-limiter
+/stress-test/driver/driver
+/stress-test/generator/generator
+
+# macOS Finder metadata.
+.DS_Store
+
+# Personal add/commit/push helper script — local convenience, never committed.
+/update_git.sh

@@ -1,0 +1,9 @@
+{
+  "discoveryMode": "scan",
+  "listedTools": ["*"],
+  "frequencySeconds": 1,
+  "toolsPollFrequencySeconds": 5,
+  "promptsPollFrequencySeconds": 5,
+  "resourcesPollFrequencySeconds": 5,
+  "resourceTemplatesPollFrequencySeconds": 5
+}

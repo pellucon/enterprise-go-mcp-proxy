@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats
+  labels:
+    app: nats
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats
+  template:
+    metadata:
+      labels:
+        app: nats
+    spec:
+      # NATS itself never needs k8s API access.
+      automountServiceAccountToken: false
+      containers:
+        - name: nats
+          # Official upstream image - not built from this repo's Dockerfile,
+          # unlike go-proxy/the sample MCP servers.
+          image: nats:2.10-alpine
+          imagePullPolicy: IfNotPresent
+          # Authentication (one user per component, each limited to the
+          # subjects it needs) and TLS, from the config scripts/deploy.sh
+          # renders from k8s/nats/nats.conf.tmpl.
+          args: ["-c", "/etc/nats-config/nats.conf"]
+          volumeMounts:
+            - name: nats-server-config
+              mountPath: /etc/nats-config
+              readOnly: true
+            - name: nats-tls
+              mountPath: /etc/nats/tls
+              readOnly: true
+          # Core NATS only (no JetStream flag) - fire-and-forget pub/sub,
+          # no persistent storage needed for this v1 event system.
+          ports:
+            - name: client
+              containerPort: 4222
+            # NATS's HTTP monitoring server (http_port in nats.conf), for the
+            # probes only: the Service doesn't expose it and the
+            # NetworkPolicy admits no pod to it. Probing it rather than the
+            # TLS client port keeps the kubelet's probe connections out of
+            # NATS's log as TLS handshake errors.
+            - name: monitor
+              containerPort: 8222
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: monitor
+            initialDelaySeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: monitor
+            initialDelaySeconds: 5
+      volumes:
+        - name: nats-server-config
+          secret:
+            secretName: nats-server-config
+        - name: nats-tls
+          secret:
+            secretName: nats-tls
+            items:
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key

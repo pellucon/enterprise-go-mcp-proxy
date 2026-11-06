@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: garden-staff-admin
+  labels:
+    app: garden-staff-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: garden-staff-admin
+  template:
+    metadata:
+      labels:
+        app: garden-staff-admin
+        mcp.io/role: backend-mcp-server
+    spec:
+      # Backend MCP servers never need k8s API access; only go-proxy does.
+      automountServiceAccountToken: false
+      containers:
+        - name: garden-staff-admin
+          image: garden-staff-admin:local
+          imagePullPolicy: IfNotPresent
+          env:
+            # Default reaches demo-authorization-server (no k8s manifest,
+            # runs host-side - see its own main.go doc comment) the same
+            # way ai-powered-tools' headless-Claude-bridge dev mode reaches
+            # its own host-side process. Overridden at deploy time via
+            # "kubectl set env deployment/garden-staff-admin
+            # AUTH_SERVER_URL=..." (see scripts/deploy.sh's
+            # --auth-server-url flag) — this lets `args` below reference a
+            # deploy-time value without templating the checked-in YAML
+            # itself. Basic Auth credentials default to admin/admin
+            # (demo-authorization-server's own built-in account), so no
+            # Secret is needed here.
+            - name: AUTH_SERVER_URL
+              value: "http://host.docker.internal:8102"
+          args:
+            - -port=:8080
+            - -auth-server-url=$(AUTH_SERVER_URL)
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 2
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5

@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world
+  labels:
+    app: hello-world
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+        # Matched by networkpolicy.yaml. Discovery itself keys off the
+        # Service's label (service.yaml), not the pod's.
+        mcp.io/role: backend-mcp-server
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - name: hello-world
+          # Stock image: the MCP SDK is installed at startup and server.py
+          # comes from the hello-world-server ConfigMap (created by
+          # deploy.sh), so nothing is compiled or built.
+          image: python:3.12-slim
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - >-
+              pip install --quiet --no-cache-dir --disable-pip-version-check
+              --target /tmp/deps mcp==2.3.0 &&
+              exec env PYTHONPATH=/tmp/deps python /app/server.py
+          env:
+            - name: HOME
+              value: /tmp
+          ports:
+            - name: http
+              containerPort: 8080
+          # Allow up to ~3 minutes for the pip install on a slow network.
+          startupProbe:
+            tcpSocket:
+              port: 8080
+            periodSeconds: 3
+            failureThreshold: 60
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              memory: 256Mi
+          volumeMounts:
+            - name: server
+              mountPath: /app
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: server
+          configMap:
+            name: hello-world-server
+        - name: tmp
+          emptyDir: {}

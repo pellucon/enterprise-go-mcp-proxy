@@ -1,0 +1,12 @@
+{
+  "discoveryMode": "k8s",
+  "listedTools": ["*"],
+  "frequencySeconds": 2,
+  "k8sNamespaces": ["mcp-proxy", "gardening-demo"],
+  "k8sCredentials": {"gardening-demo/garden-online-store": "garden-store-credentials"},
+  "k8sPinnedServers": {"rate-limiter": "mcp-proxy/rate-limiter"},
+  "toolsPollFrequencySeconds": 5,
+  "promptsPollFrequencySeconds": 5,
+  "resourcesPollFrequencySeconds": 5,
+  "resourceTemplatesPollFrequencySeconds": 5
+}

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-authorization-server
+  # Deliberately does NOT carry mcp.io/role=backend-mcp-server -- see
+  # deployment.yaml's own comment on why.
+spec:
+  # ClusterIP: reachable only inside the cluster. scripts/deploy.sh makes it
+  # a LoadBalancer on a local cluster only (same mechanism as
+  # k8s/go-proxy-service.yaml), answering on http://localhost:8102, the
+  # CLIs' default auth server address. On any other cluster it always stays
+  # ClusterIP: it hands an admin token to anyone who logs in as
+  # admin/admin, so it must never get a public address.
+  type: ClusterIP
+  selector:
+    app: demo-authorization-server
+  ports:
+    - name: http
+      port: 8102
+      targetPort: 8102

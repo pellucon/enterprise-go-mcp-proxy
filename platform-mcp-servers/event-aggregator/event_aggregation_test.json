@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "config": {
+    "filter": {},
+    "maxBufferSize": 1000,
+    "maxLogAgeDays": 5,
+    "maxLogSizeBytes": 10000000,
+    "archiverTransport": { "type": "discard" }
+  }
+}

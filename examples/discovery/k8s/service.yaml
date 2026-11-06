@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  # The Service name becomes the server name, so the tool is exposed through
+  # go-proxy as hello-world.say_hello (override with mcp.io/server-name).
+  name: hello-world
+  labels:
+    app: hello-world
+    # The label go-proxy's k8s discovery selects on (discovery.k8sLabelSelector).
+    mcp.io/role: backend-mcp-server
+  annotations:
+    # The server answers at /mcp; without this, go-proxy would use the root path.
+    mcp.io/path: /mcp
+spec:
+  selector:
+    app: hello-world
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

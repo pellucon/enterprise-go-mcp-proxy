@@ -1,0 +1,3002 @@
+[
+  {
+    "id": "cust-0001",
+    "details": {
+      "name": "Michael Perez",
+      "address": "731 Cedar Ln, Columbus, OH 43215",
+      "phone": "555-464-4099"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0002",
+    "details": {
+      "name": "Nancy Sanchez",
+      "address": "87 Pine Way, Portland, OR 97201",
+      "phone": "555-528-3189"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0003",
+    "details": {
+      "name": "James Garcia",
+      "address": "612 Cedar Ln, Tucson, AZ 85701",
+      "phone": "555-484-7801"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0004",
+    "details": {
+      "name": "William Thomas",
+      "address": "801 Willow Dr, Columbus, OH 43215",
+      "phone": "555-938-8399"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0005",
+    "details": {
+      "name": "Michael Wilson",
+      "address": "581 Elm Ct, Spokane, WA 99201",
+      "phone": "555-695-5409"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0006",
+    "details": {
+      "name": "Christopher Robinson",
+      "address": "562 Elm Ct, Columbus, OH 43215",
+      "phone": "555-405-1997"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0007",
+    "details": {
+      "name": "Sarah Anderson",
+      "address": "126 Aspen Blvd, Portland, OR 97201",
+      "phone": "555-143-5954"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0008",
+    "details": {
+      "name": "Christopher Hernandez",
+      "address": "443 Magnolia Ter, Boise, ID 83702",
+      "phone": "555-729-9969"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0009",
+    "details": {
+      "name": "William Ramirez",
+      "address": "102 Oak Ave, Portland, OR 97201",
+      "phone": "555-248-1209"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0010",
+    "details": {
+      "name": "Linda Anderson",
+      "address": "796 Birch Rd, Portland, OR 97201",
+      "phone": "555-526-8950"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0011",
+    "details": {
+      "name": "Karen Gonzalez",
+      "address": "872 Maple St, Madison, WI 53703",
+      "phone": "555-540-3084"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0012",
+    "details": {
+      "name": "William Williams",
+      "address": "134 Oak Ave, Denver, CO 80203",
+      "phone": "555-166-7159"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0013",
+    "details": {
+      "name": "Karen Lewis",
+      "address": "215 Pine Way, Providence, RI 02903",
+      "phone": "555-965-7722"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0014",
+    "details": {
+      "name": "Patricia Lee",
+      "address": "287 Magnolia Ter, Columbus, OH 43215",
+      "phone": "555-344-7542"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0015",
+    "details": {
+      "name": "Elizabeth Thomas",
+      "address": "549 Maple St, Tucson, AZ 85701",
+      "phone": "555-483-6078"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0016",
+    "details": {
+      "name": "Liam Jones",
+      "address": "361 Magnolia Ter, Columbus, OH 43215",
+      "phone": "555-752-7257"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0017",
+    "details": {
+      "name": "Sarah Williams",
+      "address": "873 Sycamore Pl, Denver, CO 80203",
+      "phone": "555-759-7520"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0018",
+    "details": {
+      "name": "Sarah Ramirez",
+      "address": "775 Willow Dr, Madison, WI 53703",
+      "phone": "555-874-9108"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0019",
+    "details": {
+      "name": "Daniel Clark",
+      "address": "909 Aspen Blvd, Austin, TX 73301",
+      "phone": "555-569-6476"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0020",
+    "details": {
+      "name": "Michael White",
+      "address": "96 Pine Way, Spokane, WA 99201",
+      "phone": "555-952-6884"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0021",
+    "details": {
+      "name": "Joseph Ramirez",
+      "address": "686 Aspen Blvd, Austin, TX 73301",
+      "phone": "555-614-3278"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0022",
+    "details": {
+      "name": "William Rodriguez",
+      "address": "111 Oak Ave, Columbus, OH 43215",
+      "phone": "555-110-6356"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0023",
+    "details": {
+      "name": "Margaret White",
+      "address": "581 Oak Ave, Portland, OR 97201",
+      "phone": "555-748-6169"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0024",
+    "details": {
+      "name": "Christopher Martin",
+      "address": "466 Sycamore Pl, Tucson, AZ 85701",
+      "phone": "555-171-9913"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0025",
+    "details": {
+      "name": "Isabella Johnson",
+      "address": "564 Oak Ave, Austin, TX 73301",
+      "phone": "555-563-6807"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0026",
+    "details": {
+      "name": "Anthony Rodriguez",
+      "address": "823 Magnolia Ter, Madison, WI 53703",
+      "phone": "555-852-8708"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0027",
+    "details": {
+      "name": "Linda Thomas",
+      "address": "772 Pine Way, Tucson, AZ 85701",
+      "phone": "555-908-8701"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0028",
+    "details": {
+      "name": "Sophia Lee",
+      "address": "555 Aspen Blvd, Austin, TX 73301",
+      "phone": "555-237-8121"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0029",
+    "details": {
+      "name": "Ava Sanchez",
+      "address": "162 Sycamore Pl, Tucson, AZ 85701",
+      "phone": "555-732-9677"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0030",
+    "details": {
+      "name": "John Jackson",
+      "address": "836 Pine Way, Austin, TX 73301",
+      "phone": "555-818-8414"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0031",
+    "details": {
+      "name": "Michael Davis",
+      "address": "722 Aspen Blvd, Denver, CO 80203",
+      "phone": "555-480-7000"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0032",
+    "details": {
+      "name": "Lucas Martinez",
+      "address": "688 Birch Rd, Raleigh, NC 27601",
+      "phone": "555-815-3188"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0033",
+    "details": {
+      "name": "Ethan Johnson",
+      "address": "363 Oak Ave, Denver, CO 80203",
+      "phone": "555-778-9885"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0034",
+    "details": {
+      "name": "Matthew Robinson",
+      "address": "258 Magnolia Ter, Tucson, AZ 85701",
+      "phone": "555-750-4047"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0035",
+    "details": {
+      "name": "Karen Brown",
+      "address": "376 Cedar Ln, Austin, TX 73301",
+      "phone": "555-563-8540"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0036",
+    "details": {
+      "name": "Michael Jackson",
+      "address": "570 Sycamore Pl, Portland, OR 97201",
+      "phone": "555-449-5014"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0037",
+    "details": {
+      "name": "Richard Gonzalez",
+      "address": "123 Sycamore Pl, Boise, ID 83702",
+      "phone": "555-586-8084"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0038",
+    "details": {
+      "name": "Sophia Harris",
+      "address": "508 Cedar Ln, Columbus, OH 43215",
+      "phone": "555-913-5942"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0039",
+    "details": {
+      "name": "Mark Ramirez",
+      "address": "395 Birch Rd, Columbus, OH 43215",
+      "phone": "555-869-6906"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0040",
+    "details": {
+      "name": "Anthony Rodriguez",
+      "address": "441 Aspen Blvd, Portland, OR 97201",
+      "phone": "555-170-7214"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0041",
+    "details": {
+      "name": "Mia Davis",
+      "address": "564 Willow Dr, Tucson, AZ 85701",
+      "phone": "555-794-7555"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0042",
+    "details": {
+      "name": "Joseph Miller",
+      "address": "264 Aspen Blvd, Spokane, WA 99201",
+      "phone": "555-868-6149"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0043",
+    "details": {
+      "name": "Noah Gonzalez",
+      "address": "385 Maple St, Portland, OR 97201",
+      "phone": "555-665-8380"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0044",
+    "details": {
+      "name": "Betty Lewis",
+      "address": "338 Willow Dr, Columbus, OH 43215",
+      "phone": "555-634-7347"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0045",
+    "details": {
+      "name": "Jessica Williams",
+      "address": "748 Willow Dr, Raleigh, NC 27601",
+      "phone": "555-626-1365"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0046",
+    "details": {
+      "name": "Lisa Wilson",
+      "address": "672 Oak Ave, Columbus, OH 43215",
+      "phone": "555-272-9583"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0047",
+    "details": {
+      "name": "Liam Davis",
+      "address": "465 Cedar Ln, Columbus, OH 43215",
+      "phone": "555-272-1521"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0048",
+    "details": {
+      "name": "Linda Lopez",
+      "address": "698 Sycamore Pl, Austin, TX 73301",
+      "phone": "555-116-2964"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0049",
+    "details": {
+      "name": "Barbara Sanchez",
+      "address": "837 Cedar Ln, Portland, OR 97201",
+      "phone": "555-225-4899"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0050",
+    "details": {
+      "name": "William Robinson",
+      "address": "806 Oak Ave, Providence, RI 02903",
+      "phone": "555-703-7646"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0051",
+    "details": {
+      "name": "William White",
+      "address": "594 Magnolia Ter, Austin, TX 73301",
+      "phone": "555-245-2996"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0052",
+    "details": {
+      "name": "Barbara Ramirez",
+      "address": "729 Pine Way, Portland, OR 97201",
+      "phone": "555-982-4846"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0053",
+    "details": {
+      "name": "Christopher Harris",
+      "address": "743 Aspen Blvd, Sacramento, CA 95814",
+      "phone": "555-597-7420"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0054",
+    "details": {
+      "name": "Ethan Garcia",
+      "address": "108 Elm Ct, Austin, TX 73301",
+      "phone": "555-508-1350"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0055",
+    "details": {
+      "name": "Mia Robinson",
+      "address": "779 Elm Ct, Raleigh, NC 27601",
+      "phone": "555-778-8807"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0056",
+    "details": {
+      "name": "Sarah Miller",
+      "address": "682 Oak Ave, Spokane, WA 99201",
+      "phone": "555-816-9361"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0057",
+    "details": {
+      "name": "Mary Wilson",
+      "address": "241 Elm Ct, Sacramento, CA 95814",
+      "phone": "555-391-2402"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0058",
+    "details": {
+      "name": "Sandra Gonzalez",
+      "address": "687 Cedar Ln, Tucson, AZ 85701",
+      "phone": "555-108-9447"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0059",
+    "details": {
+      "name": "Michael Rodriguez",
+      "address": "459 Elm Ct, Sacramento, CA 95814",
+      "phone": "555-645-5883"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0060",
+    "details": {
+      "name": "Isabella Ramirez",
+      "address": "902 Maple St, Portland, OR 97201",
+      "phone": "555-212-3573"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0061",
+    "details": {
+      "name": "Emma Smith",
+      "address": "482 Sycamore Pl, Providence, RI 02903",
+      "phone": "555-768-5161"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0062",
+    "details": {
+      "name": "David Wilson",
+      "address": "622 Magnolia Ter, Raleigh, NC 27601",
+      "phone": "555-552-5568"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0063",
+    "details": {
+      "name": "Lisa Thompson",
+      "address": "855 Pine Way, Spokane, WA 99201",
+      "phone": "555-838-4760"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0064",
+    "details": {
+      "name": "James Jones",
+      "address": "747 Sycamore Pl, Denver, CO 80203",
+      "phone": "555-899-2303"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0065",
+    "details": {
+      "name": "Liam Garcia",
+      "address": "28 Sycamore Pl, Denver, CO 80203",
+      "phone": "555-431-4098"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0066",
+    "details": {
+      "name": "Isabella Williams",
+      "address": "124 Sycamore Pl, Boise, ID 83702",
+      "phone": "555-149-9841"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0067",
+    "details": {
+      "name": "William Johnson",
+      "address": "862 Cedar Ln, Denver, CO 80203",
+      "phone": "555-122-1142"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0068",
+    "details": {
+      "name": "Noah Sanchez",
+      "address": "142 Sycamore Pl, Boise, ID 83702",
+      "phone": "555-215-6579"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0069",
+    "details": {
+      "name": "Patricia Gonzalez",
+      "address": "819 Aspen Blvd, Providence, RI 02903",
+      "phone": "555-943-3651"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0070",
+    "details": {
+      "name": "David Brown",
+      "address": "587 Sycamore Pl, Austin, TX 73301",
+      "phone": "555-608-4254"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0071",
+    "details": {
+      "name": "Thomas Jones",
+      "address": "182 Maple St, Columbus, OH 43215",
+      "phone": "555-366-8360"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0072",
+    "details": {
+      "name": "Linda Harris",
+      "address": "773 Birch Rd, Columbus, OH 43215",
+      "phone": "555-505-3459"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0073",
+    "details": {
+      "name": "Olivia Moore",
+      "address": "635 Birch Rd, Portland, OR 97201",
+      "phone": "555-553-1455"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0074",
+    "details": {
+      "name": "Sarah Anderson",
+      "address": "201 Cedar Ln, Spokane, WA 99201",
+      "phone": "555-503-3762"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0075",
+    "details": {
+      "name": "Jennifer Garcia",
+      "address": "736 Oak Ave, Columbus, OH 43215",
+      "phone": "555-340-1827"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0076",
+    "details": {
+      "name": "Patricia Perez",
+      "address": "402 Cedar Ln, Tucson, AZ 85701",
+      "phone": "555-693-2560"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0077",
+    "details": {
+      "name": "Karen Wilson",
+      "address": "64 Pine Way, Nashville, TN 37201",
+      "phone": "555-761-7831"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0078",
+    "details": {
+      "name": "Joseph Williams",
+      "address": "479 Willow Dr, Nashville, TN 37201",
+      "phone": "555-353-7912"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0079",
+    "details": {
+      "name": "Patricia Ramirez",
+      "address": "340 Pine Way, Spokane, WA 99201",
+      "phone": "555-488-4364"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0080",
+    "details": {
+      "name": "Susan Williams",
+      "address": "643 Pine Way, Denver, CO 80203",
+      "phone": "555-689-6993"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0081",
+    "details": {
+      "name": "Mia Robinson",
+      "address": "169 Maple St, Boise, ID 83702",
+      "phone": "555-320-2778"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0082",
+    "details": {
+      "name": "Jennifer Johnson",
+      "address": "377 Oak Ave, Sacramento, CA 95814",
+      "phone": "555-273-3073"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0083",
+    "details": {
+      "name": "Sophia Miller",
+      "address": "220 Willow Dr, Raleigh, NC 27601",
+      "phone": "555-347-1716"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0084",
+    "details": {
+      "name": "Linda Lee",
+      "address": "61 Birch Rd, Providence, RI 02903",
+      "phone": "555-439-5927"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0085",
+    "details": {
+      "name": "Anthony Taylor",
+      "address": "396 Willow Dr, Denver, CO 80203",
+      "phone": "555-680-1204"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0086",
+    "details": {
+      "name": "William Gonzalez",
+      "address": "128 Pine Way, Madison, WI 53703",
+      "phone": "555-483-9002"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0087",
+    "details": {
+      "name": "Patricia Anderson",
+      "address": "23 Cedar Ln, Nashville, TN 37201",
+      "phone": "555-755-1177"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0088",
+    "details": {
+      "name": "Richard Lewis",
+      "address": "655 Aspen Blvd, Columbus, OH 43215",
+      "phone": "555-758-7744"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0089",
+    "details": {
+      "name": "Karen Garcia",
+      "address": "641 Oak Ave, Nashville, TN 37201",
+      "phone": "555-363-4253"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0090",
+    "details": {
+      "name": "Susan Rodriguez",
+      "address": "221 Elm Ct, Portland, OR 97201",
+      "phone": "555-995-1511"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0091",
+    "details": {
+      "name": "Patricia Clark",
+      "address": "231 Elm Ct, Portland, OR 97201",
+      "phone": "555-548-3780"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0092",
+    "details": {
+      "name": "Matthew Martinez",
+      "address": "386 Cedar Ln, Boise, ID 83702",
+      "phone": "555-589-5132"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0093",
+    "details": {
+      "name": "David Thompson",
+      "address": "394 Sycamore Pl, Boise, ID 83702",
+      "phone": "555-906-9157"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0094",
+    "details": {
+      "name": "David Martin",
+      "address": "846 Aspen Blvd, Boise, ID 83702",
+      "phone": "555-418-1707"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0095",
+    "details": {
+      "name": "Patricia Harris",
+      "address": "208 Cedar Ln, Nashville, TN 37201",
+      "phone": "555-618-9590"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0096",
+    "details": {
+      "name": "Jennifer Moore",
+      "address": "104 Cedar Ln, Denver, CO 80203",
+      "phone": "555-251-8499"
+    },
+    "type": "vip",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0097",
+    "details": {
+      "name": "Margaret Clark",
+      "address": "54 Maple St, Columbus, OH 43215",
+      "phone": "555-280-7981"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0098",
+    "details": {
+      "name": "Elizabeth Johnson",
+      "address": "572 Willow Dr, Providence, RI 02903",
+      "phone": "555-147-3846"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0099",
+    "details": {
+      "name": "Lisa Lopez",
+      "address": "88 Magnolia Ter, Spokane, WA 99201",
+      "phone": "555-692-5184"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0100",
+    "details": {
+      "name": "Barbara Garcia",
+      "address": "855 Aspen Blvd, Raleigh, NC 27601",
+      "phone": "555-392-8722"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0101",
+    "details": {
+      "name": "Lucas Johnson",
+      "address": "809 Cedar Ln, Columbus, OH 43215",
+      "phone": "555-522-7623"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0102",
+    "details": {
+      "name": "Emma Jones",
+      "address": "27 Maple St, Denver, CO 80203",
+      "phone": "555-951-3226"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0103",
+    "details": {
+      "name": "Noah White",
+      "address": "297 Elm Ct, Spokane, WA 99201",
+      "phone": "555-657-9956"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0104",
+    "details": {
+      "name": "Sarah Jones",
+      "address": "329 Maple St, Providence, RI 02903",
+      "phone": "555-749-3166"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0105",
+    "details": {
+      "name": "John Martin",
+      "address": "536 Willow Dr, Boise, ID 83702",
+      "phone": "555-991-9328"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0106",
+    "details": {
+      "name": "Elizabeth Lee",
+      "address": "890 Cedar Ln, Providence, RI 02903",
+      "phone": "555-269-3407"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0107",
+    "details": {
+      "name": "Ava Smith",
+      "address": "300 Oak Ave, Spokane, WA 99201",
+      "phone": "555-110-8796"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0108",
+    "details": {
+      "name": "Noah Lopez",
+      "address": "423 Oak Ave, Nashville, TN 37201",
+      "phone": "555-625-9892"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0109",
+    "details": {
+      "name": "Ava Sanchez",
+      "address": "678 Cedar Ln, Sacramento, CA 95814",
+      "phone": "555-236-1547"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0110",
+    "details": {
+      "name": "Christopher Clark",
+      "address": "52 Maple St, Madison, WI 53703",
+      "phone": "555-987-4719"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0111",
+    "details": {
+      "name": "Matthew Taylor",
+      "address": "692 Elm Ct, Sacramento, CA 95814",
+      "phone": "555-344-9190"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0112",
+    "details": {
+      "name": "William Hernandez",
+      "address": "192 Sycamore Pl, Columbus, OH 43215",
+      "phone": "555-332-7793"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0113",
+    "details": {
+      "name": "Ava Harris",
+      "address": "882 Pine Way, Columbus, OH 43215",
+      "phone": "555-842-9799"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0114",
+    "details": {
+      "name": "Karen Perez",
+      "address": "404 Maple St, Raleigh, NC 27601",
+      "phone": "555-669-9430"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0115",
+    "details": {
+      "name": "Mary Lewis",
+      "address": "679 Maple St, Madison, WI 53703",
+      "phone": "555-335-6388"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0116",
+    "details": {
+      "name": "Barbara Williams",
+      "address": "40 Magnolia Ter, Providence, RI 02903",
+      "phone": "555-385-2682"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0117",
+    "details": {
+      "name": "Mary Jackson",
+      "address": "432 Pine Way, Columbus, OH 43215",
+      "phone": "555-652-2691"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0118",
+    "details": {
+      "name": "Thomas Anderson",
+      "address": "274 Willow Dr, Spokane, WA 99201",
+      "phone": "555-518-3556"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0119",
+    "details": {
+      "name": "Lisa Sanchez",
+      "address": "502 Maple St, Providence, RI 02903",
+      "phone": "555-258-4685"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0120",
+    "details": {
+      "name": "Lucas Smith",
+      "address": "510 Magnolia Ter, Spokane, WA 99201",
+      "phone": "555-865-4937"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0121",
+    "details": {
+      "name": "Anthony Lopez",
+      "address": "17 Birch Rd, Sacramento, CA 95814",
+      "phone": "555-153-9436"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0122",
+    "details": {
+      "name": "Lisa Lee",
+      "address": "280 Cedar Ln, Nashville, TN 37201",
+      "phone": "555-525-3046"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0123",
+    "details": {
+      "name": "Linda Gonzalez",
+      "address": "832 Pine Way, Nashville, TN 37201",
+      "phone": "555-771-5849"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0124",
+    "details": {
+      "name": "James Garcia",
+      "address": "41 Cedar Ln, Spokane, WA 99201",
+      "phone": "555-677-3508"
+    },
+    "type": "vip",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0125",
+    "details": {
+      "name": "Sandra Ramirez",
+      "address": "27 Oak Ave, Raleigh, NC 27601",
+      "phone": "555-303-4890"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0126",
+    "details": {
+      "name": "Mark Moore",
+      "address": "21 Cedar Ln, Spokane, WA 99201",
+      "phone": "555-541-3346"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0127",
+    "details": {
+      "name": "Thomas Lewis",
+      "address": "10 Maple St, Madison, WI 53703",
+      "phone": "555-971-5614"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0128",
+    "details": {
+      "name": "Emma Wilson",
+      "address": "225 Willow Dr, Spokane, WA 99201",
+      "phone": "555-690-4161"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0129",
+    "details": {
+      "name": "Karen Moore",
+      "address": "652 Birch Rd, Raleigh, NC 27601",
+      "phone": "555-147-7734"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0130",
+    "details": {
+      "name": "Charles Taylor",
+      "address": "213 Oak Ave, Raleigh, NC 27601",
+      "phone": "555-825-4529"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0131",
+    "details": {
+      "name": "Mia Rodriguez",
+      "address": "393 Magnolia Ter, Boise, ID 83702",
+      "phone": "555-205-1706"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0132",
+    "details": {
+      "name": "Charles Robinson",
+      "address": "146 Aspen Blvd, Portland, OR 97201",
+      "phone": "555-142-9372"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0133",
+    "details": {
+      "name": "Daniel Gonzalez",
+      "address": "496 Maple St, Providence, RI 02903",
+      "phone": "555-312-4167"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0134",
+    "details": {
+      "name": "William Martinez",
+      "address": "322 Elm Ct, Austin, TX 73301",
+      "phone": "555-966-7862"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0135",
+    "details": {
+      "name": "Anthony Taylor",
+      "address": "708 Oak Ave, Portland, OR 97201",
+      "phone": "555-514-8315"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0136",
+    "details": {
+      "name": "Olivia Martin",
+      "address": "872 Willow Dr, Boise, ID 83702",
+      "phone": "555-442-6631"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0137",
+    "details": {
+      "name": "Sarah Garcia",
+      "address": "346 Maple St, Tucson, AZ 85701",
+      "phone": "555-738-2190"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0138",
+    "details": {
+      "name": "Linda Robinson",
+      "address": "573 Elm Ct, Portland, OR 97201",
+      "phone": "555-324-8872"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0139",
+    "details": {
+      "name": "Barbara Brown",
+      "address": "258 Sycamore Pl, Spokane, WA 99201",
+      "phone": "555-344-3047"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0140",
+    "details": {
+      "name": "Lisa Perez",
+      "address": "834 Oak Ave, Tucson, AZ 85701",
+      "phone": "555-678-3879"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0141",
+    "details": {
+      "name": "Susan Martin",
+      "address": "175 Oak Ave, Sacramento, CA 95814",
+      "phone": "555-955-5176"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0142",
+    "details": {
+      "name": "Liam Martinez",
+      "address": "629 Cedar Ln, Columbus, OH 43215",
+      "phone": "555-494-7974"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0143",
+    "details": {
+      "name": "Elizabeth Thomas",
+      "address": "652 Sycamore Pl, Tucson, AZ 85701",
+      "phone": "555-322-7859"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0144",
+    "details": {
+      "name": "Margaret Garcia",
+      "address": "209 Sycamore Pl, Sacramento, CA 95814",
+      "phone": "555-573-9700"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0145",
+    "details": {
+      "name": "Linda Sanchez",
+      "address": "725 Birch Rd, Denver, CO 80203",
+      "phone": "555-288-8546"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0146",
+    "details": {
+      "name": "Richard Ramirez",
+      "address": "348 Magnolia Ter, Spokane, WA 99201",
+      "phone": "555-769-1496"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0147",
+    "details": {
+      "name": "John Lopez",
+      "address": "658 Elm Ct, Boise, ID 83702",
+      "phone": "555-132-4672"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0148",
+    "details": {
+      "name": "Daniel Taylor",
+      "address": "319 Maple St, Spokane, WA 99201",
+      "phone": "555-625-6151"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0149",
+    "details": {
+      "name": "Mia Harris",
+      "address": "692 Birch Rd, Denver, CO 80203",
+      "phone": "555-322-8183"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0150",
+    "details": {
+      "name": "Daniel Johnson",
+      "address": "799 Elm Ct, Denver, CO 80203",
+      "phone": "555-256-6225"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0151",
+    "details": {
+      "name": "David Thompson",
+      "address": "41 Magnolia Ter, Denver, CO 80203",
+      "phone": "555-805-5878"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0152",
+    "details": {
+      "name": "David Miller",
+      "address": "144 Aspen Blvd, Providence, RI 02903",
+      "phone": "555-642-4552"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0153",
+    "details": {
+      "name": "Susan Lopez",
+      "address": "829 Oak Ave, Madison, WI 53703",
+      "phone": "555-379-2643"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0154",
+    "details": {
+      "name": "Betty Perez",
+      "address": "421 Birch Rd, Portland, OR 97201",
+      "phone": "555-319-2813"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0155",
+    "details": {
+      "name": "Ethan Thompson",
+      "address": "133 Elm Ct, Sacramento, CA 95814",
+      "phone": "555-740-1704"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0156",
+    "details": {
+      "name": "Robert Sanchez",
+      "address": "229 Maple St, Spokane, WA 99201",
+      "phone": "555-601-2957"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0157",
+    "details": {
+      "name": "Anthony Taylor",
+      "address": "603 Pine Way, Denver, CO 80203",
+      "phone": "555-195-7671"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0158",
+    "details": {
+      "name": "Jessica Lewis",
+      "address": "569 Magnolia Ter, Denver, CO 80203",
+      "phone": "555-898-8811"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0159",
+    "details": {
+      "name": "Mary Miller",
+      "address": "77 Pine Way, Denver, CO 80203",
+      "phone": "555-553-2426"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0160",
+    "details": {
+      "name": "Lisa Taylor",
+      "address": "623 Sycamore Pl, Tucson, AZ 85701",
+      "phone": "555-582-6593"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0161",
+    "details": {
+      "name": "Margaret Gonzalez",
+      "address": "823 Willow Dr, Denver, CO 80203",
+      "phone": "555-363-9262"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0162",
+    "details": {
+      "name": "Michael Anderson",
+      "address": "806 Aspen Blvd, Tucson, AZ 85701",
+      "phone": "555-267-8420"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0163",
+    "details": {
+      "name": "Matthew Lewis",
+      "address": "68 Aspen Blvd, Spokane, WA 99201",
+      "phone": "555-649-5261"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0164",
+    "details": {
+      "name": "Thomas Brown",
+      "address": "663 Cedar Ln, Nashville, TN 37201",
+      "phone": "555-318-6264"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0165",
+    "details": {
+      "name": "William Miller",
+      "address": "832 Aspen Blvd, Portland, OR 97201",
+      "phone": "555-637-2316"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0166",
+    "details": {
+      "name": "Michael White",
+      "address": "596 Magnolia Ter, Denver, CO 80203",
+      "phone": "555-636-1866"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0167",
+    "details": {
+      "name": "Karen Lopez",
+      "address": "154 Aspen Blvd, Madison, WI 53703",
+      "phone": "555-803-1581"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0168",
+    "details": {
+      "name": "Noah Jackson",
+      "address": "685 Elm Ct, Spokane, WA 99201",
+      "phone": "555-185-6227"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0169",
+    "details": {
+      "name": "Lucas Ramirez",
+      "address": "478 Pine Way, Denver, CO 80203",
+      "phone": "555-563-5397"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0170",
+    "details": {
+      "name": "Patricia Davis",
+      "address": "132 Magnolia Ter, Columbus, OH 43215",
+      "phone": "555-892-7367"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0171",
+    "details": {
+      "name": "Ava Anderson",
+      "address": "100 Willow Dr, Providence, RI 02903",
+      "phone": "555-729-6659"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0172",
+    "details": {
+      "name": "James Lewis",
+      "address": "126 Cedar Ln, Denver, CO 80203",
+      "phone": "555-214-7089"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0173",
+    "details": {
+      "name": "Elizabeth Ramirez",
+      "address": "403 Magnolia Ter, Tucson, AZ 85701",
+      "phone": "555-209-4816"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0174",
+    "details": {
+      "name": "Karen Hernandez",
+      "address": "132 Aspen Blvd, Tucson, AZ 85701",
+      "phone": "555-599-9423"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0175",
+    "details": {
+      "name": "Nancy Taylor",
+      "address": "342 Aspen Blvd, Columbus, OH 43215",
+      "phone": "555-681-5548"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0176",
+    "details": {
+      "name": "David Moore",
+      "address": "561 Willow Dr, Madison, WI 53703",
+      "phone": "555-183-5491"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0177",
+    "details": {
+      "name": "Karen Clark",
+      "address": "711 Maple St, Providence, RI 02903",
+      "phone": "555-799-6730"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0178",
+    "details": {
+      "name": "Matthew Robinson",
+      "address": "865 Sycamore Pl, Tucson, AZ 85701",
+      "phone": "555-869-4009"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0179",
+    "details": {
+      "name": "Christopher Anderson",
+      "address": "820 Oak Ave, Nashville, TN 37201",
+      "phone": "555-539-8341"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0180",
+    "details": {
+      "name": "Sophia Johnson",
+      "address": "420 Magnolia Ter, Providence, RI 02903",
+      "phone": "555-176-3417"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0181",
+    "details": {
+      "name": "Mary Moore",
+      "address": "514 Oak Ave, Providence, RI 02903",
+      "phone": "555-818-2359"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0182",
+    "details": {
+      "name": "Karen Hernandez",
+      "address": "95 Magnolia Ter, Providence, RI 02903",
+      "phone": "555-887-2567"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0183",
+    "details": {
+      "name": "Robert Lee",
+      "address": "142 Maple St, Sacramento, CA 95814",
+      "phone": "555-940-8488"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0184",
+    "details": {
+      "name": "Patricia Miller",
+      "address": "412 Birch Rd, Spokane, WA 99201",
+      "phone": "555-270-1790"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0185",
+    "details": {
+      "name": "Michael Wilson",
+      "address": "681 Pine Way, Austin, TX 73301",
+      "phone": "555-705-7958"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0186",
+    "details": {
+      "name": "Emma Hernandez",
+      "address": "804 Sycamore Pl, Portland, OR 97201",
+      "phone": "555-744-9440"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0187",
+    "details": {
+      "name": "Isabella Sanchez",
+      "address": "382 Elm Ct, Boise, ID 83702",
+      "phone": "555-495-8065"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0188",
+    "details": {
+      "name": "Matthew Jackson",
+      "address": "726 Willow Dr, Madison, WI 53703",
+      "phone": "555-249-8998"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0189",
+    "details": {
+      "name": "Barbara Williams",
+      "address": "637 Magnolia Ter, Tucson, AZ 85701",
+      "phone": "555-520-2520"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0190",
+    "details": {
+      "name": "Linda Clark",
+      "address": "748 Pine Way, Providence, RI 02903",
+      "phone": "555-395-3565"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0191",
+    "details": {
+      "name": "James Moore",
+      "address": "526 Magnolia Ter, Nashville, TN 37201",
+      "phone": "555-306-5523"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0192",
+    "details": {
+      "name": "James Martinez",
+      "address": "467 Birch Rd, Sacramento, CA 95814",
+      "phone": "555-141-7906"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0193",
+    "details": {
+      "name": "Charles Clark",
+      "address": "290 Pine Way, Portland, OR 97201",
+      "phone": "555-441-9375"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0194",
+    "details": {
+      "name": "Charles Thomas",
+      "address": "712 Willow Dr, Providence, RI 02903",
+      "phone": "555-872-3546"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0195",
+    "details": {
+      "name": "Thomas Robinson",
+      "address": "453 Willow Dr, Spokane, WA 99201",
+      "phone": "555-651-9102"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0196",
+    "details": {
+      "name": "Emma Lewis",
+      "address": "887 Birch Rd, Austin, TX 73301",
+      "phone": "555-547-7599"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0197",
+    "details": {
+      "name": "Charles Jackson",
+      "address": "457 Magnolia Ter, Boise, ID 83702",
+      "phone": "555-194-8767"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0198",
+    "details": {
+      "name": "Ethan Johnson",
+      "address": "458 Maple St, Sacramento, CA 95814",
+      "phone": "555-795-7349"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0199",
+    "details": {
+      "name": "Sophia Garcia",
+      "address": "738 Oak Ave, Boise, ID 83702",
+      "phone": "555-872-2170"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0200",
+    "details": {
+      "name": "Isabella Davis",
+      "address": "73 Maple St, Boise, ID 83702",
+      "phone": "555-963-3643"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0201",
+    "details": {
+      "name": "Mary Davis",
+      "address": "329 Aspen Blvd, Providence, RI 02903",
+      "phone": "555-360-3379"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0202",
+    "details": {
+      "name": "Michael Johnson",
+      "address": "16 Birch Rd, Spokane, WA 99201",
+      "phone": "555-720-6336"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0203",
+    "details": {
+      "name": "Charles Brown",
+      "address": "24 Maple St, Providence, RI 02903",
+      "phone": "555-311-9132"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0204",
+    "details": {
+      "name": "Mia White",
+      "address": "110 Maple St, Columbus, OH 43215",
+      "phone": "555-493-1220"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0205",
+    "details": {
+      "name": "Ava Williams",
+      "address": "35 Sycamore Pl, Denver, CO 80203",
+      "phone": "555-980-8364"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0206",
+    "details": {
+      "name": "Barbara Brown",
+      "address": "523 Magnolia Ter, Providence, RI 02903",
+      "phone": "555-421-5653"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0207",
+    "details": {
+      "name": "Barbara Robinson",
+      "address": "603 Cedar Ln, Raleigh, NC 27601",
+      "phone": "555-471-1281"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0208",
+    "details": {
+      "name": "Sophia Perez",
+      "address": "190 Maple St, Columbus, OH 43215",
+      "phone": "555-718-1907"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0209",
+    "details": {
+      "name": "Emma Martin",
+      "address": "211 Birch Rd, Austin, TX 73301",
+      "phone": "555-392-2940"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0210",
+    "details": {
+      "name": "Richard Martin",
+      "address": "467 Maple St, Tucson, AZ 85701",
+      "phone": "555-581-1775"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0211",
+    "details": {
+      "name": "Lisa Perez",
+      "address": "592 Maple St, Boise, ID 83702",
+      "phone": "555-615-1798"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0212",
+    "details": {
+      "name": "Charles Jackson",
+      "address": "26 Cedar Ln, Boise, ID 83702",
+      "phone": "555-790-8156"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0213",
+    "details": {
+      "name": "Robert Williams",
+      "address": "63 Maple St, Spokane, WA 99201",
+      "phone": "555-215-8513"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0214",
+    "details": {
+      "name": "Liam Rodriguez",
+      "address": "575 Magnolia Ter, Madison, WI 53703",
+      "phone": "555-576-6852"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0215",
+    "details": {
+      "name": "Patricia Brown",
+      "address": "131 Willow Dr, Spokane, WA 99201",
+      "phone": "555-783-6379"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0216",
+    "details": {
+      "name": "Susan Martin",
+      "address": "599 Sycamore Pl, Raleigh, NC 27601",
+      "phone": "555-698-6567"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0217",
+    "details": {
+      "name": "James Perez",
+      "address": "700 Aspen Blvd, Austin, TX 73301",
+      "phone": "555-822-3529"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0218",
+    "details": {
+      "name": "Lisa Thomas",
+      "address": "802 Aspen Blvd, Columbus, OH 43215",
+      "phone": "555-237-2782"
+    },
+    "type": "vip",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0219",
+    "details": {
+      "name": "Anthony Perez",
+      "address": "182 Cedar Ln, Columbus, OH 43215",
+      "phone": "555-958-2259"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0220",
+    "details": {
+      "name": "Isabella Jackson",
+      "address": "884 Pine Way, Sacramento, CA 95814",
+      "phone": "555-748-8930"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0221",
+    "details": {
+      "name": "Matthew Garcia",
+      "address": "112 Willow Dr, Tucson, AZ 85701",
+      "phone": "555-393-3776"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0222",
+    "details": {
+      "name": "Liam Thompson",
+      "address": "240 Pine Way, Raleigh, NC 27601",
+      "phone": "555-387-1007"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0223",
+    "details": {
+      "name": "Anthony Anderson",
+      "address": "345 Willow Dr, Columbus, OH 43215",
+      "phone": "555-147-4885"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0224",
+    "details": {
+      "name": "Emma Clark",
+      "address": "513 Willow Dr, Nashville, TN 37201",
+      "phone": "555-325-9509"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0225",
+    "details": {
+      "name": "Sarah Jones",
+      "address": "194 Willow Dr, Portland, OR 97201",
+      "phone": "555-327-2094"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0226",
+    "details": {
+      "name": "David Taylor",
+      "address": "744 Oak Ave, Madison, WI 53703",
+      "phone": "555-199-8116"
+    },
+    "type": "vip",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0227",
+    "details": {
+      "name": "Christopher Smith",
+      "address": "881 Aspen Blvd, Sacramento, CA 95814",
+      "phone": "555-222-6579"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0228",
+    "details": {
+      "name": "David Anderson",
+      "address": "825 Elm Ct, Tucson, AZ 85701",
+      "phone": "555-653-6910"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0229",
+    "details": {
+      "name": "Margaret Martin",
+      "address": "314 Cedar Ln, Austin, TX 73301",
+      "phone": "555-656-4781"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0230",
+    "details": {
+      "name": "Joseph Taylor",
+      "address": "373 Maple St, Raleigh, NC 27601",
+      "phone": "555-254-2109"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0231",
+    "details": {
+      "name": "Noah Robinson",
+      "address": "607 Magnolia Ter, Providence, RI 02903",
+      "phone": "555-528-6041"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0232",
+    "details": {
+      "name": "Liam Hernandez",
+      "address": "508 Birch Rd, Austin, TX 73301",
+      "phone": "555-114-2743"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0233",
+    "details": {
+      "name": "Sarah Anderson",
+      "address": "774 Magnolia Ter, Portland, OR 97201",
+      "phone": "555-996-9167"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0234",
+    "details": {
+      "name": "Ethan Clark",
+      "address": "603 Magnolia Ter, Tucson, AZ 85701",
+      "phone": "555-326-2061"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0235",
+    "details": {
+      "name": "Jessica Hernandez",
+      "address": "38 Maple St, Sacramento, CA 95814",
+      "phone": "555-560-5995"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0236",
+    "details": {
+      "name": "Richard Gonzalez",
+      "address": "414 Cedar Ln, Austin, TX 73301",
+      "phone": "555-388-7298"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0237",
+    "details": {
+      "name": "Charles Garcia",
+      "address": "151 Aspen Blvd, Columbus, OH 43215",
+      "phone": "555-823-1394"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0238",
+    "details": {
+      "name": "Sandra Anderson",
+      "address": "408 Aspen Blvd, Raleigh, NC 27601",
+      "phone": "555-333-4096"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0239",
+    "details": {
+      "name": "Joseph Clark",
+      "address": "674 Birch Rd, Spokane, WA 99201",
+      "phone": "555-776-9407"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0240",
+    "details": {
+      "name": "Mia Martin",
+      "address": "697 Sycamore Pl, Providence, RI 02903",
+      "phone": "555-406-9543"
+    },
+    "type": "vip",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0241",
+    "details": {
+      "name": "Sophia Jones",
+      "address": "106 Elm Ct, Tucson, AZ 85701",
+      "phone": "555-129-2150"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0242",
+    "details": {
+      "name": "Daniel Robinson",
+      "address": "517 Birch Rd, Spokane, WA 99201",
+      "phone": "555-214-3638"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0243",
+    "details": {
+      "name": "Matthew Miller",
+      "address": "241 Oak Ave, Nashville, TN 37201",
+      "phone": "555-131-1018"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0244",
+    "details": {
+      "name": "Patricia Martinez",
+      "address": "28 Elm Ct, Boise, ID 83702",
+      "phone": "555-648-5924"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0245",
+    "details": {
+      "name": "Patricia Thompson",
+      "address": "205 Willow Dr, Sacramento, CA 95814",
+      "phone": "555-854-7100"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0246",
+    "details": {
+      "name": "Isabella Sanchez",
+      "address": "281 Aspen Blvd, Columbus, OH 43215",
+      "phone": "555-534-8948"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0247",
+    "details": {
+      "name": "Barbara Williams",
+      "address": "357 Cedar Ln, Tucson, AZ 85701",
+      "phone": "555-165-1792"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0248",
+    "details": {
+      "name": "Karen Rodriguez",
+      "address": "405 Willow Dr, Nashville, TN 37201",
+      "phone": "555-618-5474"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0249",
+    "details": {
+      "name": "Sandra Martinez",
+      "address": "815 Sycamore Pl, Sacramento, CA 95814",
+      "phone": "555-878-8516"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0250",
+    "details": {
+      "name": "Robert Robinson",
+      "address": "819 Oak Ave, Tucson, AZ 85701",
+      "phone": "555-171-7771"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0251",
+    "details": {
+      "name": "Mia Brown",
+      "address": "181 Birch Rd, Portland, OR 97201",
+      "phone": "555-940-2004"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0252",
+    "details": {
+      "name": "Sophia Smith",
+      "address": "605 Maple St, Columbus, OH 43215",
+      "phone": "555-161-8379"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0253",
+    "details": {
+      "name": "Richard Robinson",
+      "address": "625 Elm Ct, Nashville, TN 37201",
+      "phone": "555-255-2334"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0254",
+    "details": {
+      "name": "Margaret White",
+      "address": "244 Cedar Ln, Raleigh, NC 27601",
+      "phone": "555-694-2227"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0255",
+    "details": {
+      "name": "Christopher Taylor",
+      "address": "466 Pine Way, Raleigh, NC 27601",
+      "phone": "555-168-5386"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0256",
+    "details": {
+      "name": "James Lewis",
+      "address": "862 Maple St, Providence, RI 02903",
+      "phone": "555-137-1999"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0257",
+    "details": {
+      "name": "Betty Thomas",
+      "address": "704 Cedar Ln, Portland, OR 97201",
+      "phone": "555-888-6187"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0258",
+    "details": {
+      "name": "Thomas Ramirez",
+      "address": "424 Birch Rd, Boise, ID 83702",
+      "phone": "555-379-8738"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0259",
+    "details": {
+      "name": "Olivia Gonzalez",
+      "address": "662 Maple St, Columbus, OH 43215",
+      "phone": "555-797-6858"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0260",
+    "details": {
+      "name": "Sandra Taylor",
+      "address": "879 Aspen Blvd, Madison, WI 53703",
+      "phone": "555-864-7537"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0261",
+    "details": {
+      "name": "Olivia Lopez",
+      "address": "516 Elm Ct, Nashville, TN 37201",
+      "phone": "555-481-9326"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0262",
+    "details": {
+      "name": "Lucas Perez",
+      "address": "776 Magnolia Ter, Columbus, OH 43215",
+      "phone": "555-656-1264"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0263",
+    "details": {
+      "name": "Michael Williams",
+      "address": "50 Sycamore Pl, Spokane, WA 99201",
+      "phone": "555-156-7435"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0264",
+    "details": {
+      "name": "Karen Moore",
+      "address": "148 Willow Dr, Denver, CO 80203",
+      "phone": "555-184-9623"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0265",
+    "details": {
+      "name": "Jessica Lewis",
+      "address": "287 Maple St, Columbus, OH 43215",
+      "phone": "555-279-4252"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0266",
+    "details": {
+      "name": "Noah Thompson",
+      "address": "721 Willow Dr, Boise, ID 83702",
+      "phone": "555-631-1180"
+    },
+    "type": "vip",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0267",
+    "details": {
+      "name": "Barbara Anderson",
+      "address": "223 Oak Ave, Sacramento, CA 95814",
+      "phone": "555-826-8689"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0268",
+    "details": {
+      "name": "Barbara Thompson",
+      "address": "588 Cedar Ln, Nashville, TN 37201",
+      "phone": "555-216-5811"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0269",
+    "details": {
+      "name": "Christopher Sanchez",
+      "address": "711 Maple St, Portland, OR 97201",
+      "phone": "555-348-3509"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0270",
+    "details": {
+      "name": "John Lee",
+      "address": "148 Oak Ave, Portland, OR 97201",
+      "phone": "555-112-5680"
+    },
+    "type": "one-time-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0271",
+    "details": {
+      "name": "Thomas Thomas",
+      "address": "558 Birch Rd, Tucson, AZ 85701",
+      "phone": "555-452-5958"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0272",
+    "details": {
+      "name": "Sandra Thompson",
+      "address": "30 Elm Ct, Madison, WI 53703",
+      "phone": "555-350-7039"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0273",
+    "details": {
+      "name": "Ava Thomas",
+      "address": "489 Elm Ct, Madison, WI 53703",
+      "phone": "555-845-7898"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0274",
+    "details": {
+      "name": "Margaret Davis",
+      "address": "611 Pine Way, Boise, ID 83702",
+      "phone": "555-577-6704"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0275",
+    "details": {
+      "name": "Sandra Smith",
+      "address": "695 Oak Ave, Tucson, AZ 85701",
+      "phone": "555-599-2193"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0276",
+    "details": {
+      "name": "Betty Anderson",
+      "address": "270 Aspen Blvd, Portland, OR 97201",
+      "phone": "555-291-8560"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0277",
+    "details": {
+      "name": "James Johnson",
+      "address": "86 Cedar Ln, Denver, CO 80203",
+      "phone": "555-166-9483"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0278",
+    "details": {
+      "name": "Daniel Garcia",
+      "address": "794 Oak Ave, Spokane, WA 99201",
+      "phone": "555-269-8427"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0279",
+    "details": {
+      "name": "William Anderson",
+      "address": "394 Maple St, Madison, WI 53703",
+      "phone": "555-484-7581"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0280",
+    "details": {
+      "name": "William Lopez",
+      "address": "805 Pine Way, Raleigh, NC 27601",
+      "phone": "555-727-8856"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0281",
+    "details": {
+      "name": "Thomas Miller",
+      "address": "707 Willow Dr, Austin, TX 73301",
+      "phone": "555-582-7447"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0282",
+    "details": {
+      "name": "David Jones",
+      "address": "263 Elm Ct, Portland, OR 97201",
+      "phone": "555-386-5269"
+    },
+    "type": "one-time-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0283",
+    "details": {
+      "name": "Liam Brown",
+      "address": "569 Elm Ct, Sacramento, CA 95814",
+      "phone": "555-358-4194"
+    },
+    "type": "vip",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0284",
+    "details": {
+      "name": "William Gonzalez",
+      "address": "58 Oak Ave, Austin, TX 73301",
+      "phone": "555-222-3343"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0285",
+    "details": {
+      "name": "Karen Sanchez",
+      "address": "50 Birch Rd, Nashville, TN 37201",
+      "phone": "555-831-5443"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0286",
+    "details": {
+      "name": "Noah Anderson",
+      "address": "223 Aspen Blvd, Boise, ID 83702",
+      "phone": "555-485-7500"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0287",
+    "details": {
+      "name": "Olivia Martin",
+      "address": "451 Cedar Ln, Raleigh, NC 27601",
+      "phone": "555-339-1432"
+    },
+    "type": "one-time-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0288",
+    "details": {
+      "name": "Christopher Miller",
+      "address": "697 Maple St, Tucson, AZ 85701",
+      "phone": "555-944-8967"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0289",
+    "details": {
+      "name": "David Harris",
+      "address": "185 Cedar Ln, Sacramento, CA 95814",
+      "phone": "555-710-5045"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0290",
+    "details": {
+      "name": "Isabella Clark",
+      "address": "166 Elm Ct, Spokane, WA 99201",
+      "phone": "555-665-1480"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0291",
+    "details": {
+      "name": "Charles Williams",
+      "address": "192 Birch Rd, Tucson, AZ 85701",
+      "phone": "555-424-9402"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0292",
+    "details": {
+      "name": "Lucas Jackson",
+      "address": "582 Willow Dr, Nashville, TN 37201",
+      "phone": "555-478-8060"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0293",
+    "details": {
+      "name": "Susan Perez",
+      "address": "546 Pine Way, Denver, CO 80203",
+      "phone": "555-257-4618"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0294",
+    "details": {
+      "name": "Joseph Lee",
+      "address": "721 Magnolia Ter, Sacramento, CA 95814",
+      "phone": "555-598-8340"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0295",
+    "details": {
+      "name": "Mary Lee",
+      "address": "460 Sycamore Pl, Madison, WI 53703",
+      "phone": "555-624-7081"
+    },
+    "type": "vip",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0296",
+    "details": {
+      "name": "Isabella Robinson",
+      "address": "853 Elm Ct, Portland, OR 97201",
+      "phone": "555-613-5508"
+    },
+    "type": "returning-customer",
+    "sentiment": "unhappy"
+  },
+  {
+    "id": "cust-0297",
+    "details": {
+      "name": "Michael Smith",
+      "address": "64 Pine Way, Madison, WI 53703",
+      "phone": "555-783-8992"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0298",
+    "details": {
+      "name": "Elizabeth Thomas",
+      "address": "247 Aspen Blvd, Austin, TX 73301",
+      "phone": "555-916-3306"
+    },
+    "type": "returning-customer",
+    "sentiment": "neutral"
+  },
+  {
+    "id": "cust-0299",
+    "details": {
+      "name": "Betty Lee",
+      "address": "189 Magnolia Ter, Austin, TX 73301",
+      "phone": "555-447-2920"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  },
+  {
+    "id": "cust-0300",
+    "details": {
+      "name": "Mark Wilson",
+      "address": "491 Sycamore Pl, Providence, RI 02903",
+      "phone": "555-574-3815"
+    },
+    "type": "returning-customer",
+    "sentiment": "happy"
+  }
+]

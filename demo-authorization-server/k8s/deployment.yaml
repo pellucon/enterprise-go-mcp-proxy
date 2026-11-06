@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-authorization-server
+  labels:
+    app: demo-authorization-server
+spec:
+  # Single pod only: every bit of state (signing key, users, clients, auth
+  # codes, refresh tokens) is in-process memory with no cross-replica
+  # coordination -- a second replica would mint tokens a request routed to
+  # the other replica couldn't verify, and an /authorize -> /token flow
+  # split across two replicas would fail outright. See main.go's own doc
+  # comment.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-authorization-server
+  template:
+    metadata:
+      labels:
+        app: demo-authorization-server
+        # Deliberately NOT mcp.io/role=backend-mcp-server: this isn't an
+        # MCP server, it's an OAuth IdP -- it must never be swept up by
+        # go-proxy's own k8s backend discovery, nor by the blanket
+        # allow-proxy-to-backends NetworkPolicy (which would otherwise
+        # block the external/JWKS ingress this server actually needs --
+        # see k8s/networkpolicy.yaml in this same directory).
+    spec:
+      # Never touches the k8s API -- same as every backend MCP server.
+      automountServiceAccountToken: false
+      containers:
+        - name: demo-authorization-server
+          image: demo-authorization-server:local
+          imagePullPolicy: IfNotPresent
+          args:
+            - -port=:8102
+            # -issuer/-audience/-role-claim unchanged from the former
+            # host-process invocation: the Service below keeps this
+            # server reachable at the same http://localhost:8102 URL via
+            # k3s's klipper LoadBalancer, so nothing that depends on this
+            # value (proxy-server.cfg's auth.issuer, both CLIs'
+            # -auth-server default) needs to change.
+            - -issuer=http://localhost:8102
+            - -audience=go-proxy
+            - -role-claim=app_roles
+          ports:
+            - name: http
+              containerPort: 8102
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8102
+            initialDelaySeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8102
+            initialDelaySeconds: 5

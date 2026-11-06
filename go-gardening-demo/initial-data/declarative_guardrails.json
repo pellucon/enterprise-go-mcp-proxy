@@ -1,0 +1,70 @@
+[
+  {
+    "name": "store-purchase-cost-limit",
+    "constraint": "{\"validationTool\": \"validate_store_requests\", \"parameters\": {\"maxTotalCost\": 1000}}",
+    "roleExpression": "!admin",
+    "actions": ["block", "alert"]
+  },
+  {
+    "name": "store-purchase-cost-warning",
+    "constraint": "{\"validationTool\": \"validate_store_requests\", \"parameters\": {\"maxTotalCost\": 700}}",
+    "roleExpression": "!admin",
+    "actions": ["alert"]
+  },
+  {
+    "name": "store-purchase-items-limit",
+    "constraint": "{\"type\":\"object\",\"properties\":{\"arguments\":{\"type\":\"object\",\"properties\":{\"items\":{\"type\":\"array\",\"maxItems\":10}}}}}",
+    "roleExpression": "!admin",
+    "actions": ["block", "alert"]
+  },
+  {
+    "name": "deal-overlap-guard",
+    "constraint": "{\"validationTool\": \"validate_deal_requests\", \"parameters\": {}}",
+    "roleExpression": "!admin & !business-manager",
+    "actions": ["block", "alert"]
+  },
+  {
+    "name": "customer-fields-validation",
+    "constraint": "{\"type\":\"object\",\"properties\":{\"arguments\":{\"type\":\"object\",\"properties\":{\"id\":{\"type\":\"string\",\"minLength\":1},\"name\":{\"type\":\"string\",\"minLength\":1},\"address\":{\"type\":\"string\",\"minLength\":1},\"phone\":{\"type\":\"string\",\"pattern\":\"^\\\\d{3}-\\\\d{3}-\\\\d{4}$\"},\"type\":{\"type\":\"string\",\"minLength\":1},\"sentiment\":{\"type\":\"string\"}},\"required\":[\"id\",\"name\",\"address\",\"phone\",\"type\"]}},\"required\":[\"arguments\"]}",
+    "roleExpression": "!admin & !business-manager & !customer-management",
+    "actions": ["block", "alert"]
+  },
+  {
+    "name": "customer-deactivation-alert",
+    "constraint": "{\"type\":\"object\",\"properties\":{\"arguments\":{\"type\":\"object\",\"properties\":{\"deactivated\":{\"const\":false}}}}}",
+    "roleExpression": "_any_role",
+    "actions": ["alert"]
+  },
+  {
+    "name": "customer-unhappy-alert",
+    "constraint": "{\"type\":\"object\",\"properties\":{\"arguments\":{\"type\":\"object\",\"properties\":{\"sentiment\":{\"not\":{\"const\":\"unhappy\"}}}}}}",
+    "roleExpression": "_any_role",
+    "actions": ["alert"]
+  },
+  {
+    "name": "result-no-ssn-disclosure",
+    "constraint": "The result must not disclose any customer's Social Security Number or other government ID number.",
+    "roleExpression": "!admin",
+    "actions": ["block", "alert"]
+  },
+  {
+    "name": "weekend-service-call-alert",
+    "roleExpression": "_any_role",
+    "actions": ["alert"],
+    "effectiveTime": [
+      { "days": ["saturday", "sunday"], "startTime": "00:00", "endTime": "23:59" }
+    ]
+  },
+  {
+    "name": "service-call-content-required",
+    "constraint": "The request's issueText argument must state when the complaint happened, what happened, and what remedy is requested.",
+    "roleExpression": "!admin & !customer-support-manager",
+    "actions": ["block"]
+  },
+  {
+    "name": "staff-handling-guard",
+    "constraint": "{\"validationTool\": \"validate_staff_handling\", \"parameters\": {}}",
+    "roleExpression": "_any_role",
+    "actions": ["block"]
+  }
+]

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: event-aggregator-log
+spec:
+  # ReadWriteOnce is sufficient: event-aggregator's Deployment runs at
+  # replicas: 1 (see the tiered-event-storage design plan's "Assumptions"
+  # section), so only one pod ever needs this volume at a time - no need
+  # for a ReadWriteMany-capable storage class, which this repo has never
+  # otherwise needed.
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      # Headroom above eventAggregation.maxLogSizeBytes (10MB default):
+      # the log directory briefly holds slightly more than that ceiling
+      # between an archiver sweep discovering it's over budget and
+      # actually deleting the oldest segment(s).
+      storage: 1Gi

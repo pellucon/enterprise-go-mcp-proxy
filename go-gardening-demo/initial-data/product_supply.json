@@ -1,0 +1,452 @@
+[
+  {
+    "id": "ps-001",
+    "productId": "prod-01",
+    "name": "Steel Garden Spade",
+    "supplierName": "GreenThumb Wholesale",
+    "unitsPerWholesaleUnit": 11,
+    "costPerWholesaleUnit": 58.48,
+    "costToUserPerRetailUnit": 23.99
+  },
+  {
+    "id": "ps-002",
+    "productId": "prod-01",
+    "name": "Steel Garden Spade",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 14,
+    "costPerWholesaleUnit": 98.47,
+    "costToUserPerRetailUnit": 23.99
+  },
+  {
+    "id": "ps-003",
+    "productId": "prod-01",
+    "name": "Steel Garden Spade",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 9,
+    "costPerWholesaleUnit": 147.29,
+    "costToUserPerRetailUnit": 23.99
+  },
+  {
+    "id": "ps-004",
+    "productId": "prod-02",
+    "name": "Ergonomic Hand Trowel",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 22,
+    "costPerWholesaleUnit": 147.25,
+    "costToUserPerRetailUnit": 33.99
+  },
+  {
+    "id": "ps-005",
+    "productId": "prod-02",
+    "name": "Ergonomic Hand Trowel",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 9,
+    "costPerWholesaleUnit": 245.98,
+    "costToUserPerRetailUnit": 33.99
+  },
+  {
+    "id": "ps-006",
+    "productId": "prod-02",
+    "name": "Ergonomic Hand Trowel",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 13,
+    "costPerWholesaleUnit": 141.27,
+    "costToUserPerRetailUnit": 33.99
+  },
+  {
+    "id": "ps-007",
+    "productId": "prod-03",
+    "name": "Bypass Hand Pruners",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 18,
+    "costPerWholesaleUnit": 170.54,
+    "costToUserPerRetailUnit": 17.99
+  },
+  {
+    "id": "ps-008",
+    "productId": "prod-03",
+    "name": "Bypass Hand Pruners",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 18,
+    "costPerWholesaleUnit": 240.45,
+    "costToUserPerRetailUnit": 17.99
+  },
+  {
+    "id": "ps-009",
+    "productId": "prod-03",
+    "name": "Bypass Hand Pruners",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 21,
+    "costPerWholesaleUnit": 311.82,
+    "costToUserPerRetailUnit": 17.99
+  },
+  {
+    "id": "ps-010",
+    "productId": "prod-04",
+    "name": "Anvil Loppers",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 20,
+    "costPerWholesaleUnit": 120.24,
+    "costToUserPerRetailUnit": 52.99
+  },
+  {
+    "id": "ps-011",
+    "productId": "prod-04",
+    "name": "Anvil Loppers",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 21,
+    "costPerWholesaleUnit": 222.72,
+    "costToUserPerRetailUnit": 52.99
+  },
+  {
+    "id": "ps-012",
+    "productId": "prod-04",
+    "name": "Anvil Loppers",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 7,
+    "costPerWholesaleUnit": 299.5,
+    "costToUserPerRetailUnit": 52.99
+  },
+  {
+    "id": "ps-013",
+    "productId": "prod-05",
+    "name": "Leather Garden Gloves",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 13,
+    "costPerWholesaleUnit": 99.11,
+    "costToUserPerRetailUnit": 36.99
+  },
+  {
+    "id": "ps-014",
+    "productId": "prod-05",
+    "name": "Leather Garden Gloves",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 8,
+    "costPerWholesaleUnit": 242.08,
+    "costToUserPerRetailUnit": 36.99
+  },
+  {
+    "id": "ps-015",
+    "productId": "prod-05",
+    "name": "Leather Garden Gloves",
+    "supplierName": "GreenThumb Wholesale",
+    "unitsPerWholesaleUnit": 21,
+    "costPerWholesaleUnit": 319.25,
+    "costToUserPerRetailUnit": 36.99
+  },
+  {
+    "id": "ps-016",
+    "productId": "prod-06",
+    "name": "Adjustable Garden Rake",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 24,
+    "costPerWholesaleUnit": 302.29,
+    "costToUserPerRetailUnit": 26.99
+  },
+  {
+    "id": "ps-017",
+    "productId": "prod-06",
+    "name": "Adjustable Garden Rake",
+    "supplierName": "GreenThumb Wholesale",
+    "unitsPerWholesaleUnit": 13,
+    "costPerWholesaleUnit": 82.44,
+    "costToUserPerRetailUnit": 26.99
+  },
+  {
+    "id": "ps-018",
+    "productId": "prod-06",
+    "name": "Adjustable Garden Rake",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 13,
+    "costPerWholesaleUnit": 248.1,
+    "costToUserPerRetailUnit": 26.99
+  },
+  {
+    "id": "ps-019",
+    "productId": "prod-07",
+    "name": "Bow Rake",
+    "supplierName": "GreenThumb Wholesale",
+    "unitsPerWholesaleUnit": 10,
+    "costPerWholesaleUnit": 55.92,
+    "costToUserPerRetailUnit": 12.99
+  },
+  {
+    "id": "ps-020",
+    "productId": "prod-07",
+    "name": "Bow Rake",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 22,
+    "costPerWholesaleUnit": 200.12,
+    "costToUserPerRetailUnit": 12.99
+  },
+  {
+    "id": "ps-021",
+    "productId": "prod-07",
+    "name": "Bow Rake",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 20,
+    "costPerWholesaleUnit": 192.2,
+    "costToUserPerRetailUnit": 12.99
+  },
+  {
+    "id": "ps-022",
+    "productId": "prod-08",
+    "name": "50ft Expandable Garden Hose",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 25,
+    "costPerWholesaleUnit": 92.34,
+    "costToUserPerRetailUnit": 20.99
+  },
+  {
+    "id": "ps-023",
+    "productId": "prod-08",
+    "name": "50ft Expandable Garden Hose",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 18,
+    "costPerWholesaleUnit": 302.71,
+    "costToUserPerRetailUnit": 20.99
+  },
+  {
+    "id": "ps-024",
+    "productId": "prod-08",
+    "name": "50ft Expandable Garden Hose",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 17,
+    "costPerWholesaleUnit": 189.19,
+    "costToUserPerRetailUnit": 20.99
+  },
+  {
+    "id": "ps-025",
+    "productId": "prod-09",
+    "name": "Heavy Duty Hose Reel Cart",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 24,
+    "costPerWholesaleUnit": 119.8,
+    "costToUserPerRetailUnit": 28.99
+  },
+  {
+    "id": "ps-026",
+    "productId": "prod-09",
+    "name": "Heavy Duty Hose Reel Cart",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 12,
+    "costPerWholesaleUnit": 112.5,
+    "costToUserPerRetailUnit": 28.99
+  },
+  {
+    "id": "ps-027",
+    "productId": "prod-09",
+    "name": "Heavy Duty Hose Reel Cart",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 10,
+    "costPerWholesaleUnit": 231.77,
+    "costToUserPerRetailUnit": 28.99
+  },
+  {
+    "id": "ps-028",
+    "productId": "prod-10",
+    "name": "Brass 8-Pattern Hose Nozzle",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 22,
+    "costPerWholesaleUnit": 56.98,
+    "costToUserPerRetailUnit": 29.99
+  },
+  {
+    "id": "ps-029",
+    "productId": "prod-10",
+    "name": "Brass 8-Pattern Hose Nozzle",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 21,
+    "costPerWholesaleUnit": 125.51,
+    "costToUserPerRetailUnit": 29.99
+  },
+  {
+    "id": "ps-030",
+    "productId": "prod-10",
+    "name": "Brass 8-Pattern Hose Nozzle",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 14,
+    "costPerWholesaleUnit": 291.4,
+    "costToUserPerRetailUnit": 29.99
+  },
+  {
+    "id": "ps-031",
+    "productId": "prod-11",
+    "name": "Galvanized Steel Watering Can (2 Gal)",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 12,
+    "costPerWholesaleUnit": 235.62,
+    "costToUserPerRetailUnit": 25.99
+  },
+  {
+    "id": "ps-032",
+    "productId": "prod-12",
+    "name": "Plastic Watering Can (1 Gal)",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 13,
+    "costPerWholesaleUnit": 218.6,
+    "costToUserPerRetailUnit": 22.99
+  },
+  {
+    "id": "ps-033",
+    "productId": "prod-13",
+    "name": "Steel Wheelbarrow (6 cu ft)",
+    "supplierName": "GreenThumb Wholesale",
+    "unitsPerWholesaleUnit": 7,
+    "costPerWholesaleUnit": 67.58,
+    "costToUserPerRetailUnit": 12.99
+  },
+  {
+    "id": "ps-034",
+    "productId": "prod-14",
+    "name": "Poly Wheelbarrow (4 cu ft)",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 12,
+    "costPerWholesaleUnit": 296.12,
+    "costToUserPerRetailUnit": 36.99
+  },
+  {
+    "id": "ps-035",
+    "productId": "prod-15",
+    "name": "Folding Hand Saw",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 19,
+    "costPerWholesaleUnit": 245.69,
+    "costToUserPerRetailUnit": 16.99
+  },
+  {
+    "id": "ps-036",
+    "productId": "prod-16",
+    "name": "Hedge Shears",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 20,
+    "costPerWholesaleUnit": 269.28,
+    "costToUserPerRetailUnit": 16.99
+  },
+  {
+    "id": "ps-037",
+    "productId": "prod-17",
+    "name": "Garden Kneeler and Seat",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 9,
+    "costPerWholesaleUnit": 262.32,
+    "costToUserPerRetailUnit": 36.99
+  },
+  {
+    "id": "ps-038",
+    "productId": "prod-18",
+    "name": "Bamboo Plant Stakes (Pack of 25)",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 24,
+    "costPerWholesaleUnit": 278.73,
+    "costToUserPerRetailUnit": 14.99
+  },
+  {
+    "id": "ps-039",
+    "productId": "prod-19",
+    "name": "Tomato Cages (Pack of 6)",
+    "supplierName": "GreenThumb Wholesale",
+    "unitsPerWholesaleUnit": 9,
+    "costPerWholesaleUnit": 188.14,
+    "costToUserPerRetailUnit": 26.99
+  },
+  {
+    "id": "ps-040",
+    "productId": "prod-20",
+    "name": "Organic All-Purpose Fertilizer (10 lb)",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 21,
+    "costPerWholesaleUnit": 155.79,
+    "costToUserPerRetailUnit": 9.99
+  },
+  {
+    "id": "ps-041",
+    "productId": "prod-21",
+    "name": "Slow-Release Granular Fertilizer (20 lb)",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 24,
+    "costPerWholesaleUnit": 314.97,
+    "costToUserPerRetailUnit": 16.99
+  },
+  {
+    "id": "ps-042",
+    "productId": "prod-22",
+    "name": "Heirloom Tomato Seeds Variety Pack",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 21,
+    "costPerWholesaleUnit": 297.52,
+    "costToUserPerRetailUnit": 20.99
+  },
+  {
+    "id": "ps-043",
+    "productId": "prod-23",
+    "name": "Wildflower Seed Mix",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 8,
+    "costPerWholesaleUnit": 132.13,
+    "costToUserPerRetailUnit": 22.99
+  },
+  {
+    "id": "ps-044",
+    "productId": "prod-24",
+    "name": "Raised Garden Bed Kit (4x4)",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 13,
+    "costPerWholesaleUnit": 143.54,
+    "costToUserPerRetailUnit": 14.99
+  },
+  {
+    "id": "ps-045",
+    "productId": "prod-25",
+    "name": "Compost Bin (80 Gal)",
+    "supplierName": "GreenThumb Wholesale",
+    "unitsPerWholesaleUnit": 25,
+    "costPerWholesaleUnit": 110.31,
+    "costToUserPerRetailUnit": 5.99
+  },
+  {
+    "id": "ps-046",
+    "productId": "prod-26",
+    "name": "Garden Cart with Removable Sides",
+    "supplierName": "EarthWorks Supply Co.",
+    "unitsPerWholesaleUnit": 24,
+    "costPerWholesaleUnit": 131.1,
+    "costToUserPerRetailUnit": 6.99
+  },
+  {
+    "id": "ps-047",
+    "productId": "prod-27",
+    "name": "Soil pH Test Kit",
+    "supplierName": "Bloom \u0026 Branch Distributors",
+    "unitsPerWholesaleUnit": 7,
+    "costPerWholesaleUnit": 275.82,
+    "costToUserPerRetailUnit": 48.99
+  },
+  {
+    "id": "ps-048",
+    "productId": "prod-28",
+    "name": "Sun Hat and Gardening Apron Set",
+    "supplierName": "Harvest Trail Supply",
+    "unitsPerWholesaleUnit": 8,
+    "costPerWholesaleUnit": 292.91,
+    "costToUserPerRetailUnit": 50.99
+  },
+  {
+    "id": "ps-049",
+    "productId": "prod-29",
+    "name": "Long Handle Digging Fork",
+    "supplierName": "TerraCraft Wholesale",
+    "unitsPerWholesaleUnit": 9,
+    "costPerWholesaleUnit": 317.53,
+    "costToUserPerRetailUnit": 42.99
+  },
+  {
+    "id": "ps-050",
+    "productId": "prod-30",
+    "name": "Telescoping Tree Pruner",
+    "supplierName": "Meadowline Distributors",
+    "unitsPerWholesaleUnit": 20,
+    "costPerWholesaleUnit": 71.12,
+    "costToUserPerRetailUnit": 4.99
+  }
+]

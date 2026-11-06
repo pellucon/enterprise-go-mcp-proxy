@@ -1,0 +1,22 @@
+# Applied by scripts/deploy.sh's apply_ingress_overlay only when
+# --cluster-issuer is given, into the namespace of each Ingress it creates
+# (mcp-proxy, demo-auth). cert-manager answers Let's Encrypt's HTTP-01
+# challenge with a short-lived solver pod in the Certificate's own
+# namespace; those namespaces are default-deny for ingress, which would
+# block the ingress controller from reaching the solver and the
+# certificate would never be issued. This opens exactly the solver pods'
+# port, nothing else, and the pods only exist while a challenge is open.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-acme-http01-solver
+spec:
+  podSelector:
+    matchLabels:
+      acme.cert-manager.io/http01-solver: "true"
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 8089

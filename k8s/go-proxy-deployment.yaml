@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-proxy
+  labels:
+    app: go-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-proxy
+  template:
+    metadata:
+      labels:
+        app: go-proxy
+    spec:
+      serviceAccountName: go-proxy
+      containers:
+        - name: go-proxy
+          image: go-proxy:local
+          imagePullPolicy: IfNotPresent
+          args:
+            - -config=/etc/proxy-server/proxy-server.cfg
+          ports:
+            - name: http
+              containerPort: 8081
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            initialDelaySeconds: 2
+          livenessProbe:
+            tcpSocket:
+              port: 8081
+            initialDelaySeconds: 5
+          env:
+            - name: NATS_CREDENTIALS_DIR
+              value: /etc/nats-client
+          volumeMounts:
+            - name: nats-client
+              mountPath: /etc/nats-client
+              readOnly: true
+            - name: proxy-server-config
+              mountPath: /etc/proxy-server
+            # The 5 sections go-proxy itself reads back (accessRules,
+            # orchestration, discovery, eventDictionary, rateLimiting,
+            # logLevel — see CLAUDE.md's "Unify configuration into a single
+            # config-map mechanism"), each its own ConfigMap mounted as a
+            # sibling directory of proxy-server-config's own mountPath —
+            # matching overrideMountPath's (main.go) filepath.Join(filepath.Dir(configPath),
+            # section+"-override", "config.json") convention exactly, so no
+            # separate flag/config field is needed to tell go-proxy where
+            # to find them. declarativeGuardrails is NOT mounted here —
+            # go-proxy only ever writes it via the k8s API on an admin
+            # update, never reads it itself.
+            - name: access-rules-override
+              mountPath: /etc/proxy-server/access-rules-override
+              readOnly: true
+            - name: orchestration-override
+              mountPath: /etc/proxy-server/orchestration-override
+              readOnly: true
+            - name: discovery-override
+              mountPath: /etc/proxy-server/discovery-override
+              readOnly: true
+            - name: event-dictionary-override
+              mountPath: /etc/proxy-server/event-dictionary-override
+              readOnly: true
+            - name: rate-limiting-override
+              mountPath: /etc/proxy-server/rate-limiting-override
+              readOnly: true
+            - name: log-level-override
+              mountPath: /etc/proxy-server/log-level-override
+              readOnly: true
+            - name: jwt-public-key
+              # auth.publicKeyPath is empty in proxy-server.cfg (jwksUrl-
+              # based auth is used instead — see CLAUDE.md's auth section),
+              # so go-proxy never actually reads from this mount today; it
+              # exists only for a config that DOES set publicKeyPath. This
+              # is deliberately its own whole-directory mount, not subPath
+              # into /app-run alongside internal-signing-key/internal-
+              # public-key below: subPath + an absent *optional* Secret is
+              # a real kubelet gotcha that can fail container startup
+              # outright instead of resolving to "nothing there" (see
+              # ai-mcp-servers/ai-powered-tools's k8s manifest for the same
+              # reasoning) — and this volume must tolerate the
+              # jwt-public-key Secret not existing at all, since
+              # deploy_proxy now deliberately skips creating it whenever
+              # publicKeyPath is empty. The mounted file lands at
+              # /app-run-jwt-public-key/public.pem (the Secret's own data
+              # key), not /app-run/public.pem.
+              mountPath: /app-run-jwt-public-key
+              readOnly: true
+            # No internal-signing-key/internal-public-key volumes here
+            # anymore: go-proxy generates its own internal-signing keypair
+            # in memory at startup (or, across replicas, coordinates one
+            # via the go-proxy-internal-signing-key Secret it creates
+            # itself — see internal_signing_key.go's
+            # bootstrapInternalSigningKey and the "secrets" RBAC rule in
+            # go-proxy-serviceaccount-rbac.yaml) rather than reading a
+            # mounted PEM file. See CLAUDE.md's "Internal identity
+            # assertions" section.
+      volumes:
+        # This component's own NATS credentials and the CA for NATS's TLS
+        # certificate (scripts/deploy.sh's ensure_nats_secrets; see
+        # k8s/nats/nats.conf.tmpl for what this user may do).
+        - name: nats-client
+          secret:
+            secretName: nats-client-go-proxy
+        - name: proxy-server-config
+          configMap:
+            name: proxy-server-config
+        # optional: true — deploy.sh's deploy_proxy always seeds these
+        # before applying this Deployment (see scripts/deploy.sh), but a
+        # manual/partial deploy shouldn't crash-loop the pod: an absent
+        # ConfigMap just means an empty mount, which overrideMountPath's
+        # caller (configsync.NewWatcher) already treats as "not seeded
+        # yet" — falls back to proxy-server.cfg's own parsed value.
+        - name: access-rules-override
+          configMap:
+            name: access-rules-override
+            optional: true
+        - name: orchestration-override
+          configMap:
+            name: orchestration-override
+            optional: true
+        - name: discovery-override
+          configMap:
+            name: discovery-override
+            optional: true
+        - name: event-dictionary-override
+          configMap:
+            name: event-dictionary-override
+            optional: true
+        - name: rate-limiting-override
+          configMap:
+            name: rate-limiting-override
+            optional: true
+        - name: log-level-override
+          configMap:
+            name: log-level-override
+            optional: true
+        - name: jwt-public-key
+          secret:
+            secretName: jwt-public-key
+            optional: true

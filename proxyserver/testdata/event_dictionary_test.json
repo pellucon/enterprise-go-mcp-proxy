@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "config": {
+    "eventTypes": {
+      "alert": {
+        "subtypes": ["tool-call-blocked", "result-blocked", "tool-call-alert", "result-alert"],
+        "metadata": {
+          "user": { "type": "string", "required": true },
+          "roles": { "type": "json", "required": true },
+          "tool": { "type": "string", "required": true },
+          "reason": { "type": "string", "required": true },
+          "toolCallId": { "type": "string", "required": true }
+        }
+      },
+      "tool-request": {
+        "subtypes": ["request-blocked", "request-ok"],
+        "metadata": {
+          "user": { "type": "string", "required": true },
+          "roles": { "type": "json", "required": true },
+          "tool": { "type": "string", "required": true },
+          "request": { "type": "json", "required": true },
+          "reason": { "type": "string", "required": false },
+          "toolCallId": { "type": "string", "required": true }
+        }
+      },
+      "tool-request-result": {
+        "subtypes": ["result-blocked", "call-failed", "call-succeeded"],
+        "metadata": {
+          "user": { "type": "string", "required": true },
+          "roles": { "type": "json", "required": true },
+          "tool": { "type": "string", "required": true },
+          "request": { "type": "json", "required": true },
+          "result": { "type": "json", "required": false },
+          "reason": { "type": "string", "required": false },
+          "toolCallId": { "type": "string", "required": true }
+        }
+      }
+    }
+  }
+}

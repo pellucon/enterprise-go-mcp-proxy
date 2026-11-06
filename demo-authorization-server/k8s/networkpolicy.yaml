@@ -1,0 +1,61 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-demo-authorization-server
+spec:
+  # The namespace's default-deny-ingress policy blocks all traffic. This
+  # policy re-opens ingress on this server's pods for exactly its callers,
+  # not for any pod in the cluster: this server hands an admin token to
+  # anyone who logs in as admin/admin, so any pod able to reach it could
+  # become gateway administrator.
+  #
+  # - go-proxy: fetches the JWKS to verify tokens.
+  # - garden-customer-admin, garden-staff-admin: register their customers
+  #   and staffers as demo users (go-gardening-demo/authserver).
+  # - gardening-demo-seed: logs in as admin to load the demo data.
+  # - k3s's ServiceLB pod for this Service (kube-system): on a local
+  #   cluster deploy.sh makes this Service a LoadBalancer on
+  #   localhost:8102, where the CLIs, the stress test and a browser log in;
+  #   ServiceLB forwards that traffic from its own pod. It exists only for
+  #   a LoadBalancer Service on k3s, so elsewhere this rule matches nothing.
+  #   On a remote cluster the Service is ClusterIP, and a person reaches it
+  #   with kubectl port-forward, which NetworkPolicies don't apply to.
+  #
+  # The namespace names are fixed, like the other cross-namespace policies:
+  # go-proxy runs in mcp-proxy and the demo in gardening-demo.
+  #
+  # Ships in this server's own k8s/ directory (not the shared root k8s/)
+  # so `deploy_folder`'s `kubectl apply -f demo-authorization-server/k8s/`
+  # is fully self-contained, with no ordering dependency on --deploy-proxy
+  # having applied the root manifests first.
+  podSelector:
+    matchLabels:
+      app: demo-authorization-server
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: mcp-proxy
+          podSelector:
+            matchLabels:
+              app: go-proxy
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: gardening-demo
+          podSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values: [garden-customer-admin, garden-staff-admin, gardening-demo-seed]
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              svccontroller.k3s.cattle.io/svcname: demo-authorization-server
+              svccontroller.k3s.cattle.io/svcnamespace: demo-auth
+      ports:
+        - protocol: TCP
+          port: 8102

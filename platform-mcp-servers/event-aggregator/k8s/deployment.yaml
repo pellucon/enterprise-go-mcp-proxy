@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-aggregator
+  labels:
+    app: event-aggregator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-aggregator
+  template:
+    metadata:
+      labels:
+        app: event-aggregator
+        mcp.io/role: backend-mcp-server
+    spec:
+      # Backend MCP servers never need k8s API access; only go-proxy does.
+      automountServiceAccountToken: false
+      containers:
+        - name: event-aggregator
+          image: event-aggregator:local
+          imagePullPolicy: IfNotPresent
+          args:
+            - -port=:8080
+            - -nats-url=nats://nats:4222
+            - -events-dictionary=/app-run/config.json
+            - -event-aggregation-config=/app-run/aggregation/config.json
+            - -event-log-dir=/data/event-log
+            - -archive-check-interval=1h
+            - -log-level-config=/app-run/log-level/config.json
+            # The archiver's ArchiverTransport (which implementation ships
+            # a rolled segment out of the cluster, and its own properties)
+            # is selected by the "archiverTransport" field in the mounted
+            # event-aggregation-override ConfigMap above, not a flag —
+            # see events.ArchiverTransportConfig / eventlog.RegisterArchiverTransport.
+            # The default in every committed config is
+            # {"type":"discard"}: archived segments are deleted locally,
+            # never shipped anywhere, so disk usage still stays bounded
+            # with zero external setup. Push a different "archiverTransport"
+            # via _admin.update_event_aggregation to actually ship segments
+            # somewhere.
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 2
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+          env:
+            - name: NATS_CREDENTIALS_DIR
+              value: /etc/nats-client
+          volumeMounts:
+            - name: nats-client
+              mountPath: /etc/nats-client
+              readOnly: true
+            - name: event-dictionary-override
+              mountPath: /app-run
+              readOnly: true
+            # A separate mount path, not nested under /app-run above:
+            # that path is already fully occupied by the read-only
+            # event-dictionary-override ConfigMap, and a second ConfigMap
+            # needs its own directory.
+            - name: event-aggregation-override
+              mountPath: /app-run/aggregation
+              readOnly: true
+            - name: log-level-override
+              mountPath: /app-run/log-level
+              readOnly: true
+            # The on-disk event log's "cold" tier. Backed by a PVC, not
+            # emptyDir: emptyDir survives container restarts but not pod
+            # rescheduling/deletion, which would silently lose the whole
+            # disk tier - see the design plan's "Durability caveat". RWO
+            # is sufficient since this Deployment runs at replicas: 1 (see
+            # the design plan's "Assumptions" section) - only one pod ever
+            # needs this volume at a time.
+            - name: event-log
+              mountPath: /data/event-log
+      volumes:
+        # This component's own NATS credentials and the CA for NATS's TLS
+        # certificate (scripts/deploy.sh's ensure_nats_secrets; see
+        # k8s/nats/nats.conf.tmpl for what this user may do).
+        - name: nats-client
+          secret:
+            secretName: nats-client-event-aggregator
+        - name: event-dictionary-override
+          configMap:
+            name: event-dictionary-override
+        - name: event-aggregation-override
+          configMap:
+            name: event-aggregation-override
+        - name: log-level-override
+          configMap:
+            name: log-level-override
+            optional: true
+        - name: event-log
+          persistentVolumeClaim:
+            claimName: event-aggregator-log

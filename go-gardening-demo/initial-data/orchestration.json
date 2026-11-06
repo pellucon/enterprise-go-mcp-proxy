@@ -1,0 +1,126 @@
+{
+  "orchestrations": {
+    "store-purchase-guardrails": {
+      "callAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "request_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"store-purchase-items-limit\"]}"
+        },
+        {
+          "server": "proxy_utility",
+          "tool": "business_logic_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"store-purchase-cost-limit\", \"store-purchase-cost-warning\"]}"
+        }
+      ],
+      "toolCallAudit": ["publish-tool-request-result"]
+    },
+    "deal-guardrails": {
+      "callAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "business_logic_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"deal-overlap-guard\"]}"
+        }
+      ],
+      "toolCallAudit": ["publish-tool-request-result"]
+    },
+    "customer-guardrails": {
+      "callAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "request_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"customer-fields-validation\", \"customer-unhappy-alert\"]}"
+        }
+      ]
+    },
+    "customer-details-no-audit": {
+      "resultAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "result_ai_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"result-no-ssn-disclosure\"]}"
+        }
+      ]
+    },
+    "customer-deactivation-guardrails": {
+      "callAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "request_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"customer-deactivation-alert\"]}"
+        }
+      ],
+      "toolCallAudit": ["publish-tool-request-result"]
+    },
+    "customer-sentiment-guardrails": {
+      "callAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "request_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"customer-unhappy-alert\"]}"
+        }
+      ],
+      "toolCallAudit": ["publish-tool-request-result"]
+    },
+    "service-call-guardrails": {
+      "callAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "request_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"weekend-service-call-alert\"]}"
+        },
+        {
+          "server": "proxy_utility",
+          "tool": "request_ai_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"service-call-content-required\"]}"
+        }
+      ],
+      "toolCallAudit": ["publish-tool-request-result"]
+    },
+    "staffer-deactivation-guardrails": {
+      "callAuthorization": [
+        {
+          "server": "proxy_utility",
+          "tool": "business_logic_constraints_validation",
+          "parameters": "{\"declarationNames\": [\"staff-handling-guard\"]}"
+        }
+      ],
+      "toolCallAudit": ["publish-tool-request-result"]
+    }
+  },
+  "toolMappings": [
+    {
+      "pattern": "garden-online-store.purchase_products",
+      "orchestration": "store-purchase-guardrails"
+    },
+    {
+      "pattern": "garden-business-ops.add_or_update_deal",
+      "orchestration": "deal-guardrails"
+    },
+    {
+      "pattern": "garden-customer-admin.add_or_update_customer",
+      "orchestration": "customer-guardrails"
+    },
+    {
+      "pattern": "garden-customer-admin.get_customer_details",
+      "orchestration": "customer-details-no-audit"
+    },
+    {
+      "pattern": "garden-customer-admin.mark_customer_deactivated",
+      "orchestration": "customer-deactivation-guardrails"
+    },
+    {
+      "pattern": "garden-customer-admin.modify_customer_sentiment",
+      "orchestration": "customer-sentiment-guardrails"
+    },
+    {
+      "pattern": "garden-customer-service.add_customer_service_call",
+      "orchestration": "service-call-guardrails"
+    },
+    {
+      "pattern": "garden-staff-admin.mark_staffer_deactivated",
+      "orchestration": "staffer-deactivation-guardrails"
+    }
+  ]
+}

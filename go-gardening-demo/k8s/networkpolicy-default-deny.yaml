@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  # Same shape/rationale as k8s/networkpolicy-default-deny.yaml (the
+  # mcp-proxy namespace's own copy): blocks all ingress in this namespace
+  # except what a more specific policy re-opens. See
+  # networkpolicy-allow-ingress-from-proxy.yaml in this same directory for
+  # the one that re-opens ingress for these backend pods.
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress: []

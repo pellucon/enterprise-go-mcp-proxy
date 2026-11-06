@@ -1,0 +1,117 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-powered-tools
+  labels:
+    app: ai-powered-tools
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-powered-tools
+  template:
+    metadata:
+      labels:
+        app: ai-powered-tools
+        mcp.io/role: backend-mcp-server
+    spec:
+      # Backend MCP servers never need k8s API access; only go-proxy does.
+      automountServiceAccountToken: false
+      containers:
+        - name: ai-powered-tools
+          image: ai-powered-tools:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NATS_CREDENTIALS_DIR
+              value: /etc/nats-client
+            # Default model, overridden at deploy time via
+            # "kubectl set env deployment/ai-powered-tools AI_MODEL=..."
+            # (see scripts/deploy.sh's --ai-model flag) — this
+            # lets `args` below reference a deploy-time value without
+            # templating the checked-in YAML itself.
+            - name: AI_MODEL
+              value: "gemini-2.5-flash"
+            # Default false, overridden at deploy time via
+            # "kubectl set env deployment/ai-powered-tools USE_HEADLESS_CLAUDE=true"
+            # (see scripts/deploy.sh's --use-headless-claude flag and
+            # CLAUDE.md's "AI-powered tool discovery" section) — set
+            # unconditionally on every deploy_ai_tools() run (both true and
+            # false), so switching back out of headless mode actually
+            # resets it rather than leaving a stale "true" from an earlier
+            # deploy.
+            - name: USE_HEADLESS_CLAUDE
+              value: "false"
+            # No LLM endpoint here: the server's built-in default (Google
+            # Gemini) applies unless an LLM_BASE_URL env var is set - which
+            # scripts/deploy.sh's --ai-base-url does via "kubectl set env",
+            # and which an overlay can set the same way.
+          args:
+            - -port=:8080
+            - -model=$(AI_MODEL)
+            - -api-key-path=/app-run/ai-api-key.txt
+            - -use-headless-claude=$(USE_HEADLESS_CLAUDE)
+            - -claude-bridge-url=http://host.docker.internal:8099
+            - -claude-bridge-token-path=/claude-bridge/token.txt
+            - -nats-url=nats://nats:4222
+            - -log-level-config=/app-run-log-level/config.json
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 2
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+          volumeMounts:
+            - name: nats-client
+              mountPath: /etc/nats-client
+              readOnly: true
+            - name: ai-api-key
+              mountPath: /app-run
+              readOnly: true
+            - name: claude-bridge-token
+              mountPath: /claude-bridge
+              readOnly: true
+            - name: log-level-override
+              mountPath: /app-run-log-level
+              readOnly: true
+      volumes:
+        # This component's own NATS credentials and the CA for NATS's TLS
+        # certificate (scripts/deploy.sh's ensure_nats_secrets; see
+        # k8s/nats/nats.conf.tmpl for what this user may do).
+        - name: nats-client
+          secret:
+            secretName: nats-client-ai-powered-tools
+            # Optional: deployed outside go-proxy's namespace (--namespace),
+            # this server can't reach NATS anyway; it then only loses live
+            # log-level reload.
+            optional: true
+        # optional: true so the pod still starts cleanly with no API key
+        # configured (scripts/deploy.sh's --ai-api-key-file
+        # not given) — find_relevant_tools just fails cleanly at call time.
+        - name: ai-api-key
+          secret:
+            secretName: ai-powered-tools-api-key
+            optional: true
+        # A second, independent optional Secret (not folded into the same
+        # ai-api-key volume/mountPath) — deliberately a separate directory
+        # rather than subPath-mounting both files into /app-run: subPath +
+        # an absent optional Secret is a real kubelet gotcha that can fail
+        # container startup outright instead of resolving to "nothing
+        # there", unlike a whole-directory optional mount. optional: true
+        # so the pod still starts cleanly with headless mode off (no
+        # --use-headless-claude given to scripts/deploy.sh).
+        - name: claude-bridge-token
+          secret:
+            secretName: ai-powered-tools-claude-bridge-token
+            optional: true
+        # optional: true, same reasoning as every other backend's own
+        # log-level-override mount — this server may be deployed/started
+        # before go-proxy has ever seeded this ConfigMap.
+        - name: log-level-override
+          configMap:
+            name: log-level-override
+            optional: true

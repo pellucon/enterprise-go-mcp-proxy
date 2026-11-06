@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: garden-online-store
+  labels:
+    # This is the identity signal go-proxy's "k8s" discovery mode filters
+    # on (see proxy-server.cfg's discovery.k8sLabelSelector) — it's what
+    # marks this Service as a discoverable MCP backend.
+    mcp.io/role: backend-mcp-server
+spec:
+  type: ClusterIP
+  selector:
+    app: garden-online-store
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080

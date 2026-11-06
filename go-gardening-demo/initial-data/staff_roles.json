@@ -1,0 +1,46 @@
+[
+  {
+    "id": "admin",
+    "name": "Admin"
+  },
+  {
+    "id": "business-manager",
+    "name": "Business Manager"
+  },
+  {
+    "id": "customer-support-manager",
+    "name": "Customer Support Manager"
+  },
+  {
+    "id": "customer-management",
+    "name": "Customer Management"
+  },
+  {
+    "id": "customer-support",
+    "name": "Customer Support"
+  },
+  {
+    "id": "human_resource_manager",
+    "name": "Human Resource Manager"
+  },
+  {
+    "id": "human_resource_staffer",
+    "name": "Human Resource Staffer"
+  },
+  {
+    "id": "inventory-clerk",
+    "name": "Inventory Clerk"
+  },
+  {
+    "id": "business-staff",
+    "name": "Business Staff"
+  },
+  {
+    "id": "analyst",
+    "name": "Analyst"
+  },
+  {
+    "id": "deactivated",
+    "name": "Deactivated"
+  }
+]

@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backends-to-nats
+spec:
+  # Selects the NATS pod and allows ingress only from the components that
+  # use NATS - each of which also has its own NATS user, limited to the
+  # subjects it needs (k8s/nats/nats.conf.tmpl). No other pod, backend or
+  # not, can reach NATS. Adding a NATS client means adding it here and as a
+  # user in the template.
+  #
+  # go-proxy publishes events and config-change pings and listens for the
+  # pings; event-aggregator reads events; declarative-guardrail,
+  # rate-limiter and ai-powered-tools listen for their own config pings.
+  podSelector:
+    matchLabels:
+      app: nats
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: go-proxy
+        - podSelector:
+            matchLabels:
+              app: event-aggregator
+        - podSelector:
+            matchLabels:
+              app: declarative-guardrail
+        - podSelector:
+            matchLabels:
+              app: rate-limiter
+        - podSelector:
+            matchLabels:
+              app: ai-powered-tools
+      ports:
+        - protocol: TCP
+          port: 4222

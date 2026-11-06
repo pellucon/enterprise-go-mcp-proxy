@@ -1,0 +1,154 @@
+[
+  {
+    "id": "deal-01",
+    "name": "Fall Cleanup Clearance",
+    "startDate": "2025-10-01",
+    "endDate": "2025-10-20",
+    "ids": [
+      "ps-007",
+      "ps-008",
+      "ps-009",
+      "ps-010",
+      "ps-011",
+      "ps-012",
+      "ps-016",
+      "ps-017",
+      "ps-018",
+      "ps-019",
+      "ps-020",
+      "ps-021",
+      "ps-045",
+      "ps-046"
+    ],
+    "discountPercentages": {
+      "one-time-customer": 20,
+      "returning-customer": 25,
+      "vip": 30
+    }
+  },
+  {
+    "id": "deal-02",
+    "name": "Winter Prep Bundle",
+    "startDate": "2025-12-01",
+    "endDate": "2025-12-31",
+    "ids": [
+      "ps-013",
+      "ps-014",
+      "ps-015",
+      "ps-035",
+      "ps-037",
+      "ps-044",
+      "ps-048"
+    ],
+    "discountPercentages": {
+      "one-time-customer": 15,
+      "returning-customer": 20,
+      "vip": 25
+    }
+  },
+  {
+    "id": "deal-03",
+    "name": "Spring Planting Sale",
+    "startDate": "2026-03-01",
+    "endDate": "2026-03-21",
+    "ids": [
+      "ps-038",
+      "ps-039",
+      "ps-040",
+      "ps-041",
+      "ps-042",
+      "ps-043",
+      "ps-047"
+    ],
+    "discountPercentages": {
+      "one-time-customer": 20,
+      "returning-customer": 25,
+      "vip": 30
+    }
+  },
+  {
+    "id": "deal-04",
+    "name": "Summer Watering Savings",
+    "startDate": "2026-06-01",
+    "endDate": "2026-09-30",
+    "ids": [
+      "ps-022",
+      "ps-023",
+      "ps-024",
+      "ps-025",
+      "ps-026",
+      "ps-027",
+      "ps-028",
+      "ps-029",
+      "ps-030",
+      "ps-031",
+      "ps-032",
+      "ps-033",
+      "ps-034"
+    ],
+    "discountPercentages": {
+      "one-time-customer": 25,
+      "returning-customer": 30,
+      "vip": 35
+    }
+  },
+  {
+    "id": "deal-05",
+    "name": "VIP Loyalty Discount",
+    "ids": [
+      "ps-001",
+      "ps-002",
+      "ps-003",
+      "ps-004",
+      "ps-005",
+      "ps-006",
+      "ps-007",
+      "ps-008",
+      "ps-009",
+      "ps-010",
+      "ps-011",
+      "ps-012",
+      "ps-013",
+      "ps-014",
+      "ps-015",
+      "ps-016",
+      "ps-017",
+      "ps-018",
+      "ps-019",
+      "ps-020",
+      "ps-021",
+      "ps-022",
+      "ps-023",
+      "ps-024",
+      "ps-025",
+      "ps-026",
+      "ps-027",
+      "ps-028",
+      "ps-029",
+      "ps-030",
+      "ps-031",
+      "ps-032",
+      "ps-033",
+      "ps-034",
+      "ps-035",
+      "ps-036",
+      "ps-037",
+      "ps-038",
+      "ps-039",
+      "ps-040",
+      "ps-041",
+      "ps-042",
+      "ps-043",
+      "ps-044",
+      "ps-045",
+      "ps-046",
+      "ps-047",
+      "ps-048",
+      "ps-049",
+      "ps-050"
+    ],
+    "discountPercentages": {
+      "vip": 5
+    }
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "one-time-customer",
+    "name": "One-Time Customer"
+  },
+  {
+    "id": "returning-customer",
+    "name": "Returning Customer"
+  },
+  {
+    "id": "vip",
+    "name": "VIP"
+  }
+]

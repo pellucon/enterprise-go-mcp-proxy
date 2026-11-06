@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: declarative-guardrail
+  labels:
+    app: declarative-guardrail
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: declarative-guardrail
+  template:
+    metadata:
+      labels:
+        app: declarative-guardrail
+        mcp.io/role: backend-mcp-server
+    spec:
+      # Backend MCP servers never need k8s API access; only go-proxy does.
+      automountServiceAccountToken: false
+      containers:
+        - name: declarative-guardrail
+          image: declarative-guardrail:local
+          imagePullPolicy: IfNotPresent
+          args:
+            - -port=:8080
+            - -config=/app-run/config.json
+            - -nats-url=nats://nats:4222
+            - -log-level-config=/app-run/log-level/config.json
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 2
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+          env:
+            - name: NATS_CREDENTIALS_DIR
+              value: /etc/nats-client
+          volumeMounts:
+            - name: nats-client
+              mountPath: /etc/nats-client
+              readOnly: true
+            - name: declarative-guardrails-override
+              mountPath: /app-run
+              readOnly: true
+            - name: log-level-override
+              mountPath: /app-run/log-level
+              readOnly: true
+      volumes:
+        # This component's own NATS credentials and the CA for NATS's TLS
+        # certificate (scripts/deploy.sh's ensure_nats_secrets; see
+        # k8s/nats/nats.conf.tmpl for what this user may do).
+        - name: nats-client
+          secret:
+            secretName: nats-client-declarative-guardrail
+        - name: declarative-guardrails-override
+          configMap:
+            name: declarative-guardrails-override
+        - name: log-level-override
+          configMap:
+            name: log-level-override
+            optional: true

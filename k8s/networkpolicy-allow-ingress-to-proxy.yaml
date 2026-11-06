@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-proxy
+spec:
+  # The default-deny-ingress policy blocks all traffic in the namespace,
+  # including external NodePort traffic to go-proxy itself. This policy
+  # re-opens ingress on go-proxy's pods specifically, from any source,
+  # since external clients have no in-cluster pod identity to scope a
+  # podSelector to. Backend pods are NOT selected here — only this policy's
+  # sibling (allow-proxy-to-backends) opens ingress on them, and only from
+  # go-proxy's own pods.
+  podSelector:
+    matchLabels:
+      app: go-proxy
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 8081

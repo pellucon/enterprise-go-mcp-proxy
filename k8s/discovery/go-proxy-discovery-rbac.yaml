@@ -1,0 +1,32 @@
+# Backend MCP server discovery ("k8s" discoveryMode, see
+# docs/architecture/discovery.md): lets go-proxy list/watch the Services in
+# ONE namespace. scripts/deploy.sh applies this file into every namespace
+# named in the cfg's discovery.k8sNamespaces (and nowhere else), so
+# go-proxy can't see Services anywhere it wasn't told to trust - not even
+# if its discovery config were changed to name another namespace.
+#
+# Kept out of k8s/*.yaml on purpose: deploy_proxy applies those into
+# go-proxy's own namespace only. Namespace-agnostic like every manifest
+# here; the RoleBinding's subject is go-proxy's ServiceAccount, which
+# always lives in mcp-proxy.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: go-proxy-discovery
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: go-proxy-discovery
+subjects:
+  - kind: ServiceAccount
+    name: go-proxy
+    namespace: mcp-proxy
+roleRef:
+  kind: Role
+  name: go-proxy-discovery
+  apiGroup: rbac.authorization.k8s.io

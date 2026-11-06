@@ -1,0 +1,68 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gardening-demo-seed
+  labels:
+    app: gardening-demo-seed
+spec:
+  # One-shot seeding, never retried automatically: a real failure (bad
+  # data, an unreachable demo-authorization-server/go-proxy) should
+  # surface once, clearly, not retry-storm against them. restartPolicy:
+  # Never + backoffLimit: 0 together mean the Job is marked Failed after
+  # exactly one failed pod attempt — paired with scripts/deploy.sh's own
+  # WARNING-and-continue handling of a failed/timed-out Job.
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app: gardening-demo-seed
+    spec:
+      restartPolicy: Never
+      # Never touches the k8s API — same as every backend MCP server and
+      # demo-authorization-server.
+      automountServiceAccountToken: false
+      containers:
+        - name: gardening-demo-seed
+          image: gardening-demo-seed:local
+          imagePullPolicy: IfNotPresent
+          # -auth-server's value is rewritten by scripts/deploy.sh
+          # (render_gardening_demo_seed_job) before this manifest is ever
+          # applied — a Job's .spec.template is immutable once created,
+          # so unlike a Deployment there's no later "kubectl set env"
+          # correction path; getting it right in the one-shot apply is
+          # sufficient since this Job is only ever created once (see the
+          # create-only-if-missing check in deploy.sh).
+          # -endpoint is NOT deploy-time-variable at all: go-proxy's own
+          # in-cluster Service DNS name is fixed and portable to any
+          # cluster (the same address proxy-server.cfg's own selfUrl
+          # uses) — this is what lets this one manifest work identically
+          # for both the local and --fromGitPackage deploy paths.
+          #
+          # The wrapper first waits (up to 60s) until demo-authorization-
+          # server answers this pod: its NetworkPolicy admits this Job's
+          # pods by label, and on a fresh cluster the network plugin can
+          # take a few seconds to apply that to a brand-new pod - during
+          # which the login would be refused. A server that's really
+          # unreachable still fails the seed once, after the wait.
+          command:
+            - sh
+            - -c
+            - |
+              for i in $(seq 60); do
+                wget -q -T 2 -O /dev/null "__AUTH_SERVER_URL__/.well-known/oauth-authorization-server" && exec /app/cli "$@"
+                sleep 1
+              done
+              echo "demo-authorization-server (__AUTH_SERVER_URL__) unreachable from this pod after 60s" >&2
+              exit 1
+            - gardening-demo-seed
+          args:
+            - -username=admin
+            - -password=admin
+            - -auth-server=__AUTH_SERVER_URL__
+            # Reached in-cluster, but its issuer is fixed at
+            # http://localhost:8102 (demo-authorization-server/k8s/deployment.yaml's
+            # -issuer), which the login checks the metadata against.
+            - -auth-issuer=http://localhost:8102
+            - -endpoint=http://go-proxy.mcp-proxy.svc.cluster.local/mcp
+            - init
+            - -data-dir=/app/initial-data

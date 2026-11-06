@@ -1,0 +1,56 @@
+# Enterprise exposure path only (scripts/deploy.sh --ingress-host) — never
+# applied by a default deploy: the default path's "k8s/*.yaml" glob is
+# top-level only, and go-proxy stays reachable via k8s/go-proxy-service.yaml's
+# LoadBalancer there. See docs/enterprise-deployment/enterprise-deployment.md.
+#
+# __INGRESS_HOST__ and __INGRESS_CLASS__ are substituted by deploy.sh
+# (--ingress-host/--ingress-class); spec.tls is added by a Kustomize patch
+# only when --tls-secret is given. To apply by hand instead (e.g. from a
+# GitOps repo), replace both placeholders yourself and add the tls block.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-proxy
+  annotations:
+    # MCP's streamable-HTTP transport may answer a POST with a long-lived
+    # text/event-stream response: buffering must be off so events reach
+    # the client as they're written, and the read/send timeouts must
+    # outlast the longest tool call (nginx's 60s default would cut a slow
+    # orchestration or AI tool call off mid-stream).
+    #
+    # Both annotation families are listed on purpose: nginx.ingress.kubernetes.io/*
+    # is read by the community ingress-nginx controller, nginx.org/* by
+    # F5's NGINX Ingress Controller. Each controller ignores the other's.
+    nginx.ingress.kubernetes.io/proxy-buffering: "off"
+    nginx.ingress.kubernetes.io/proxy-request-buffering: "off"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.org/proxy-buffering: "False"
+    nginx.org/proxy-read-timeout: "3600s"
+    nginx.org/proxy-send-timeout: "3600s"
+    nginx.org/client-max-body-size: "10m"
+spec:
+  ingressClassName: __INGRESS_CLASS__
+  rules:
+    - host: __INGRESS_HOST__
+      http:
+        paths:
+          # Only the two client-facing routes are published: the MCP
+          # endpoint itself, and RFC 9728 Protected Resource Metadata
+          # (both its root and path-inserted forms share this prefix).
+          # /healthz and /.well-known/jwks-internal.json stay in-cluster.
+          - path: /mcp
+            pathType: Prefix
+            backend:
+              service:
+                name: go-proxy
+                port:
+                  number: 80
+          - path: /.well-known/oauth-protected-resource
+            pathType: Prefix
+            backend:
+              service:
+                name: go-proxy
+                port:
+                  number: 80

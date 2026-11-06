@@ -1,0 +1,19 @@
+.git
+go-proxy
+k8s/
+# Never send secret material, or local build output, into an image build:
+# "COPY . ." puts the whole context in the build stage's layers and cache,
+# even though the final images keep only the compiled binary.
+**/*.pem
+**/*.key
+**/*-key.txt
+**/*token*.txt
+**/*.p12
+**/*.pfx
+**/.env
+**/.env.*
+.claude/
+bin/
+go-gardening-demo/bin/
+.build/
+update_git.sh

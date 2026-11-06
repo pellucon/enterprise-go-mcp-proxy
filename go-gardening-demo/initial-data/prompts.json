@@ -1,0 +1,57 @@
+[
+  {
+    "server": "garden-business-ops",
+    "name": "vip_spend_comparison",
+    "description": "Do VIP customers spend on average more than other customers?",
+    "text": "Do VIP customers spend on average more than other customers?"
+  },
+  {
+    "server": "garden-business-ops",
+    "name": "unhappy_spend_comparison",
+    "description": "Do unhappy customers spend on average less than other customers?",
+    "text": "Do unhappy customers spend on average less than other customers?"
+  },
+  {
+    "server": "garden-business-ops",
+    "name": "purchase_failure_patterns",
+    "description": "Use event listing to answer: is there a pattern for when purchase orders fail?",
+    "text": "Use event listing to answer: Is there a pattern for when purchase orders fail?"
+  },
+  {
+    "server": "garden-business-ops",
+    "name": "unauthorized_requests_report",
+    "description": "Use event listing to answer: give me the details of customers and staffers who tried unauthorized requests.",
+    "text": "Use event listing to answer: Give me the details of customers and staffers who tried unauthorized requests."
+  },
+  {
+    "server": "garden-business-ops",
+    "name": "unavailable_and_unpopular_products",
+    "description": "Which products are not available in the inventory or projected to be unavailable. Of those, which products are not popular?",
+    "text": "Which products are not available in the inventory or projected to be unavailable. Of those, which products are not popular?"
+  },
+  {
+    "server": "garden-online-store",
+    "name": "product_on_sale_for_me",
+    "description": "Can I find a given product on sale (now or a coming sale)? How much will it cost me?",
+    "text": "Can I find a {{.product}} on sale (now or a coming sale)? How much will it cost me?",
+    "arguments": [
+      { "name": "product", "description": "The product to look for, e.g. \"rake\".", "required": true }
+    ]
+  },
+  {
+    "server": "garden-customer-service",
+    "name": "my_service_calls",
+    "description": "Which service calls are currently assigned to me? Optionally filter to just the unresolved ones, or the unresolved ones older than a given number of days.",
+    "text": "Which service calls are currently assigned to me? Use proxy_utility.get_my_id_details to find my own id, then call garden-customer-service.get_customer_service_calls filtered to that id via handledByStafferId.{{if .days}} Of those, show only the ones that are still unresolved and whose callDate is more than {{.days}} days before today ({{.today}}).{{else if .unresolved}} Of those, show only the ones that are still unresolved.{{end}}",
+    "arguments": [
+      { "name": "unresolved", "description": "Set to any non-empty value (e.g. \"true\") to only show calls that are still unresolved.", "required": false },
+      { "name": "days", "description": "Only show unresolved calls whose callDate is more than this many days old (implies unresolved).", "required": false }
+    ]
+  },
+  {
+    "server": "garden-staff-admin",
+    "name": "staffers_allowed_to_list_events",
+    "description": "Which staffers are allowed to list log events?",
+    "text": "Which staffers are allowed to list log events?"
+  }
+]

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-proxy
+  # Deliberately does NOT carry mcp.io/role=backend-mcp-server: the proxy
+  # must never discover itself as a backend.
+spec:
+  # ClusterIP: reachable only inside the cluster. scripts/deploy.sh makes it
+  # a LoadBalancer on a local cluster only (expose_on_local_cluster in
+  # scripts/lib/k8s.sh), where k3s's built-in ServiceLB ("klipper") binds
+  # `port` directly on the node: a fixed port across redeploys, unlike a
+  # NodePort, and port 80 so the URL never mentions one
+  # (http://localhost/mcp). On any other cluster a LoadBalancer would get a
+  # public address, so it stays ClusterIP unless deploy.sh is given
+  # --public-load-balancer; reach it through --ingress-host instead.
+  type: ClusterIP
+  selector:
+    app: go-proxy
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8081

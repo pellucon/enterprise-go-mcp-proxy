@@ -1,0 +1,275 @@
+[
+  {
+    "id": "csc-01",
+    "customerId": "cust-0251",
+    "handledByStafferId": "staff-05",
+    "callDate": "2025-08-21",
+    "issueText": "Requesting a price-match against a Deal that started after the order was placed.",
+    "resolutionDate": "2025-08-24",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-02",
+    "customerId": "cust-0110",
+    "handledByStafferId": "staff-09",
+    "callDate": "2025-08-27",
+    "issueText": "The Bamboo Plant Stakes (Pack of 25) stopped working within a week of use.",
+    "resolutionDate": null,
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-03",
+    "customerId": "cust-0143",
+    "handledByStafferId": "staff-10",
+    "callDate": "2025-09-03",
+    "issueText": "Wrong item shipped - ordered a Bamboo Plant Stakes (Pack of 25) but received something else.",
+    "resolutionDate": "2025-09-08",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-04",
+    "customerId": "cust-0098",
+    "handledByStafferId": "staff-10",
+    "callDate": "2025-09-06",
+    "issueText": "Question about how to assemble the Heirloom Tomato Seeds Variety Pack.",
+    "resolutionDate": "2025-09-06",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-05",
+    "customerId": "cust-0044",
+    "handledByStafferId": "staff-05",
+    "callDate": "2025-09-13",
+    "issueText": "The Soil pH Test Kit stopped working within a week of use.",
+    "resolutionDate": "2025-09-16",
+    "escalatedToManager": true,
+    "escalatedToStafferId": "staff-04"
+  },
+  {
+    "id": "csc-06",
+    "customerId": "cust-0217",
+    "handledByStafferId": "staff-06",
+    "callDate": "2025-09-19",
+    "issueText": "Received a damaged Steel Wheelbarrow (6 cu ft) and would like a replacement.",
+    "resolutionDate": "2025-09-23",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-07",
+    "customerId": "cust-0052",
+    "handledByStafferId": "staff-05",
+    "callDate": "2025-09-21",
+    "issueText": "Complimenting the fast shipping on a recent order.",
+    "resolutionDate": "2025-09-25",
+    "escalatedToManager": true,
+    "escalatedToStafferId": "staff-04"
+  },
+  {
+    "id": "csc-08",
+    "customerId": "cust-0218",
+    "handledByStafferId": "staff-05",
+    "callDate": "2025-10-05",
+    "issueText": "General question about upcoming seasonal deals.",
+    "resolutionDate": "2025-10-09",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-09",
+    "customerId": "cust-0112",
+    "handledByStafferId": "staff-05",
+    "callDate": "2025-11-02",
+    "issueText": "Requesting a price-match against a Deal that started after the order was placed.",
+    "resolutionDate": "2025-11-04",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-10",
+    "customerId": "cust-0300",
+    "handledByStafferId": "staff-09",
+    "callDate": "2025-11-24",
+    "issueText": "Asking about the delivery status of my Poly Wheelbarrow (4 cu ft) order.",
+    "resolutionDate": "2025-11-29",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-11",
+    "customerId": "cust-0194",
+    "handledByStafferId": "staff-10",
+    "callDate": "2025-11-30",
+    "issueText": "Requesting to change the shipping address for a pending order.",
+    "resolutionDate": "2025-11-30",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-12",
+    "customerId": "cust-0117",
+    "handledByStafferId": "staff-05",
+    "callDate": "2025-11-30",
+    "issueText": "The Steel Garden Spade stopped working within a week of use.",
+    "resolutionDate": null,
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-13",
+    "customerId": "cust-0256",
+    "handledByStafferId": "staff-05",
+    "callDate": "2025-12-06",
+    "issueText": "General question about upcoming seasonal deals.",
+    "resolutionDate": "2025-12-07",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-14",
+    "customerId": "cust-0016",
+    "handledByStafferId": "staff-09",
+    "callDate": "2025-12-13",
+    "issueText": "Wrong item shipped - ordered a Sun Hat and Gardening Apron Set but received something else.",
+    "resolutionDate": "2025-12-18",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-15",
+    "customerId": "cust-0012",
+    "handledByStafferId": "staff-06",
+    "callDate": "2025-12-14",
+    "issueText": "Billing was charged twice for the same order.",
+    "resolutionDate": "2025-12-15",
+    "escalatedToManager": true,
+    "escalatedToStafferId": "staff-04"
+  },
+  {
+    "id": "csc-16",
+    "customerId": "cust-0056",
+    "handledByStafferId": "staff-05",
+    "callDate": "2026-01-01",
+    "issueText": "Requesting to change the shipping address for a pending order.",
+    "resolutionDate": "2026-01-02",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-17",
+    "customerId": "cust-0237",
+    "handledByStafferId": "staff-05",
+    "callDate": "2026-02-19",
+    "issueText": "Requesting a price-match against a Deal that started after the order was placed.",
+    "resolutionDate": null,
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-18",
+    "customerId": "cust-0211",
+    "handledByStafferId": "staff-10",
+    "callDate": "2026-02-23",
+    "issueText": "General question about upcoming seasonal deals.",
+    "resolutionDate": "2026-02-26",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-19",
+    "customerId": "cust-0068",
+    "handledByStafferId": "staff-09",
+    "callDate": "2026-03-12",
+    "issueText": "Package marked delivered but never arrived.",
+    "resolutionDate": "2026-03-15",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-20",
+    "customerId": "cust-0249",
+    "handledByStafferId": "staff-09",
+    "callDate": "2026-03-21",
+    "issueText": "Question about how to assemble the Anvil Loppers.",
+    "resolutionDate": "2026-03-23",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-21",
+    "customerId": "cust-0295",
+    "handledByStafferId": "staff-06",
+    "callDate": "2026-03-26",
+    "issueText": "Requesting to change the shipping address for a pending order.",
+    "resolutionDate": "2026-03-30",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-22",
+    "customerId": "cust-0170",
+    "handledByStafferId": "staff-05",
+    "callDate": "2026-04-10",
+    "issueText": "Requesting a price-match against a Deal that started after the order was placed.",
+    "resolutionDate": "2026-04-15",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-23",
+    "customerId": "cust-0045",
+    "handledByStafferId": "staff-10",
+    "callDate": "2026-04-12",
+    "issueText": "Asking whether a discount code can still be applied after checkout.",
+    "resolutionDate": "2026-04-13",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-24",
+    "customerId": "cust-0156",
+    "handledByStafferId": "staff-06",
+    "callDate": "2026-04-13",
+    "issueText": "Requesting a price-match against a Deal that started after the order was placed.",
+    "resolutionDate": "2026-04-14",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-25",
+    "customerId": "cust-0049",
+    "handledByStafferId": "staff-10",
+    "callDate": "2026-04-18",
+    "issueText": "General question about upcoming seasonal deals.",
+    "resolutionDate": "2026-04-19",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-26",
+    "customerId": "cust-0285",
+    "handledByStafferId": "staff-09",
+    "callDate": "2026-04-18",
+    "issueText": "Asking whether a discount code can still be applied after checkout.",
+    "resolutionDate": "2026-04-23",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-27",
+    "customerId": "cust-0127",
+    "handledByStafferId": "staff-06",
+    "callDate": "2026-05-07",
+    "issueText": "Package marked delivered but never arrived.",
+    "resolutionDate": "2026-05-11",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-28",
+    "customerId": "cust-0143",
+    "handledByStafferId": "staff-05",
+    "callDate": "2026-05-24",
+    "issueText": "The Bamboo Plant Stakes (Pack of 25) stopped working within a week of use.",
+    "resolutionDate": "2026-05-26",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-29",
+    "customerId": "cust-0082",
+    "handledByStafferId": "staff-09",
+    "callDate": "2026-05-27",
+    "issueText": "Requesting a price-match against a Deal that started after the order was placed.",
+    "resolutionDate": "2026-05-28",
+    "escalatedToManager": false
+  },
+  {
+    "id": "csc-30",
+    "customerId": "cust-0244",
+    "handledByStafferId": "staff-10",
+    "callDate": "2026-07-01",
+    "issueText": "Asking about the warranty coverage on gardening tools.",
+    "resolutionDate": "2026-07-01",
+    "escalatedToManager": false
+  }
+]
