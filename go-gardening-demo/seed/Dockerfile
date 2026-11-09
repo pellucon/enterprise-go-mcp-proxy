@@ -25,6 +25,11 @@ COPY . .
 RUN CGO_ENABLED=0 go build -o /out/cli ./go-gardening-demo/cli
 
 FROM alpine:3.20
+# Links the image's GHCR package to this repository: GitHub lists the
+# package on the repository's page, and the package can take its access
+# from the repository's.
+LABEL org.opencontainers.image.source="https://github.com/pellucon/enterprise-go-mcp-proxy" \
+      org.opencontainers.image.licenses="MIT"
 RUN adduser -D -H app
 COPY --from=build /out/cli /app/cli
 COPY go-gardening-demo/initial-data /app/initial-data

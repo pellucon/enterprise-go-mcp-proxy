@@ -15,6 +15,11 @@ COPY . .
 RUN CGO_ENABLED=0 go build -o /out/app ${BUILD_PATH}
 
 FROM alpine:3.20
+# Links the image's GHCR package to this repository: GitHub lists the
+# package on the repository's page, and the package can take its access
+# from the repository's.
+LABEL org.opencontainers.image.source="https://github.com/pellucon/enterprise-go-mcp-proxy" \
+      org.opencontainers.image.licenses="MIT"
 # declarative-guardrail's guardrailcfg config (declarativeGuardrails'
 # per-declaration "timezone", e.g. "EST"/"America/New_York") is parsed via
 # time.LoadLocation, which resolves named zones from the OS's IANA tzdata —

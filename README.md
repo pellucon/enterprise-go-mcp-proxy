@@ -55,7 +55,7 @@ Deploy a published release to a local Kubernetes cluster. No Go toolchain or sou
 
 **1. Download the deploy bundle** for your platform (`darwin-arm64` or `linux-arm64`) from the project's GitHub Releases page and extract it:
 ```sh
-VERSION=v0.8.0
+VERSION=v0.9.0
 tar xzf deploy-bundle-$VERSION-darwin-arm64.tar.gz
 cd deploy-bundle-$VERSION-darwin-arm64
 ```
