@@ -1328,14 +1328,12 @@ MCP is [deprecating sampling, roots and logging](https://modelcontextprotocol.io
 | Sends log messages during a call | They aren't forwarded to the client | Use the server's own logs, or the gateway's [event system](#event-based-observability) |
 
 ## Roadmap
-Planned, not committed; see the issues for details and discussion.
+These are planned directions, not commitments. See the issues for details and discussion.
 
-- AI Powered constraint generation
-- Ability to add More AI powered tools more easily (requires ability to configure enhanced permissions per tool)
-- Event search scalability
-- Alert Pluggins
-- Helm deployment
-- Metrics
-- UI for configuration and control
-- Support replicas by some platform servers?
-- Add keycloak option?
+- **AI-powered constraint generation.** Describe a rule in plain language, such as "no purchase over $1,000 for customers", and have the gateway propose the matching declarative guardrail and orchestration step. An administrator reviews the proposal before applying it with the usual `update-…` commands.
+- **Easier AI-powered tools.** Adding a tool to the AI-powered tools server should be a configuration change, not new code. That needs finer per-tool permissions: which roles may use the tool, what data it may send to the model, and limits on its cost.
+- **Scalable event search.** The event aggregator keeps recent events in memory and older ones in files on one disk, and runs as a single replica. Searching a long history should go to an indexed store instead, so that it stays fast and the aggregator can run more than one replica.
+- **Alert plugins.** Today alerts are events in the event log. Plugins would deliver them to where people work, such as email, Slack, Microsoft Teams, PagerDuty or a webhook, with routing by alert type.
+- **Helm chart.** A Helm chart as an alternative to `deploy.sh`, for installing into existing clusters with standard tooling. Its values would cover the proxy configuration, the ingress, the identity provider and which demo parts to include.
+- **Metrics.** A Prometheus endpoint with call counts and latencies per tool and server, guardrail blocks and alerts, rate-limit waits, and backend health, so the gateway can be watched with existing dashboards.
+- **Configuration and control UI.** A web console for the live configuration that the CLI's `export-…`/`update-…` commands manage today, and for browsing the event log and alerts.
