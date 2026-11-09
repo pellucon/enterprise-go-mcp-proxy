@@ -16,6 +16,7 @@
 # A GitHub PAT for ./scripts/build.sh --release / ./scripts/deploy.sh
 # --release's --github-token-file (see docs/architecture/build-deploy.md). Real, sensitive secret material — never committed.
 /github-token.txt
+/pellucon-bot-token.txt
 
 # Secret material under common names, anywhere in the tree - so a key saved
 # under a name of its own (e.g. an --ai-api-key-file ./openai-key.txt, a
