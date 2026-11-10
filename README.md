@@ -239,6 +239,24 @@ The proxy never logs users in itself. It follows the **OAuth 2.1** authorization
 - **Roles.** The proxy reads the caller's roles from a configurable claim, such as Okta's `groups`. Role-based access rules then decide which tools, prompts and resources each caller can see and call. A separate, fixed administrator role controls the proxy's own admin tools.
 - **Backends.** Backend servers never receive the client's token. They get a short-lived identity signed by the proxy instead, and network policies ensure they can be reached only through the proxy.
 
+
+**Access rules by role.** Each rule names a role, or a role pattern, and lists what callers with that role may use: tools, prompts, resources and resource templates, by name or pattern. Names are prefixed with their server (`<server>.<tool>`, `<server>:<uri>`), so a rule can grant a whole server or single items:
+
+```json
+{
+  "role": "support-*",
+  "allowed_tools": ["garden-customer-service.*", "garden-customer-admin.get_customers"],
+  "allowed_prompts": ["garden-customer-service.*"],
+  "allowed_resources": [],
+  "allowed_resource_templates": []
+}
+```
+
+- **Nothing is allowed by default:** a role with no matching rule sees nothing.
+- **Rules add up:** a caller with several roles gets everything any of them allows.
+- **Lists and calls both follow the rules:** callers see only what they may use in tool, prompt and resource lists, and any other call is refused.
+- **Rules change live,** with the `export-role-permissions`/`update-role-permissions` commands, without a redeploy. See [Live updates](#live-updates-no-redeploy-no-restart).
+
 Clients discover where to log in automatically, as the MCP authorization specification defines: an unauthenticated request gets `401` with a pointer to metadata naming the identity provider.
 
 **Development and demo: a small built-in authorization server.** Production deployments are expected to use a leading identity provider such as Okta, Microsoft Entra ID or Auth0. For development and demos, a small footprint matters more, so the project ships `demo-authorization-server`, a minimal OAuth 2.1 server.
