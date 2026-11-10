@@ -124,7 +124,7 @@ The proxy serves one MCP endpoint, `/mcp`: `http://localhost/mcp` locally, or `h
 **Clients:**
 - **The included CLI** (`scripts/cli.sh`) is the reference client and supports both registration modes (`-client-id`, `-scope`).
 - **Claude Code and other MCP-capable agents and IDEs** that implement Streamable HTTP and MCP authorization can connect to the same endpoint.
-- **Claude Desktop** connects to remote MCP servers through Anthropic's cloud, so it needs the proxy at a public HTTPS URL.
+- **Clients that connect from their vendor's cloud**, such as Claude Desktop and claude.ai custom connectors, ChatGPT connectors, Microsoft Copilot Studio, and the remote MCP features of the Claude and OpenAI APIs, need the proxy at a public HTTPS URL. Clients that run on your machine (the CLI, Claude Code, Cursor, VS Code with GitHub Copilot, the MCP Inspector) can use `http://localhost/mcp`. See [Giving the gateway a public URL with Cloudflare Tunnel](public-url-cloudflare-tunnel.md).
 
 **Not supported yet:**
 - Requests a backend server sends back to the client: sampling, and elicitation before protocol 2026-07-28. Clients on 2026-07-28 can answer elicitation ("input required" tool results).

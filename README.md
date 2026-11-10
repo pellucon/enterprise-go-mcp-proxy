@@ -165,7 +165,7 @@ The essentials for working on the proxy itself. The **[Development and Deploymen
 - **MCP clients:**
   - Any client that supports **Streamable HTTP** and the **MCP authorization flow** (OAuth 2.1 with an external identity provider) can connect, for example the included CLI, Claude Code or Claude Desktop.
   - Clients that rely on automatic client registration need an identity provider that supports it. With Okta, register each client in advance.
-  - Claude Desktop needs a public HTTPS URL.
+  - **Clients that connect from their vendor's cloud need the gateway at a public HTTPS URL**, and an identity provider reachable from the internet. Examples: Claude Desktop and claude.ai custom connectors (also used by the Claude mobile apps), ChatGPT connectors, Microsoft Copilot Studio, and the remote MCP features of the Claude and OpenAI APIs. Clients that run on your machine can use `http://localhost/mcp` as is, for example the included CLI, Claude Code, Cursor, VS Code with GitHub Copilot, and the MCP Inspector. See [Giving the gateway a public URL with Cloudflare Tunnel](docs/public-url-cloudflare-tunnel.md).
 - **Elicitation** (a tool asking the user for input mid-call) is passed through when both the client and the server use MCP protocol 2026-07-28.
 - **Not relayed yet:** older-style server-initiated requests (sampling, and elicitation before 2026-07-28) and resource subscriptions.
 
@@ -234,7 +234,7 @@ The proxy's integration tests use fixed local ports (8081–8096, 8113–8115, 8
 Stress testing: `./stress-test/run.sh --client-count 1 --calls-per-second 1 --duration 2` redeploys the stack and runs concurrent clients against the gardening demo, then checks pod health and logs. See [`stress-test/README.md`](stress-test/README.md).
 
 ## Authentication and Authorization
-The proxy never logs users in itself. Users log in at an **identity provider**, and the client sends the resulting access token (a signed JWT) with every request.
+The proxy never logs users in itself. It follows the **OAuth 2.1** authorization flow that the MCP specification defines: the proxy is the OAuth *resource server*, and the **identity provider** is the *authorization server*. Users log in at the identity provider, the client obtains an access token there (a signed JWT, through the authorization-code flow with PKCE), and it sends that token with every request.
 - **Verification.** The proxy checks the token's signature against the provider's published keys, along with its expiry, issuer and audience.
 - **Roles.** The proxy reads the caller's roles from a configurable claim, such as Okta's `groups`. Role-based access rules then decide which tools, prompts and resources each caller can see and call. A separate, fixed administrator role controls the proxy's own admin tools.
 - **Backends.** Backend servers never receive the client's token. They get a short-lived identity signed by the proxy instead, and network policies ensure they can be reached only through the proxy.
@@ -897,7 +897,7 @@ A caller whose call is refused after waiting gets an error such as `rate limit c
 ## AI Applications
 **Any MCP-capable AI application can use the gateway:** Claude Code, Claude Desktop, IDE assistants, autonomous agents and your own applications. To the application, the gateway is one ordinary MCP server, and every tool and prompt it's allowed to use appears as if it came from that one server. The application needs no knowledge of the backends, and each user sees only what their role allows (see [Compatibility](#development-and-deployment) for the client requirements).
 
-> ⚠️ **Some AI applications need a public URL.** Claude Desktop, claude.ai custom connectors and similar hosted applications connect to MCP servers from their vendor's cloud, not from your computer. So they can't reach the local development and demo gateway at `http://localhost/mcp`. They also need an identity provider reachable from the internet, which the demo authorization server isn't. To try them without a production deployment, see [Giving the gateway a public URL with Cloudflare Tunnel](docs/public-url-cloudflare-tunnel.md). Claude Code runs on your machine, so it works with the local gateway as is.
+> ⚠️ **Some AI applications need a public URL.** Claude Desktop, claude.ai custom connectors, ChatGPT connectors and similar hosted applications connect to MCP servers from their vendor's cloud, not from your computer. So they can't reach the local development and demo gateway at `http://localhost/mcp`. They also need an identity provider reachable from the internet, which the demo authorization server isn't. To try them without a production deployment, see [Giving the gateway a public URL with Cloudflare Tunnel](docs/public-url-cloudflare-tunnel.md). Claude Code, Cursor and other clients that run on your machine work with the local gateway as is.
 
 ### Tested with Claude Code
 **1. Add the gateway as an MCP server** (once per project):

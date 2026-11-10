@@ -39,7 +39,7 @@ flowchart LR
 | **Backend identity** | What does the server learn about the caller? | `internalAuth` |
 | **Network isolation** | Can anything bypass the proxy? | Kubernetes NetworkPolicies |
 
-The proxy never logs users in itself. Users log in at an **identity provider** (IdP): Okta in production, or the small demo server during development. The proxy only **verifies** the access tokens the provider issues. This keeps passwords, multi-factor login and user management in the provider, where they belong.
+The proxy never logs users in itself. It follows the **OAuth 2.1** authorization flow that the MCP specification defines: the proxy is the OAuth *resource server*, and the **identity provider** (IdP) is the *authorization server*, Okta in production or the small demo server during development. Users log in at the IdP, and the client obtains an access token there through the authorization-code flow with PKCE. The proxy only **verifies** the access tokens the provider issues. This keeps passwords, multi-factor login and user management in the provider, where they belong.
 
 ## 2. Client authentication
 
