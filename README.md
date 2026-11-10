@@ -46,11 +46,15 @@ An enterprise-grade MCP gateway: a reverse proxy that federates many MCP servers
 Deploy a published release to a local Kubernetes cluster. No Go toolchain or source build is needed. To build from source, see [Development and Deployment](#development-and-deployment).
 
 **Prerequisites**
-- A local Kubernetes cluster with `kubectl` pointing at it, e.g. [Colima](https://github.com/abiosoft/colima) with k3s on macOS:
+- **A Mac with Apple Silicon.** The release images and deploy bundles are built for arm64 (`darwin-arm64`, `linux-arm64`), so an Intel Mac can't run them. On an Intel Mac, build from source instead: `./scripts/build.sh` builds the images and CLIs for your machine, and `./scripts/deploy.sh` deploys them to your local Colima. See [Development and Deployment](docs/development-and-deployment.md#5-build).
+- **[Colima](https://github.com/abiosoft/colima) with k3s**, with `kubectl` pointing at it. This is the setup the Quick Start is tested on (Colima 0.10, k3s 1.35):
   ```sh
-  colima start --kubernetes --k3s-arg=--disable=traefik
+  colima start --cpu 2 --memory 4 --disk 20 --kubernetes --k3s-arg=--disable=traefik
   ```
-- Docker and `python3`
+  - **Resources:** at least 2 CPUs, 2 GiB of memory and 10 GiB of disk. The full demo uses about 1.3 GiB of the VM's memory and under 1 GB of disk for images; 4 GiB of memory leaves room for the AI tools and for building from source.
+  - **`--disable=traefik` is required:** k3s's bundled ingress controller would take port 80, where the proxy answers (`http://localhost/mcp`).
+  - **For any other cluster,** including Docker Desktop, see [Deploying to other clusters](docs/development-and-deployment.md#13-deploying-to-other-clusters).
+- Docker (Colima provides it) and `python3`
 - A GitHub personal access token with the `read:packages` scope, saved to a file (e.g. `github-token.txt`). It's used to pull the release images from GHCR.
 
 **1. Download the deploy bundle** for your platform (`darwin-arm64` or `linux-arm64`) from the project's GitHub Releases page and extract it:
@@ -156,7 +160,7 @@ The essentials for working on the proxy itself. The **[Development and Deploymen
 - **MCP servers:**
   - Any server that speaks MCP over **Streamable HTTP** can sit behind the proxy.
   - In Kubernetes, label its Service `mcp.io/role=backend-mcp-server` (plus `mcp.io/path` if it isn't served at `/`). Otherwise, list it in the `discovery` section of the config.
-  - Servers need no authentication of their own.
+  - **Servers don't have to authenticate users:** the proxy verifies each user's token and applies the access rules before a call reaches them. A server that requires credentials of its own, such as an API key or OAuth client credentials, gets the proxy's (see [Backend credentials](#backend-credentials)).
   - Stdio-only servers need an HTTP bridge in front of them.
 - **MCP clients:**
   - Any client that supports **Streamable HTTP** and the **MCP authorization flow** (OAuth 2.1 with an external identity provider) can connect, for example the included CLI, Claude Code or Claude Desktop.

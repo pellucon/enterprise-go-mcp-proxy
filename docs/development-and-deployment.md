@@ -376,11 +376,35 @@ Step-by-step instructions, verification and troubleshooting: [`docs/enterprise-d
 
 ## 13. Deploying to other clusters
 
+The Quick Start is tested on Colima with k3s. This section covers everything else.
+
+### Docker Desktop
+
+The Quick Start (a `--release` deploy) is supported on [Docker Desktop](https://www.docker.com/products/docker-desktop/) with Kubernetes enabled, but not yet tested.
+- **Enable Kubernetes:** **Settings → Kubernetes → Enable Kubernetes**, cluster type **kubeadm**.
+- **Resources:** give Docker Desktop at least 2 CPUs, 4 GiB of memory (its Kubernetes takes more than Colima's k3s) and 10 GiB of disk.
+- **How it's reached:** Docker Desktop serves the proxy (`http://localhost/mcp`) and the demo login (`http://localhost:8102`) on `localhost` itself.
+- **No isolation:** its Kubernetes doesn't enforce NetworkPolicies, so the backends aren't isolated from other pods. That's fine for the demo.
+- **Building from source** needs Colima: that path waits for k3s's ServiceLB pods (see the table below).
+
+### Other local clusters
+
+They aren't supported as is. `deploy.sh` publishes the proxy (`http://localhost/mcp`) and the demo login (`http://localhost:8102`) through LoadBalancer Services on `localhost`, and only when the cluster's API server is on this machine:
+- **minikube:** its API server is on a VM address, which doesn't count as local, so both stay internal.
+- **kind:** it has no LoadBalancer implementation, so they never get an address.
+- **k3d:** ports 80 and 8102 must be mapped when the cluster is created.
+- **Rancher Desktop:** it keeps Traefik on port 80 by default.
+
+On any of them, `kubectl port-forward` reaches both: `kubectl -n mcp-proxy port-forward svc/go-proxy 8080:80` and `kubectl -n demo-auth port-forward svc/demo-authorization-server 8102:8102`, then use the CLI with `-endpoint http://localhost:8080/mcp`.
+
+### What any cluster needs
+
 The manifests are namespace-agnostic and avoid local-only assumptions. On a cluster other than Colima/k3s, check these:
 
 | Requirement | Used by | If missing |
 |---|---|---|
-| **LoadBalancer Services** (local clusters; elsewhere only with `--public-load-balancer`) | The proxy (`k8s/go-proxy-service.yaml`) and, on a local cluster, the demo auth server | Both Services are `ClusterIP` by default. `deploy.sh` makes them LoadBalancers only when the cluster is local (its API server is on this machine, as with Colima, Docker Desktop, kind or k3d), where that means `localhost`. On any other cluster, a LoadBalancer gets a public address, so the proxy stays `ClusterIP` unless you pass `--public-load-balancer`; use `--ingress-host` for HTTPS, or `kubectl port-forward`. The demo auth server is never made public there; port-forward to it to log in from your machine. |
+| **LoadBalancer Services** (local clusters; elsewhere only with `--public-load-balancer`) | The proxy (`k8s/go-proxy-service.yaml`) and, on a local cluster, the demo auth server | Both Services are `ClusterIP` by default. `deploy.sh` makes them LoadBalancers only when the cluster is local, meaning its API server address is a loopback address or `localhost` (Colima, kind, k3d) or Docker Desktop's `kubernetes.docker.internal`; minikube's VM address doesn't count. There a LoadBalancer means `localhost`. On any other cluster, a LoadBalancer gets a public address, so the proxy stays `ClusterIP` unless you pass `--public-load-balancer`; use `--ingress-host` for HTTPS, or `kubectl port-forward`. The demo auth server is never made public there; port-forward to it to log in from your machine. |
+| **k3s's built-in load balancer (ServiceLB)** | Builds deployed from source (without `--release`): `deploy.sh` waits for ServiceLB's pods in `kube-system` | Docker Desktop, kind and minikube have none, so that wait fails and the deploy stops: build from source on Colima. Release deploys don't depend on it: they wait for the Service's LoadBalancer address, and only warn if none arrives. Docker Desktop gives LoadBalancer Services `localhost`, so a release deploy works there |
 | **A default StorageClass** | The event aggregator's volume | Install a storage provisioner, or set `storageClassName` in `platform-mcp-servers/event-aggregator/k8s/pvc.yaml` |
 | **A CNI that enforces NetworkPolicies** (Calico, Cilium, most managed clusters) | Restricting backends to proxy traffic | Everything still works, but without that isolation |
 | **The standard `cluster.local` DNS domain** | The proxy's `selfUrl` | Edit `selfUrl` in the config |

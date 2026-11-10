@@ -148,8 +148,10 @@ poll_service_loadbalancer_address() {
 
 # -----------------------------------------------------------------------
 # cluster_is_local: whether kubectl talks to a cluster on this machine -
-# its API server is on a loopback address, as with Colima, Docker Desktop,
-# kind or k3d. On such a cluster a LoadBalancer Service is reachable only
+# its API server is on a loopback address, as with Colima, kind or k3d, or
+# is Docker Desktop's kubernetes.docker.internal (which resolves to
+# 127.0.0.1; Docker Desktop serves LoadBalancer Services on localhost).
+# minikube's VM address counts as remote here. On such a cluster a LoadBalancer Service is reachable only
 # from this machine (localhost); on any other, a cloud provider gives it a
 # public address.
 # -----------------------------------------------------------------------
@@ -165,7 +167,7 @@ cluster_is_local() {
     host="${host%%:*}"
   fi
   case "$host" in
-    127.*|localhost|::1|*.localhost) return 0 ;;
+    127.*|localhost|::1|*.localhost|kubernetes.docker.internal) return 0 ;;
   esac
   return 1
 }
