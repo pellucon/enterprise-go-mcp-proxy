@@ -40,7 +40,8 @@ An enterprise-grade MCP gateway: a reverse proxy that federates many MCP servers
 17. [Scalability](#scalability)
 18. [MCP Client Limitations](#mcp-client-limitations)
 19. [MCP Server Requirements and Limitations](#mcp-server-requirements-and-limitations)
-20. [Roadmap](#roadmap)
+20. [Advanced MCP Server Integration](#advanced-mcp-server-integration)
+21. [Roadmap](#roadmap)
 
 ## Quick Start
 Deploy a published release to a local Kubernetes cluster. No Go toolchain or source build is needed. To build from source, see [Development and Deployment](#development-and-deployment).
@@ -1233,7 +1234,7 @@ What a backend MCP server needs in order to work behind the gateway, and what do
 - **Who's calling:** each forwarded call carries the caller's identity, signed by the gateway.
 - **Who can reach it:** network policies ensure only the gateway can reach the server.
 
-A backend that does require credentials can get them from the gateway; see [Backend credentials](#backend-credentials) below.
+A backend that does require credentials can get them from the gateway; see [Backend credentials](#backend-credentials).
 
 **Discovery configuration**
 
@@ -1256,6 +1257,28 @@ See [Dynamic Discovery](#dynamic-discovery) and the [discovery example](examples
 - **Reachable only from the gateway.** A server deployed with `deploy.sh` gets a NetworkPolicy that lets only the gateway reach its pods. One you deploy yourself needs the same, as the [discovery example](examples/discovery/README.md) does; `deploy.sh` warns when a discovery namespace has no policy at all.
 
 **Responsiveness.** Each gateway replica asks every backend for its tool, prompt and resource lists, every 5 seconds by default. Each answer, including all its pages if the server splits a long list into pages, must arrive within 10 seconds.
+
+### Limitations in specific scenarios
+
+| If the server… | Then |
+|---|---|
+| Asks the user for input mid-call (elicitation) | It works when the server uses protocol 2026-07-28, where the tool returns an "input required" result that the gateway passes to the client, and the client's answers come back on a follow-up call. With older protocols, the server sends a request back to the client mid-call, which the gateway can't relay, so the call fails. A Go MCP SDK server must be **stateless** to use 2026-07-28 (`StreamableHTTPOptions{Stateless: true}`). The client must use 2026-07-28 too. Only tools can ask for input this way, not prompts or resources. |
+| Returns a result larger than 16 MiB | The call fails (the MCP SDK's default event-size limit). |
+| Requires each **user's own** login (per-user OAuth, e.g. a SaaS server acting as the user) | It can't be used. The gateway presents one credential per backend, the same for every user (see [Backend credentials](#backend-credentials)). |
+| Keeps per-user state in its MCP session | It won't work as intended. Each gateway replica holds one session per backend, **shared by all users**, and it's reset if the gateway restarts or the backend is rediscovered. Keep per-user state keyed on the caller's identity from the signed header instead (see [Keeping per-user state](#keeping-per-user-state)). |
+| Offers resource subscriptions or argument completions | They aren't relayed to clients. |
+
+### Deprecated MCP features
+MCP is [deprecating sampling, roots and logging](https://modelcontextprotocol.io/seps/2577-deprecate-roots-sampling-and-logging). They keep working in specification versions released within a year of the deprecation, and may be removed after that. The gateway doesn't relay them, and since the specification advises against building on them, it won't. Servers shouldn't rely on them.
+
+| If the server… | Then | Instead |
+|---|---|---|
+| Asks the client for an LLM completion (sampling) | The request fails | Call a model provider directly from the server |
+| Asks for the client's roots (its workspace folders) | It gets an empty list | Take the needed paths or locations as tool arguments, or as server configuration |
+| Sends log messages during a call | They aren't forwarded to the client | Use the server's own logs, or the gateway's [event system](#event-based-observability) |
+
+## Advanced MCP Server Integration
+Beyond the [requirements](#mcp-server-requirements-and-limitations), a backend can do more with the gateway: require credentials, which the gateway then presents to it; apply per-user rules with the caller's identity; call other tools through the gateway; and keep per-user state safely.
 
 ### Backend credentials
 A backend that requires its own credentials, such as an internal API that wants a key or an OAuth access token, gets them from the gateway. These are the **gateway's** credentials for that server, the same for every user. The client's own token is still never passed on; the caller's identity travels separately, in the signed header.
@@ -1335,25 +1358,6 @@ drafts[user] = append(drafts[user], in.Text) // per user, not per session
 ```
 
 Other languages: verify the header as an RS256 JWT against the same JWKS URL, issuer and audience. Long-lived objects such as a browser or a shell can be handled the same way: keep one per user, or return a handle from the tool that creates it and check on every later call that the handle belongs to the caller.
-
-### Limitations in specific scenarios
-
-| If the server… | Then |
-|---|---|
-| Asks the user for input mid-call (elicitation) | It works when the server uses protocol 2026-07-28, where the tool returns an "input required" result that the gateway passes to the client, and the client's answers come back on a follow-up call. With older protocols, the server sends a request back to the client mid-call, which the gateway can't relay, so the call fails. A Go MCP SDK server must be **stateless** to use 2026-07-28 (`StreamableHTTPOptions{Stateless: true}`). The client must use 2026-07-28 too. Only tools can ask for input this way, not prompts or resources. |
-| Returns a result larger than 16 MiB | The call fails (the MCP SDK's default event-size limit). |
-| Requires each **user's own** login (per-user OAuth, e.g. a SaaS server acting as the user) | It can't be used. The gateway presents one credential per backend, the same for every user (see [Backend credentials](#backend-credentials)). |
-| Keeps per-user state in its MCP session | It won't work as intended. Each gateway replica holds one session per backend, **shared by all users**, and it's reset if the gateway restarts or the backend is rediscovered. Keep per-user state keyed on the caller's identity from the signed header instead (see [Keeping per-user state](#keeping-per-user-state)). |
-| Offers resource subscriptions or argument completions | They aren't relayed to clients. |
-
-### Deprecated MCP features
-MCP is [deprecating sampling, roots and logging](https://modelcontextprotocol.io/seps/2577-deprecate-roots-sampling-and-logging). They keep working in specification versions released within a year of the deprecation, and may be removed after that. The gateway doesn't relay them, and since the specification advises against building on them, it won't. Servers shouldn't rely on them.
-
-| If the server… | Then | Instead |
-|---|---|---|
-| Asks the client for an LLM completion (sampling) | The request fails | Call a model provider directly from the server |
-| Asks for the client's roots (its workspace folders) | It gets an empty list | Take the needed paths or locations as tool arguments, or as server configuration |
-| Sends log messages during a call | They aren't forwarded to the client | Use the server's own logs, or the gateway's [event system](#event-based-observability) |
 
 ## Roadmap
 These are planned directions, not commitments. See the issues for details and discussion.
