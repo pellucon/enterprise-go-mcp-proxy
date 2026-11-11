@@ -1249,7 +1249,7 @@ See [Dynamic Discovery](#dynamic-discovery) and the [discovery example](examples
 - **The server's name prefixes all its tools and prompts,** e.g. `hello-world.say_hello`. Names must be unique.
 - **Allowed characters:** letters, digits, `-` and `_`, starting with a letter or digit. A name with `.` or `:` is rejected, since those separate a server from its tools and resources.
 - **Reserved:** `_admin` and `proxy_utility` belong to the gateway's own tools.
-- **Contested names:** if Services in several namespaces claim the same name, the one in the earliest namespace in `k8sNamespaces` wins. Names in `k8sPinnedServers` (the platform servers, by default) are only accepted from the Service they're pinned to.
+- **Contested names:** if Services in several namespaces claim the same name, the one in the earliest namespace in `k8sNamespaces` wins. Names in `k8sPinnedServers` are accepted only from the Service each is pinned to (`<namespace>/<service>`), whatever the namespace order. The shipped configs pin the platform servers and the demo's servers.
 - **Names the gateway trusts must be pinned:** `rate-limiter`, `declarative-guardrail`, `ai-powered-tools`, every server an orchestration step runs on, and every server listed in `internalAuth.relay`. Otherwise any Service in a listed namespace could claim the name and approve calls, or call other servers as your users. The gateway refuses to start, and refuses admin updates, while one is unpinned, and discovery never accepts such a name from an unpinned Service.
 
 **Network**
