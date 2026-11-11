@@ -797,7 +797,7 @@ Their metadata:
 
 **Consumers:** the event aggregator receives every event; query it with the tools below.
 
-**Protected bus.** Only the gateway can publish events, and only the event aggregator can read them. NATS refuses anonymous connections and accepts only TLS. Each component that uses NATS has its own credentials, limited to the messages it needs, and no other pod can reach NATS at all. `deploy.sh` creates the certificates and credentials (see [`docs/architecture/events.md`](docs/architecture/events.md)). To feed another system, such as a paging or chat tool, give it a NATS user of its own in [`k8s/nats/nats.conf.tmpl`](k8s/nats/nats.conf.tmpl). The demo's orchestrations publish `tool-request-result` for every call (see [Declarative Guardrails and Constraints](#declarative-guardrails-and-constraints)).
+**Protected bus.** By default, only the gateway can publish events, and only the event aggregator can read them. NATS refuses anonymous connections and accepts only TLS. Each component that uses NATS has its own credentials, limited to the messages it needs, and no other pod can reach NATS at all. `deploy.sh` creates the certificates and credentials. Another component, such as a new platform server or one that forwards alerts to a paging or chat tool, can be allowed to read or publish events through configuration; see [The Event Bus](docs/event-bus.md) for the steps, and for how to add a publisher without weakening the audit trail. The demo's orchestrations publish `tool-request-result` for every call (see [Declarative Guardrails and Constraints](#declarative-guardrails-and-constraints)).
 
 **End-to-end traceability.** The same `toolCallId` appears on every event a call causes: its alerts, its request and result events, and any calls a backend makes back through the proxy on the user's behalf. One ID reconstructs the whole story of a call.
 
@@ -1144,7 +1144,7 @@ Every customer and staff member is also a user of the demo authorization server.
 | [Prompts](#ai-applications) | 8 prompts across the servers, from a shopper's question to business analysis |
 | [Task-oriented tool discovery](#task-oriented-tool-discovery) | Every role can ask `find_relevant_tools` for the tools a task needs |
 
-For worked examples, see [Declarative Guardrails and Constraints](#declarative-guardrails-and-constraints) and [AI Applications](#ai-applications).
+For step-by-step examples, see [guardrails on store purchases](#example-guardrails-on-store-purchases) and [an AI-powered guardrail on customer complaints](#example-an-ai-powered-guardrail-on-customer-complaints), and the demo's prompts [in Claude Code](#examples-the-demos-prompts-in-claude-code).
 
 ### Try it
 ```sh
@@ -1171,7 +1171,7 @@ kubectl -n mcp-proxy scale deployment/go-proxy --replicas=3
 
 Replicas stay consistent automatically:
 - **Configuration:** all replicas read the same ConfigMaps, and are notified of every live change over NATS (see [Dynamic Configuration](#dynamic-configuration)).
-- **Backend identity:** all replicas sign the identities they send to backends with one shared key, which the first replica creates and stores in a Kubernetes Secret.
+- **User identity sent to backends:** the signed token that tells a backend who the user is must verify the same whichever replica sent it, so all replicas share one signing key. The first replica creates it and stores it in a Kubernetes Secret. (This isn't the proxy's own credentials for backends, which are configured in the cfg; see [Backend credentials](#backend-credentials).)
 - **Discovery:** each replica discovers backends on its own.
 
 Each replica also keeps its own connections to the backends and polls them for their tool lists. So the polling load on backends grows with the number of replicas; the intervals are set in the `discovery` section.
