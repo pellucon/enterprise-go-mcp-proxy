@@ -425,10 +425,8 @@ if [[ -n "$RELEASE_VERSION" ]]; then
   echo "==> Done. Published release $RELEASE_VERSION to ghcr.io/$GITHUB_OWNER."
   echo "    Deploy-bundle tarball(s) for a deployer to download:"
   echo "      https://github.com/$GITHUB_OWNER/$GITHUB_REPO/releases/tag/$RELEASE_VERSION"
-  echo "    (open in a browser you're already logged into as the repo owner — click the"
-  echo "    deploy-bundle-$RELEASE_VERSION-<goos>-<arch>.tar.gz asset to download it directly,"
-  echo "    no token/curl needed for a same-account download; see CLAUDE.md's \"Build and"
-  echo "    deploy\" section for the scripted curl-based alternative for a non-owner deployer)."
+  echo "    A package this release created for the first time is private: make it public"
+  echo "    in its package settings (Change visibility), or deployers need --github-token-file."
 else
   echo "==> Done. Built images/binaries are ready for ./scripts/deploy.sh."
 fi
