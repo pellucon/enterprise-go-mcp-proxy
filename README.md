@@ -1208,7 +1208,7 @@ Some components add latency to each call, and should be sized accordingly:
 
 ## MCP Client Limitations
 - **List-change notifications need protocol 2026-07-28 or later.** When backends are discovered or removed, the gateway notifies clients that use the current MCP protocol (2026-07-28), which subscribe to these notifications. The gateway serves clients statelessly, so it has no connection on which to notify clients using older protocol versions. Those clients see new or removed tools and prompts when they reconnect, e.g. `/mcp` → reconnect in Claude Code.
-- **A new proxy replica takes clients only after its first discovery pass.** Its readiness check reports "not ready" until it has contacted every discovered server once, or for at most 30 seconds. So clients never connect to a replica that hasn't loaded any tools yet. A proxy run outside Kubernetes has no readiness probe, so this doesn't apply there.
+- **A new proxy replica takes clients only after its first discovery pass.** Its readiness check reports "not ready" until it has contacted every discovered server once, or for at most 30 seconds. So clients never connect to a replica that hasn't loaded any tools yet.
 - **Elicitation needs protocol 2026-07-28.** A tool that asks the user for input returns an "input required" result; the gateway passes it to the client, and passes the client's answers back to the server on the follow-up call. A client on an older protocol can't answer it, so the call fails.
 - **Other requests from a backend to the client aren't relayed:** sampling, and elicitation in the older style. Resource subscriptions aren't relayed either. The gateway doesn't advertise these capabilities, so clients won't try to use them.
 - **Results are limited to 16 MiB** per tool call, the MCP SDK's default event size.
@@ -1275,6 +1275,14 @@ kubectl -n mcp-proxy create secret generic crm-oauth \
   --from-literal=clientId=<id> --from-literal=clientSecret=<secret> --from-literal=scopes="crm.read crm.write"
 ```
 
+**How OAuth client credentials work.** This is OAuth's machine-to-machine flow: the gateway logs in to the identity provider as an application, with its own client ID and secret, and no user or browser is involved. Unlike the users' login, it gives the gateway a token of its own, the same for every user.
+- **Set up at the identity provider first, once.** Register the backend's API (in Okta, an authorization server with an audience and scopes; in Auth0, an API whose identifier is the audience; in Entra ID, an app registration that exposes app roles). Then register the gateway as a machine-to-machine application with the client-credentials grant, and grant it the API's scopes. Put that application's client ID and secret, and the provider's token endpoint, in the Secret. The backend must accept these tokens, checking their issuer, audience and scopes.
+- **The gateway logs in on its first request to the server,** usually discovery's first poll, by sending the client ID and secret, the scopes and the audience to `tokenUrl`. It caches the access token it receives and sends it on every request to that server.
+- **Renewal is automatic:** when the token is about to expire, the next request first gets a new one. There's no refresh token.
+- **Rotation:** update `clientSecret` in the Secret; the gateway logs in with it within a minute.
+- **Fails closed:** if the identity provider can't be reached or refuses the login, calls to the server fail.
+- **Egress policies:** if you deploy with `--egress-policies`, also allow the identity provider with `--egress-allow`, for example `--egress-allow 0.0.0.0/0:443` for one on the internet. Otherwise the token request is blocked.
+
 **2. Say which hosts may receive it:** annotate the Secret with the hosts the credential is for, e.g. `kubectl -n mcp-proxy annotate secret crm-api-key mcp.io/allowed-hosts=crm.gardening-demo.svc.cluster.local:8080`. Entries are comma-separated `host` or `host:port`; one without a port matches any port. The gateway sends the credential only to those hosts, so neither a changed server address nor a backend's redirect can carry it elsewhere. A Secret without this annotation is refused.
 
 **3. Assign it to the server in the gateway's config:** in the `discovery` section, map the server's Service to it with `"k8sCredentials": {"<namespace>/<service>": "crm-api-key"}`, or add `"credentialsSecret": "crm-api-key"` to a `static` server entry. The key is the Service's namespace and name, not its server name. Only the gateway's config decides which server gets which credential; a backend can't ask for one.
@@ -1285,8 +1293,6 @@ How it behaves:
 - **Fails closed:** if the Secret is missing or invalid, has no `mcp.io/allowed-hosts`, or a token can't be obtained, calls to that server fail rather than going out without credentials.
 - **Where the Secrets live:** only in the gateway's own namespace. A backend owner can't point it at Secrets elsewhere, and headers starting `X-Go-Proxy-` are reserved.
 - **The gateway may read only the Secrets its config names:** `deploy.sh --deploy-proxy` grants it read access to exactly the Secrets in `k8sCredentials`/`credentialsSecret`, and nothing else in its namespace (not the NATS passwords, the image pull secret or the AI key). After assigning a new Secret with `update-discovery`, run `./scripts/deploy.sh --deploy-proxy` again to grant it; until then calls to that server fail closed, with an error saying so.
-- **Kubernetes only:** a gateway run outside Kubernetes can't read Secrets, so servers configured with credentials can't be reached there.
-
 ### Optional integrations
 A backend can make more of the gateway:
 - **Per-user authorization:** verify the signed identity header (`X-Go-Proxy-Assertion`) against the gateway's public key, at `/.well-known/jwks-internal.json`, to apply per-user rules such as "customers see only their own orders". Verify with audience `go-proxy-backend/<your server name>` to accept only assertions minted for your server.
