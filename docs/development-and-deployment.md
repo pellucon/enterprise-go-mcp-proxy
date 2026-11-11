@@ -23,6 +23,14 @@ This guide covers everything needed to build, run, test, release and deploy Ente
 
 ## 1. Prerequisites
 
+### Source
+
+```sh
+git clone https://github.com/pellucon/enterprise-go-mcp-proxy.git
+```
+
+Deploying a release doesn't need the source; see [section 10](#10-deploy-a-release).
+
 ### Tools
 
 | Tool | Needed for | Notes |
@@ -59,7 +67,7 @@ To resize an existing Colima VM: `colima stop && colima start --memory 4 ...` (C
 
 | File | Needed for | Scopes / content |
 |---|---|---|
-| `github-token.txt` | Publishing or deploying a release | GitHub personal access token: `write:packages` + `read:packages` (+ `repo` to publish release bundles). Deploying needs only `read:packages`. |
+| `github-token.txt` | Publishing a release | GitHub personal access token: `write:packages` + `read:packages` (+ `repo` to publish release bundles). Deploying the project's releases needs none, since its images are public. |
 | `ai-api-key.txt` | Deploying the AI-powered tools | An API key for the LLM provider |
 
 Both file names are git-ignored. Never commit them.
@@ -298,23 +306,25 @@ This:
    There's no Go source.
 4. Prints the Release page URL.
 
-The token needs `write:packages` and `read:packages` to push images, plus `repo` to create the Release. The owner defaults to the `origin` remote's owner; override it with `--github-owner`.
+Publishing needs write access to the repository. The token needs `write:packages` and `read:packages` to push images, plus `repo` to create the Release. The owner defaults to the `origin` remote's owner; override it with `--github-owner`.
+
+**Package visibility.** The project's 12 packages on `ghcr.io/pellucon` are public, and each new version of a package keeps its visibility. GitHub creates a *new* package as private, so when a release adds an image, make its package public (the package's settings → Change visibility) and link it to the repository. A release from a fork goes to the fork owner's packages, which are private until made public; deploy those with `--github-token-file` (see [section 10](#10-deploy-a-release)).
 
 To publish one extra server image under the same version, add `--build-server PATH`.
 
 ## 10. Deploy a release
 
-On the deploying machine you need `kubectl` (pointing at the target cluster), Docker, `python3` and a GitHub token with `read:packages`. You don't need Go or the source code.
+On the deploying machine you need `kubectl` (pointing at the target cluster), Docker and `python3`. You don't need Go, the source code, a GitHub account or a token.
 
-1. Download the bundle for your machine from the Release page, then extract it:
+1. Download the bundle for your machine from the project's [GitHub Releases](https://github.com/pellucon/enterprise-go-mcp-proxy/releases), then extract it:
    ```sh
+   curl -LO https://github.com/pellucon/enterprise-go-mcp-proxy/releases/download/v1.2.0/deploy-bundle-v1.2.0-darwin-arm64.tar.gz
    tar xzf deploy-bundle-v1.2.0-darwin-arm64.tar.gz
    cd deploy-bundle-v1.2.0-darwin-arm64
    ```
 2. Deploy:
    ```sh
-   ./scripts/deploy.sh --deploy-all --release v1.2.0 \
-     --github-owner <owner> --github-token-file /path/to/github-token.txt \
+   ./scripts/deploy.sh --deploy-all --release v1.2.0 --github-owner pellucon \
      --config go-gardening-demo/gardening-demo.cfg
    ```
 3. Use it:
@@ -323,7 +333,7 @@ On the deploying machine you need `kubectl` (pointing at the target cluster), Do
    ```
 
 What's different from a local deploy:
-- **Images and the pull secret:** images are pulled from GHCR, and deploy creates a pull secret in each namespace.
+- **Images:** they're pulled from GHCR, anonymously. For private packages, such as a fork's releases, add `--github-token-file <file>` with a token that has `read:packages`: deploy then logs in to GHCR and creates a pull secret in each namespace.
 - **The version is always explicit:** pass it with `--release`.
 - **The owner:** pass `--github-owner` when deploying from a bundle, since there's no git remote to infer it from.
 - **Any cluster:** this path works against any cluster `kubectl` points at, not just the local one.
@@ -364,7 +374,7 @@ The outline:
 4. **Deploy with the ingress options:**
    ```sh
    ./scripts/deploy.sh --deploy-proxy --deploy-platform-servers --release v1.2.0 \
-     --github-token-file ./github-token.txt --config ./proxy-server.okta.cfg \
+     --github-owner pellucon --config ./proxy-server.okta.cfg \
      --ingress-host mcp.acme.com --tls-secret mcp-acme-com-tls
    ```
    With `--cluster-issuer letsencrypt-prod` instead of `--tls-secret`, cert-manager issues and renews the certificate.
@@ -420,4 +430,4 @@ The manifests are namespace-agnostic and avoid local-only assumptions. On a clus
 | Pods are evicted or restart with `OOMKilled` | The cluster VM is too small; give Colima 4 GiB. |
 | Tests fail with "address already in use" | Another process is using one of the test ports; see [section 8](#8-testing). |
 | A new backend server isn't discovered | Check its Service label `mcp.io/role=backend-mcp-server`, and add `mcp.io/path` if it isn't served at `/`. The [discovery example](../examples/discovery/README.md) shows a working setup. |
-| `deploy.sh --release` can't pull images | The token lacks `read:packages`, the version doesn't exist, or it was built for the other architecture (see [section 11](#11-cpu-architectures)). |
+| `deploy.sh --release` can't pull images | The version or `--github-owner` is wrong, the image was built for the other architecture (see [section 11](#11-cpu-architectures)), or the package is private: pass `--github-token-file` with a token that has `read:packages`. A stale `ghcr.io` login on the deploying machine can also refuse public images; `docker logout ghcr.io` removes it. |

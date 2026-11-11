@@ -19,8 +19,8 @@
 # require_image (scripts/lib/images.sh) and CLAUDE.md's "Build and deploy" section.
 #
 # Passing --release VERSION switches to a different source entirely: images
-# published by ./scripts/build.sh --release VERSION to a private GHCR
-# package, pulled into whichever cluster kubectl is currently configured
+# published by ./scripts/build.sh --release VERSION to GHCR (public
+# packages pull anonymously; --github-token-file for private ones), pulled into whichever cluster kubectl is currently configured
 # against — not necessarily this repo's own local Colima/k3s. --release is
 # mandatory for this path (no auto-detection from a git tag/VERSION file —
 # removed on purpose, so a version is never guessed, only ever stated). See
@@ -185,7 +185,7 @@ Targets (combinable — pass any subset; at least one is required):
                                      above, can be combined with them
 
 Options:
-  --release VERSION      Deploy from a private GHCR release (published via
+  --release VERSION      Deploy from a GHCR release (published via
                          ./scripts/build.sh --release VERSION) instead of
                          requiring images already in this machine's local
                          docker daemon — works against any cluster kubectl
@@ -194,10 +194,10 @@ Options:
                          switches to that path (no separate on/off flag,
                          and no auto-detection from a git tag/VERSION file
                          — a version is only ever stated explicitly, never
-                         guessed). Requires --github-token-file. Creates a
-                         $GHCR_PULL_SECRET_NAME imagePullSecret in every
-                         touched namespace. Skips this repo's k3s/Colima-only
-                         waits (see CLAUDE.md's "Build and deploy" section)
+                         guessed). Pulls anonymously unless
+                         --github-token-file is given. Skips this repo's
+                         k3s/Colima-only waits (see CLAUDE.md's "Build and
+                         deploy" section)
                          — the gardening-demo seeding Job itself works
                          identically either way. Cannot be combined with
                          --use-headless-claude.
@@ -207,9 +207,12 @@ Options:
                          when running from an extracted deploy-bundle
                          tarball (no .git directory to infer it from).
   --github-token-file PATH
-                         Local file containing a GitHub PAT with
-                         read:packages scope. Required together with
-                         --release.
+                         Only with --release, and only for private
+                         packages (the project's are public): a local file
+                         containing a GitHub PAT with read:packages scope.
+                         Logs in to ghcr.io with it, and creates a
+                         $GHCR_PULL_SECRET_NAME imagePullSecret in every
+                         touched namespace.
   --namespace NAME       k8s namespace for --deploy-ai/--deploy-server only
                          (default: $SERVER_NAMESPACE) — created if it doesn't
                          already exist. Has NO effect on --deploy-proxy/
@@ -368,10 +371,10 @@ Examples:
   $0 --deploy-all                                   # skips ai-powered-tools with a warning
   $0 --deploy-auth-server
   $0 --deploy-proxy --deploy-auth-server --deploy-gardening-demo
-  $0 --deploy-all --release v0.6.0 --github-token-file ./github-token.txt \\
+  $0 --deploy-all --release v0.9.0 --github-owner pellucon \\
      --ai-api-key-file ./ai-api-key.txt --ai-model gemini-2.5-flash
-  $0 --deploy-proxy --deploy-platform-servers --release v0.6.0 \\
-     --github-token-file ./github-token.txt --config ./proxy-server.okta.cfg \\
+  $0 --deploy-proxy --deploy-platform-servers --release v0.9.0 \\
+     --github-owner pellucon --config ./proxy-server.okta.cfg \\
      --ingress-host mcp.acme.com --tls-secret mcp-acme-com-tls
 EOF
 }
@@ -548,11 +551,11 @@ if [[ "$FROM_GIT_PACKAGE" == "true" && "$USE_HEADLESS_CLAUDE" == "true" ]]; then
   exit 1
 fi
 
-if [[ "$FROM_GIT_PACKAGE" == "true" && -z "$GITHUB_TOKEN_FILE" ]]; then
-  echo "--release requires --github-token-file PATH (a GitHub PAT with read:packages scope; the same PAT/file used for ./scripts/build.sh --release works)" >&2
+if [[ -n "$GITHUB_TOKEN_FILE" && "$FROM_GIT_PACKAGE" != "true" ]]; then
+  echo "--github-token-file is only used together with --release" >&2
   exit 1
 fi
-if [[ "$FROM_GIT_PACKAGE" == "true" && ! -f "$GITHUB_TOKEN_FILE" ]]; then
+if [[ -n "$GITHUB_TOKEN_FILE" && ! -f "$GITHUB_TOKEN_FILE" ]]; then
   echo "GitHub token file not found at $GITHUB_TOKEN_FILE (from --github-token-file)" >&2
   exit 1
 fi
@@ -572,7 +575,7 @@ if [[ "$FROM_GIT_PACKAGE" == "true" && -z "$GITHUB_OWNER" ]]; then
   fi
 fi
 
-if [[ "$FROM_GIT_PACKAGE" == "true" ]]; then
+if [[ "$FROM_GIT_PACKAGE" == "true" ]] && ghcr_uses_pull_secret; then
   echo "==> Logging in to ghcr.io as $GITHUB_OWNER"
   docker login ghcr.io -u "$GITHUB_OWNER" --password-stdin < "$GITHUB_TOKEN_FILE"
 fi

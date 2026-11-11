@@ -65,7 +65,7 @@ apply_ingress_overlay() {
     fi
     echo "patches:"
     echo "  - path: $overlay_dir/service-clusterip-patch.yaml"
-    if [[ "$FROM_GIT_PACKAGE" == "true" ]]; then
+    if [[ "$FROM_GIT_PACKAGE" == "true" ]] && ghcr_uses_pull_secret; then
       echo "  - target:"
       echo "      kind: Deployment"
       echo "      name: $name"

@@ -217,7 +217,7 @@ In both cases go-proxy itself still speaks plain HTTP inside the cluster. It bui
 
 ### 5.4 Images
 
-`deploy.sh --release VERSION --github-token-file FILE` pulls `ghcr.io/<owner>/<image>:VERSION` and creates the pull Secret itself — the simplest option if the cluster can reach GHCR.
+`deploy.sh --release VERSION --github-owner pellucon` pulls the public images `ghcr.io/pellucon/<image>:VERSION`, with no credentials — the simplest option if the cluster can reach GHCR. For private packages (a fork's releases), add `--github-token-file FILE`, a token with `read:packages`; `deploy.sh` then creates the pull Secret itself.
 
 If images must come from an internal registry, mirror them there (`docker pull` / `docker tag` / `docker push`, or your registry's proxy-cache feature). `deploy.sh` only knows GHCR, so in that case render the manifests yourself (§6.3) and set the image with `kustomize edit set image go-proxy=registry.acme.com/mcp/go-proxy:VERSION` plus your own `imagePullSecrets`.
 
@@ -241,7 +241,7 @@ From a checkout, or from an extracted release deploy-bundle (which includes this
 
 ```sh
 ./scripts/deploy.sh --deploy-proxy --deploy-platform-servers \
-  --release v0.6.0 --github-token-file ./github-token.txt \
+  --release v0.9.0 --github-owner pellucon \
   --config ./proxy-server.okta.cfg \
   --ingress-host mcp.acme.com --tls-secret mcp-acme-com-tls \
   --proxy-replicas 3
@@ -276,7 +276,7 @@ patches:
 images:
   - name: go-proxy
     newName: registry.acme.com/mcp/go-proxy
-    newTag: v0.6.0
+    newTag: v0.9.0
 ```
 
 Add a `tls:` block to the Ingress yourself. The rest of `deploy.sh --deploy-proxy` (namespace, RBAC, NetworkPolicies, NATS, the `proxy-server-config` ConfigMap from your cfg file) must be reproduced too — read `deploy_proxy` in `scripts/lib/deploy-proxy.sh` for the exact objects. With cert-manager, add the `cert-manager.io/cluster-issuer: <issuer>` annotation alongside the `tls:` block, and (for an HTTP-01 issuer) include `k8s/overlays/networkpolicy-acme-http01-solver.yaml`.

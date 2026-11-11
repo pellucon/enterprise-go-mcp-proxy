@@ -10,8 +10,20 @@
 # (FROM_GIT_PACKAGE, GITHUB_OWNER, RELEASE_VERSION, GITHUB_TOKEN_FILE).
 
 # Name of the docker-registry Secret --release creates in every namespace
-# it deploys into (ensure_ghcr_pull_secret) and patches into Deployments.
+# it deploys into (ensure_ghcr_pull_secret) and patches into Deployments,
+# when --github-token-file is given.
 GHCR_PULL_SECRET_NAME="ghcr-pull-secret"
+
+# -----------------------------------------------------------------------
+# ghcr_uses_pull_secret: whether --release pulls with a token. The
+# project's packages are public, so by default images are pulled
+# anonymously: no ghcr.io login, no pull Secret, no imagePullSecrets.
+# --github-token-file is for private packages (a fork's, for example):
+# then every --release Deployment/Job pulls with it.
+# -----------------------------------------------------------------------
+ghcr_uses_pull_secret() {
+  [[ -n "$GITHUB_TOKEN_FILE" ]]
+}
 
 # -----------------------------------------------------------------------
 # require_image: fails fast, with a pointer to ./scripts/build.sh, if the
@@ -40,8 +52,9 @@ ghcr_image_ref() {
 # -----------------------------------------------------------------------
 # require_ghcr_image: --release's counterpart to require_image —
 # fails fast, pointing at ./scripts/build.sh --release, if the requested
-# version isn't actually published for this image. Requires the ghcr.io
-# login scripts/deploy.sh's validation block already performed. Every ./scripts/
+# version isn't actually published for this image. Uses the ghcr.io login
+# scripts/deploy.sh's validation block performed, if any (anonymous for
+# public packages). Every ./scripts/
 # build.sh --release run publishes ALL images under the same version (see
 # the Makefile's publish-all), so this should never fail for a genuinely
 # published version — a failure here means the wrong version was named, or
@@ -51,7 +64,10 @@ require_ghcr_image() {
   local name="$1" ref
   ref="$(ghcr_image_ref "$name")"
   if ! docker manifest inspect "$ref" >/dev/null 2>&1; then
-    echo "Image $ref not found on ghcr.io. Publish it first: ./scripts/build.sh --release $RELEASE_VERSION --github-token-file <PATH>" >&2
+    echo "Image $ref not found on ghcr.io. Check the version and --github-owner; publish it with ./scripts/build.sh --release $RELEASE_VERSION --github-token-file <PATH>." >&2
+    if ! ghcr_uses_pull_secret; then
+      echo "If the package is private, pass --github-token-file PATH (a GitHub token with read:packages)." >&2
+    fi
     exit 1
   fi
 }
@@ -59,14 +75,16 @@ require_ghcr_image() {
 # -----------------------------------------------------------------------
 # ensure_ghcr_pull_secret: idempotent get-or-create for the
 # kubernetes.io/dockerconfigjson imagePullSecret every --release
-# Deployment in a given namespace needs, since these are private GHCR
-# packages. Same idempotent-apply idiom as ensure_namespace (scripts/lib/k8s.sh). Callers
+# Deployment in a given namespace needs when the packages are private
+# (--github-token-file given); a no-op otherwise, since public packages
+# pull anonymously. Same idempotent-apply idiom as ensure_namespace (scripts/lib/k8s.sh). Callers
 # always invoke this only after the target namespace is already known to
 # exist. Safe to call more than once per namespace per invocation (e.g.
 # once per deploy_category loop iteration) — cheap and idempotent.
 # -----------------------------------------------------------------------
 ensure_ghcr_pull_secret() {
   local namespace="$1" tmpdir
+  ghcr_uses_pull_secret || return 0
   # The registry credential is built into a private file and handed to
   # kubectl with --from-file, never as --docker-password on its command
   # line, where any local user could read the token from the process list.
@@ -91,7 +109,7 @@ PY
 # -----------------------------------------------------------------------
 # apply_ghcr_release: renders a throwaway Kustomize overlay over the given
 # manifest files — rewriting the named $kind's image to
-# ghcr.io/$GITHUB_OWNER/<name>:$RELEASE_VERSION and adding
+# ghcr.io/$GITHUB_OWNER/<name>:$RELEASE_VERSION and, with a token, adding
 # $GHCR_PULL_SECRET_NAME as an imagePullSecret — then applies the fully
 # substituted result in one shot. Kustomize computes the final manifest
 # client-side, so kubectl only ever sees the already-correct object: no
@@ -141,15 +159,17 @@ apply_ghcr_release() {
     echo "  - name: $name"
     echo "    newName: ghcr.io/$GITHUB_OWNER/$name"
     echo "    newTag: $RELEASE_VERSION"
-    echo "patches:"
-    echo "  - target:"
-    echo "      kind: $kind"
-    echo "      name: $name"
-    echo "    patch: |-"
-    echo "      - op: add"
-    echo "        path: /spec/template/spec/imagePullSecrets"
-    echo "        value:"
-    echo "          - name: $GHCR_PULL_SECRET_NAME"
+    if ghcr_uses_pull_secret; then
+      echo "patches:"
+      echo "  - target:"
+      echo "      kind: $kind"
+      echo "      name: $name"
+      echo "    patch: |-"
+      echo "      - op: add"
+      echo "        path: /spec/template/spec/imagePullSecrets"
+      echo "        value:"
+      echo "          - name: $GHCR_PULL_SECRET_NAME"
+    fi
   } > "$tmpdir/kustomization.yaml"
 
   echo "==> Applying $name via Kustomize overlay (image $ghcr_ref)"

@@ -56,22 +56,23 @@ Deploy a published release to a local Kubernetes cluster. No Go toolchain or sou
   - **`--disable=traefik` is required:** k3s's bundled ingress controller would take port 80, where the proxy answers (`http://localhost/mcp`).
   - **For any other cluster,** including Docker Desktop, see [Deploying to other clusters](docs/development-and-deployment.md#13-deploying-to-other-clusters).
 - Docker (Colima provides it) and `python3`
-- A GitHub personal access token with the `read:packages` scope, saved to a file (e.g. `github-token.txt`). It's used to pull the release images from GHCR.
 
-**1. Download the deploy bundle** for your platform (`darwin-arm64` or `linux-arm64`) from the project's GitHub Releases page and extract it:
+No GitHub account or token is needed: the release bundles and images are public.
+
+**1. Download the deploy bundle** for your platform (`darwin-arm64` or `linux-arm64`) from the project's [GitHub Releases](https://github.com/pellucon/enterprise-go-mcp-proxy/releases) and extract it:
 ```sh
 VERSION=v0.9.0
+curl -LO https://github.com/pellucon/enterprise-go-mcp-proxy/releases/download/$VERSION/deploy-bundle-$VERSION-darwin-arm64.tar.gz
 tar xzf deploy-bundle-$VERSION-darwin-arm64.tar.gz
 cd deploy-bundle-$VERSION-darwin-arm64
 ```
 
 **2. Deploy** the proxy, the platform servers, the demo authorization server and the Gardening Online Store demo, with the demo's configuration:
 ```sh
-./scripts/deploy.sh --release $VERSION --github-owner <owner> \
-  --github-token-file /path/to/github-token.txt --deploy-all \
+./scripts/deploy.sh --release $VERSION --github-owner pellucon --deploy-all \
   --config go-gardening-demo/gardening-demo.cfg
 ```
-Replace `<owner>` with the GitHub account or organization that published the release. Keep passing the same `--config` on later deploys (see [Which configuration the demo runs with](#the-data)). The AI-powered tools are skipped unless you also pass `--ai-api-key-file` and `--ai-model`.
+The images are pulled from `ghcr.io/pellucon`. Keep passing the same `--config` on later deploys (see [Which configuration the demo runs with](#the-data)). The AI-powered tools are skipped unless you also pass `--ai-api-key-file` and `--ai-model`.
 
 **3. Try it.** The proxy is now at `http://localhost/mcp`. List the tools the demo `admin` user can see:
 ```sh
@@ -149,6 +150,7 @@ flowchart LR
 The essentials for working on the proxy itself. The **[Development and Deployment Guide](docs/development-and-deployment.md)** covers every step in detail.
 
 **Prerequisites**
+- **Source:** `git clone https://github.com/pellucon/enterprise-go-mcp-proxy.git`
 - **Tools:** Go (the version in `go.mod`), Docker, `kubectl`, `python3`, and a local Kubernetes cluster. The reference setup is macOS with [Colima](https://github.com/abiosoft/colima) running k3s:
   ```sh
   colima start --cpu 2 --memory 4 --disk 40 --kubernetes --k3s-arg=--disable=traefik
@@ -192,28 +194,26 @@ Redeploy just what you changed, e.g. `./scripts/deploy.sh --deploy-proxy`. To in
 ```
 This tags the commit, pushes all images to GitHub Container Registry and publishes per-platform deploy bundles on a GitHub Release. Deployers then need no Go and no source code (see [Quick Start](#quick-start)).
 
-A release needs a GitHub personal access token saved in a file, e.g. `github-token.txt` at the repo root, which is git-ignored and must never be committed. Create a classic token at GitHub → Settings → Developer settings → Personal access tokens, with these scopes:
+Publishing a release needs write access to the repository and a GitHub personal access token saved in a file, e.g. `github-token.txt` at the repo root, which is git-ignored and must never be committed. Create a classic token at GitHub → Settings → Developer settings → Personal access tokens, with these scopes:
 - **`write:packages`** and **`read:packages`** to push the images.
 - **`repo`** to create the Release and upload the bundles.
 
-Deploying a release only needs `read:packages`.
+Deploying a release needs no token, since the project's images are public. A release published from a fork goes to the fork owner's packages, which GitHub makes private by default; deploy those with `--github-owner <owner> --github-token-file <file>`, using a token with `read:packages`.
 
 **Deployment**
 
 To deploy a release on any machine with `kubectl` pointing at the target cluster (no Go or source code needed):
-1. **Download** the deploy bundle for the machine you'll deploy *from* (`darwin-arm64` or `linux-arm64`, or `-amd64` for an amd64 release) from the project's GitHub Releases page.
+1. **Download** the deploy bundle for the machine you'll deploy *from* (`darwin-arm64` or `linux-arm64`, or `-amd64` for an amd64 release) from the project's [GitHub Releases](https://github.com/pellucon/enterprise-go-mcp-proxy/releases).
 2. **Extract** it and change into its folder:
    ```sh
    tar xzf deploy-bundle-v1.2.0-darwin-arm64.tar.gz
    cd deploy-bundle-v1.2.0-darwin-arm64
    ```
-3. **Deploy** with a token file that has `read:packages`:
+3. **Deploy:**
    ```sh
-   ./scripts/deploy.sh --deploy-all --release v1.2.0 \
-     --github-owner <owner> --github-token-file /path/to/github-token.txt \
+   ./scripts/deploy.sh --deploy-all --release v1.2.0 --github-owner pellucon \
      --config go-gardening-demo/gardening-demo.cfg
    ```
-   `<owner>` is the GitHub account or organization that published the release.
 4. **Check** the deployment:
    ```sh
    ./scripts/cli.sh -username admin -password admin list-tools
