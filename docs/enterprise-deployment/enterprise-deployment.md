@@ -241,7 +241,7 @@ From a checkout, or from an extracted release deploy-bundle (which includes this
 
 ```sh
 ./scripts/deploy.sh --deploy-proxy --deploy-platform-servers \
-  --release v0.9.0 --github-owner pellucon \
+  --release v0.9.1 --github-owner pellucon \
   --config ./proxy-server.okta.cfg \
   --ingress-host mcp.acme.com --tls-secret mcp-acme-com-tls \
   --proxy-replicas 3
@@ -276,7 +276,7 @@ patches:
 images:
   - name: go-proxy
     newName: registry.acme.com/mcp/go-proxy
-    newTag: v0.9.0
+    newTag: v0.9.1
 ```
 
 Add a `tls:` block to the Ingress yourself. The rest of `deploy.sh --deploy-proxy` (namespace, RBAC, NetworkPolicies, NATS, the `proxy-server-config` ConfigMap from your cfg file) must be reproduced too — read `deploy_proxy` in `scripts/lib/deploy-proxy.sh` for the exact objects. With cert-manager, add the `cert-manager.io/cluster-issuer: <issuer>` annotation alongside the `tls:` block, and (for an HTTP-01 issuer) include `k8s/overlays/networkpolicy-acme-http01-solver.yaml`.

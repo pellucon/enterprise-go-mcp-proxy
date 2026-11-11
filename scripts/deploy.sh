@@ -371,9 +371,9 @@ Examples:
   $0 --deploy-all                                   # skips ai-powered-tools with a warning
   $0 --deploy-auth-server
   $0 --deploy-proxy --deploy-auth-server --deploy-gardening-demo
-  $0 --deploy-all --release v0.9.0 --github-owner pellucon \\
+  $0 --deploy-all --release v0.9.1 --github-owner pellucon \\
      --ai-api-key-file ./ai-api-key.txt --ai-model gemini-2.5-flash
-  $0 --deploy-proxy --deploy-platform-servers --release v0.9.0 \\
+  $0 --deploy-proxy --deploy-platform-servers --release v0.9.1 \\
      --github-owner pellucon --config ./proxy-server.okta.cfg \\
      --ingress-host mcp.acme.com --tls-secret mcp-acme-com-tls
 EOF

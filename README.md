@@ -61,7 +61,7 @@ No GitHub account or token is needed: the release bundles and images are public.
 
 **1. Download the deploy bundle** for your platform (`darwin-arm64` or `linux-arm64`) from the project's [GitHub Releases](https://github.com/pellucon/enterprise-go-mcp-proxy/releases) and extract it:
 ```sh
-VERSION=v0.9.0
+VERSION=v0.9.1
 curl -LO https://github.com/pellucon/enterprise-go-mcp-proxy/releases/download/$VERSION/deploy-bundle-$VERSION-darwin-arm64.tar.gz
 tar xzf deploy-bundle-$VERSION-darwin-arm64.tar.gz
 cd deploy-bundle-$VERSION-darwin-arm64
