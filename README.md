@@ -1187,16 +1187,36 @@ Every customer and staff member is also a user of the demo authorization server.
 For step-by-step examples, see [guardrails on store purchases](#example-guardrails-on-store-purchases) and [an AI-powered guardrail on customer complaints](#example-an-ai-powered-guardrail-on-customer-complaints), and the demo's prompts [in Claude Code](#examples-the-demos-prompts-in-claude-code).
 
 ### Try it
+The demo can be used with two command-line clients. Both log in like any MCP client, so every call goes through the gateway's access rules and guardrails.
+
+**The gateway's CLI, `./scripts/cli.sh`,** is a generic MCP client. It works with any server behind the gateway: name the tool or prompt with its server prefix (`<server>.<name>`) and pass arguments as JSON.
 ```sh
-# As a customer: which tools am I allowed to use?
+# As a customer: which tools may I use?
 ./scripts/cli.sh -username cust-0002 -password cust-0002 list-tools
 
-# As a business manager: an operations report, through any MCP client with prompts
-./scripts/cli.sh -username staff-03 -password staff-03 get-prompt -name garden-business-ops.unauthorized_requests_report
+# As a customer: call a tool, with its arguments as JSON
+./scripts/cli.sh -username cust-0002 -password cust-0002 call-tool \
+  -name garden-customer-admin.get_customer_type -args '{"id":"cust-0002"}'
 
-# With the demo's own CLI, in its friendlier <section> <tool> form
-go-gardening-demo/cli.sh -username cust-0002 -password cust-0002 online-store get_catalogue
+# As a business manager: fetch a prompt
+./scripts/cli.sh -username staff-03 -password staff-03 get-prompt \
+  -name garden-business-ops.unauthorized_requests_report
 ```
+
+**The demo's CLI, `go-gardening-demo/cli.sh`,** knows only the five demo servers, in a friendlier form: `<section> <tool>`, with one flag per field. Run it with `-h` for every section and tool.
+```sh
+# As a customer: browse the catalogue
+go-gardening-demo/cli.sh -username cust-0002 -password cust-0002 online-store get_catalogue
+
+# As a customer: buy two bow rakes
+go-gardening-demo/cli.sh -username cust-0002 -password cust-0002 online-store purchase_products \
+  -customerId cust-0002 -item prod-07:2
+
+# As a customer: forty adjustable rakes cost over $1,000, so a guardrail blocks the purchase
+go-gardening-demo/cli.sh -username cust-0002 -password cust-0002 online-store purchase_products \
+  -customerId cust-0002 -item prod-06:40
+```
+The last one fails with `blocked by constraint(s): store-purchase-cost-limit` (see [guardrails on store purchases](#example-guardrails-on-store-purchases)).
 
 ## Scalability
 The gateway is designed to **scale out**: run more copies of the busy parts rather than one bigger machine. What can scale depends on where each component keeps its state.
