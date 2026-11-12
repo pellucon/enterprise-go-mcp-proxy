@@ -968,15 +968,30 @@ Inside a session, ask "who am I on go-proxy?". Claude Code calls `proxy_utility.
 
 **4. Use it:**
 - **Tools** appear as `mcp__go-proxy__<server>_<tool>`, and Claude Code picks them as needed. The first time a tool is used, Claude Code asks for permission.
-- **Prompts** from every backend server appear as slash commands. Type `/mcp__go-proxy` to list them, and pick one, e.g. the store's `product_on_sale_for_me`.
+- **Prompts** from every backend server appear as slash commands, `/mcp__go-proxy__<server>.<prompt>`, listed as `/go-proxy:<server>.<prompt>`. Type `/go-proxy:` to list them (see the examples below).
 - **Clients that don't support prompts** can reach them as tools, via `proxy_utility.get_prompts` and `proxy_utility.render_prompt` (see [Utility tools](#utility-tools)).
 
 ### Examples: the demo's prompts in Claude Code
-The Gardening Online Store demo ships ready-made prompts. Below are three of them, with Claude Code's actual answers, logged in as `admin`. They're shortened slightly; the data is the demo's seed data plus our own test calls.
+The Gardening Online Store demo ships ready-made prompts. Claude Code shows each one as a slash command. To run one:
+1. **Add the gateway and log in** (steps 1 and 2 above), e.g. as `admin`.
+2. **Start Claude Code** in the same project: `claude`
+3. **Type `/go-proxy:`** at the prompt, without pressing Enter. As you type, Claude Code lists the demo's prompts your role may use (all 8 for `admin`), each with a description and its arguments, e.g. `/go-proxy:garden-online-store.product_on_sale_for_me … (arguments: product)`. Keep typing to narrow the list.
+4. **Choose a prompt with the arrow keys and press Tab** (not Enter: Enter runs the highlighted prompt at once, without arguments). Tab puts its full name in the input line, `/mcp__go-proxy__<server>.<prompt>`, with a hint for its arguments.
+5. **Type its arguments after a space, and press Enter.** Separate several arguments with spaces, in the order listed. For example:
+   ```text
+   /mcp__go-proxy__garden-online-store.product_on_sale_for_me rake
+   ```
+   Typing the whole command yourself works too, in either form (`/go-proxy:…` or `/mcp__go-proxy__…`).
+   Claude Code fetches the prompt from the gateway, with your arguments filled in, and works through it with the gateway's tools.
 
-The answers were produced in non-interactive Claude Code sessions (`claude -p`). Prompt slash commands only exist in interactive sessions, so in the second and third examples Claude Code fetched the prompt's text with `render_prompt` instead. In the first, the slash command wasn't available, so it answered with the store's tools directly. Interactively, you'd run the slash command, with the same result.
+Prompts are slash commands only in interactive sessions. In a non-interactive session (`claude -p`), ask Claude to fetch the prompt with `proxy_utility.render_prompt` instead.
 
-**A shopper's question:** `product_on_sale_for_me` with `product = rake`
+Below are three examples, with Claude Code's answers, logged in as `admin`. The answers are shortened; yours will differ in wording, and in figures once the demo's data changes.
+
+**A shopper's question:**
+```text
+/go-proxy:garden-online-store.product_on_sale_for_me rake
+```
 ```text
 ## Rakes on sale
 
@@ -995,7 +1010,10 @@ tier applies to you. A VIP pays $12.34 or $25.64. Everyone else pays full price.
 ```
 Signed in as a customer instead, the same prompt is answered for that customer's own pricing tier. The assistant can find out who the caller is with `proxy_utility.get_my_id_details`.
 
-**An insight across servers:** `vip_spend_comparison`
+**An insight across servers:**
+```text
+/go-proxy:garden-business-ops.vip_spend_comparison
+```
 ```text
 Yes, but only by a modest margin per customer. VIPs buy more often, but each order is smaller.
 
@@ -1013,7 +1031,10 @@ online orders.
 ```
 The answer combines two backend servers: customers from `garden-customer-admin`, orders from `garden-online-store`. The assistant reached both through the one gateway connection, under one set of access rules.
 
-**An operations question:** `unauthorized_requests_report`
+**An operations question:**
+```text
+/go-proxy:garden-business-ops.unauthorized_requests_report
+```
 ```text
 Only one user made unauthorized requests: customer cust-0002. No staffers did.
 
