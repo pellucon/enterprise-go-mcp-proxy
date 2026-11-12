@@ -68,11 +68,29 @@ cd deploy-bundle-$VERSION-darwin-arm64
 ```
 
 **2. Deploy** the proxy, the platform servers, the demo authorization server and the Gardening Online Store demo, with the demo's configuration:
-```sh
-./scripts/deploy.sh --release $VERSION --github-owner pellucon --deploy-all \
-  --config go-gardening-demo/gardening-demo.cfg
-```
-The images are pulled from `ghcr.io/pellucon`. Keep passing the same `--config` on later deploys (see [Which configuration the demo runs with](#the-data)). The AI-powered tools are skipped unless you also pass `--ai-api-key-file` and `--ai-model`.
+- **With an AI model** (recommended): save your LLM provider's API key in a file, then pass the file and the model. This also deploys the AI-powered tools server:
+  ```sh
+  ./scripts/deploy.sh --release $VERSION --github-owner pellucon --deploy-all \
+    --config go-gardening-demo/gardening-demo.cfg \
+    --ai-api-key-file /path/to/ai-api-key.txt --ai-model gemini-2.5-flash
+  ```
+  The default endpoint is Google Gemini's. For another OpenAI-compatible provider, add `--ai-base-url`, e.g. `--ai-base-url https://api.openai.com/v1 --ai-model gpt-4o-mini` (see [AI Powered Tools](#ai-powered-tools)).
+- **Without an AI model:**
+  ```sh
+  ./scripts/deploy.sh --release $VERSION --github-owner pellucon --deploy-all \
+    --config go-gardening-demo/gardening-demo.cfg
+  ```
+  Everything is deployed except the AI-powered tools server, and the deploy warns that it skipped it. The demo works, minus the features that need the model:
+  - **Task-oriented tool discovery** (`find_relevant_tools`) fails.
+  - **The demo's two AI guardrails can't be checked, so they fail closed** and block the calls they cover. For every role except `admin`, that's reading customer details (`get_customer_details`, checked for disclosed Social Security Numbers) and, except for customer-support managers, filing complaints (`add_customer_service_call`, checked for when, what and which remedy).
+
+  To add the AI tools later, deploy just them:
+  ```sh
+  ./scripts/deploy.sh --release $VERSION --github-owner pellucon --deploy-ai \
+    --ai-api-key-file /path/to/ai-api-key.txt --ai-model gemini-2.5-flash
+  ```
+
+The images are pulled from `ghcr.io/pellucon`. Keep passing the same `--config` on later deploys (see [Which configuration the demo runs with](#the-data)).
 
 **3. Try it.** The proxy is now at `http://localhost/mcp`. List the tools the demo `admin` user can see:
 ```sh
